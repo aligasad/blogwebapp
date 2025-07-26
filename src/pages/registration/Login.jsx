@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -48,10 +48,14 @@ function Login() {
     }
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
   return (
     <>
       {loading && <Loader />}
-      <div className=" flex justify-center items-center my-8">
+      {/* <div className=" flex justify-center items-center my-8">
         <form
           className="bg-gray-800 p-8 rounded-xl shadow-md w-96"
           onSubmit={handleSubmit}
@@ -84,6 +88,51 @@ function Login() {
           <p className="mt-4 text-center text-white">
             Don't have an account?{" "}
             <Link to="/signup" className="text-yellow-400 outline-0-500">
+              Register
+            </Link>
+          </p>
+        </form>
+      </div> */}
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#e8f5e9] to-[#f1f8e9] p-4">
+        <form
+          className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-green-200 transition-all duration-300 hover:shadow-2xl"
+          onSubmit={handleSubmit}
+        >
+          <h2 className="text-3xl font-bold mb-6 text-center text-green-800 font-serif">
+            Ayura C Serum 🌿
+          </h2>
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            value={form.email}
+            onChange={handleChange}
+            className="w-full p-3 mb-4 border border-green-300 bg-[#f9fff9] text-green-900 placeholder-green-500 rounded-lg outline-none focus:ring-2 focus:ring-green-400 transition-all"
+          />
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            value={form.password}
+            onChange={handleChange}
+            className="w-full p-3 mb-6 border border-green-300 bg-[#f9fff9] text-green-900 placeholder-green-500 rounded-lg outline-none focus:ring-2 focus:ring-green-400 transition-all"
+          />
+
+          <button
+            type="submit"
+            className="w-full bg-gradient-to-r from-green-600 to-lime-500 text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-lg hover:from-green-700 hover:to-lime-600 transition-all cursor-pointer"
+          >
+            Login
+          </button>
+
+          <p className="mt-6 text-center text-green-700 font-medium">
+            Don’t have an account?{" "}
+            <Link
+              to="/signup"
+              className="text-lime-600 hover:text-lime-800 font-semibold underline transition-all"
+            >
               Register
             </Link>
           </p>

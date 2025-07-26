@@ -1,18 +1,12 @@
-import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import adv1 from '../../assets/adv1.jpg';
+import adv2 from '../../assets/adv2.jpg';
 
 const images = [
-  "https://images-eu.ssl-images-amazon.com/images/G/31/img22/Wireless/devjyoti/GW/Uber/Nov/uber_new_high._CB537689643_.jpg",
-  "https://images-eu.ssl-images-amazon.com/images/G/31/img21/MA2025/GW/BAU/Unrec/PC/934044814._CB551384116_.jpg",
-  "https://images-eu.ssl-images-amazon.com/images/G/31/img19/SiddMiniTV/10may/PPPHigh._CB795869145_.jpg",
-  "https://images-eu.ssl-images-amazon.com/images/G/31/img23/Beauty/GW/yesbank/makeup_PC._CB796616147_.png",
-  "https://images-eu.ssl-images-amazon.com/images/G/31/IMG25/Home/2025/BAU/May/Hero/Mothers_Day-BAU-GW-PC_-_Custom_gifts__more._CB795803255_.jpg",
-  "https://images-eu.ssl-images-amazon.com/images/G/31/img25/Media/PC_Hero_3000x1200_Asin-toys-2x._CB547414496_.jpg",
-  "https://images-eu.ssl-images-amazon.com/images/G/31/img23/Softlines_JWL_SH_GW_Assets/2024/BAU_BTF/Nov/Unrec/Shoes/1/30003._CB542120021_.jpg",
-  "https://images-eu.ssl-images-amazon.com/images/G/31/img24/Media/BAU/PC_Hero_2x-toys_1._CB582765723_.jpg"
+  adv1, adv2
 ];
 
 // Custom Arrow Components

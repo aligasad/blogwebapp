@@ -8,7 +8,6 @@ import Layout from "./components/layout/Layout";
 import Home from "./pages/home/Home.jsx";
 import Order from "./pages/order/Order.jsx";
 import Cart from "./pages/cart/Cart.jsx";
-import Wishlist from "./pages/wishlist/Wishlist.jsx";
 import Dashboard from "./pages/admin/dashboard/Dashboard.jsx";
 import NoPage from "./pages/nopage/NoPage.jsx";
 import MyState from "./context/data/MyState.jsx";
@@ -21,10 +20,8 @@ import { ToastContainer, Bounce } from "react-toastify";
 import AuthProvider from "./components/protector/AuthContext.jsx";
 import ProtectedRoute from "./components/protector/ProtectedRoute.jsx";
 import Allproducts from "./pages/allproducts/Allproducts.jsx";
-import Kids from "./pages/allproducts/Kids/Kids.jsx";
-import Mobile from "./pages/allproducts/Mobile/Mobile.jsx";
-import Cloths from "./pages/allproducts/Cloths/Mens/Cloths.jsx";
-import HomeKitchen from "./pages/allproducts/Home & Kitchen/HomeKitchen.jsx";
+import Mobile from "./pages/allproducts/Serum2/Serum2.jsx";
+import Serum1 from "./pages/allproducts/Serum1/Serum1.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -46,18 +43,9 @@ function App() {
         },
         {
           path: "/cart",
-
           element: (
             <ProtectedRoute>
               <Cart />,
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/wishlist",
-          element: (
-            <ProtectedRoute>
-              <Wishlist />
             </ProtectedRoute>
           ),
         },
@@ -86,20 +74,12 @@ function App() {
           element: <Allproducts />,
         },
         {
-          path: "/kids",
-          element: <Kids />,
-        },
-        {
-          path: "/cloths",
-          element: <Cloths />,
+          path: "/serum1",
+          element: <Serum1 />,
         },
         {
           path: "/mobile",
           element: <Mobile />,
-        },
-        {
-          path: "/homekitchen",
-          element: <HomeKitchen />,
         },
         {
           path: "/addproduct",

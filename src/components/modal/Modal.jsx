@@ -29,12 +29,11 @@ export default function Modal({
 
   return (
     <>
-    
       <div className="  text-center rounded-lg text-white font-bold">
         <button
           type="button"
           onClick={openModal}
-          className="w-full  bg-amber-600 hover:bg-green-600 py-2 text-center rounded-lg text-white font-bold cursor-pointer"
+          className="w-full  bg-[#439373] hover:bg-[#376a55] py-2 text-center rounded-lg text-white font-bold cursor-pointer"
         >
           Buy Now
         </button>
@@ -140,13 +139,28 @@ export default function Modal({
                               />
                             </div>
                           </form>
-                          <button
-                            onClick={()=>{buyNow(); closeModal()}}
-                            type="button"
-                            className="focus:outline-none w-full text-white bg-violet-600 bg-green-600 hover:bg-violet-800  outline-0 font-medium rounded-lg text-sm px-5 py-2.5 "
-                          >
-                            Order Now
-                          </button>
+                          <div className="flex flex-col gap-3 mt-4">
+                            <button
+                              onClick={() => {
+                                buyNow("cod");
+                                closeModal();
+                              }}
+                              type="button"
+                              className="focus:outline-none w-full text-white bg-green-600 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5"
+                            >
+                              Cash on Delivery
+                            </button>
+                            <button
+                              onClick={() => {
+                                buyNow("online");
+                                closeModal();
+                              }}
+                              type="button"
+                              className="focus:outline-none w-full text-white bg-violet-600 hover:bg-violet-800 font-medium rounded-lg text-sm px-5 py-2.5"
+                            >
+                              Online Payment
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -159,4 +173,17 @@ export default function Modal({
       </Transition>
     </>
   );
+}
+
+// In your parent component where Modal is used:
+function buyNow(method) {
+  if (method === "cod") {
+    // Place the order directly for Cash on Delivery
+    // Example:
+    placeOrder({ paymentMethod: "Cash on Delivery" });
+    alert("Order placed successfully with Cash on Delivery!");
+  } else if (method === "online") {
+    // Trigger Razorpay payment flow
+    openRazorpay();
+  }
 }

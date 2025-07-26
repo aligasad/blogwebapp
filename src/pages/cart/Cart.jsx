@@ -44,7 +44,7 @@ function Cart() {
     console.log(temp);
   }, [cartItems]);
 
-  // Calculate GST----------------------------------
+  // Calculate GST------------------ -- -- -- -- -- -- -- --
   const calcGST = (price) => {
     let discount = 0.18;
     const discountedPrice = price * discount;
@@ -65,7 +65,7 @@ function Cart() {
   const [pincode, setPincode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  const buyNow = async () => {
+  const buyNow = async (method) => {
     // validation
     if (name === "" || address == "" || pincode == "" || phoneNumber == "") {
       return toast.error("All fields are required");
@@ -81,24 +81,51 @@ function Cart() {
         year: "numeric",
       }),
     };
-    // Payment Integration Main CODE-------------
+
+    if (method === "cod") {
+      // Place order directly for Cash on Delivery
+      const orderInfo = {
+        cartItems,
+        addressInfo,
+        date: new Date().toLocaleString("en-US", {
+          month: "short",
+          day: "2-digit",
+          year: "numeric",
+        }),
+        email: JSON.parse(localStorage.getItem("user")).user.email,
+        userid: JSON.parse(localStorage.getItem("user")).user.uid,
+        paymentId: "COD",
+        paymentMethod: "Cash on Delivery",
+      };
+
+      try {
+        const orderRef = collection(firebaseDB, "orders");
+        await addDoc(orderRef, orderInfo);
+        toast.success("Order placed successfully with Cash on Delivery!");
+        // Optionally clear cart or redirect
+      } catch (error) {
+        console.log(error);
+        toast.error("Failed to place order.");
+      }
+      return;
+    }
+
+    // Online Payment (Razorpay)
     var options = {
       key: "rzp_test_rmJprKHkqwT85l",
       key_secret: "7vqkNgOjwnfx8a13WysHFoiV",
       amount: parseInt(grandTotal * 100),
       currency: "INR",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", // Amazon-like logo
+        "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
       order_receipt: "order_rcptid_" + name,
-      name: "Amazon",
+      name: "Noor By Shayan",
       description: "Secured Payment Dude ",
-      // It handle payment is sucessfull or not
       handler: function (response) {
-        console.log(response);
         toast.success("Payment Successful");
         const paymentId = response.razorpay_payment_id;
 
-        // store order information into firebase- - -  - -- - -  -- --
+        // store order information into firebase
         const orderInfo = {
           cartItems,
           addressInfo,
@@ -110,29 +137,24 @@ function Cart() {
           email: JSON.parse(localStorage.getItem("user")).user.email,
           userid: JSON.parse(localStorage.getItem("user")).user.uid,
           paymentId,
+          paymentMethod: "Online Payment",
         };
 
         try {
-          // In One line
-          // const result = addDoc(collection(firebaseDB, "orders"), orderInfo)
-          // In two line
           const orderRef = collection(firebaseDB, "orders");
           addDoc(orderRef, orderInfo);
-          addDoc;
         } catch (error) {
           console.log(error);
         }
       },
-
       theme: {
-        color: "#FF9900", // Amazon's brand color
+        color: "#FF9900",
         hide_topbar: false,
       },
     };
 
     var pay = new window.Razorpay(options);
     pay.open();
-    console.log(pay);
   };
 
   // Go to top
@@ -154,57 +176,66 @@ function Cart() {
     >
       <h1 className="mb-10 text-center text-2xl font-bold">Cart Items</h1>
       <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0 ">
-        <div className="rounded-lg md:w-2/3 max-h-[80vh] overflow-y-auto ">
-          {cartItems.length > 0 ? cartItems.map((item, index) => {
-            const { title, price, imageUrl, description, id } = item;
-            return (
-              <div
-                key={index}
-                className="justify-between mb-6 rounded-lg border  drop-shadow-xl bg-white p-6  sm:flex  sm:justify-start"
-                style={{
-                  backgroundColor: mode === "dark" ? "rgb(32 33 34)" : "",
-                  color: mode === "dark" ? "white" : "",
-                }}
-              >
-                <img
-                  src={imageUrl}
-                  onClick={() => window.location.href = `/productinfo/${id}`}
-                  alt="product-image"
-                  className="w-full rounded-lg sm:w-40 cursor-pointer"
-                />
-                <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
-                  <div className="mt-5 sm:mt-0">
-                    <h2
-                      className="text-lg font-bold text-gray-900"
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      {title}
-                    </h2>
-                    <h2
-                      className="text-sm  text-gray-900"
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      {description}
-                    </h2>
-                    <div className="flex items-baseline gap-3">
-                      <span className="text-xl font-bold text-red-600 mt-1">
-                        ₹{calcOffer(Number(price))}
-                      </span>
-                      <span className="text-base font-semibold text-amber-600  line-through">
-                        ₹{price}
-                      </span>
+        <div className="rounded-lg md:w-2/3 max-h-[80vh] overflow-y-auto">
+          {cartItems.length > 0 ? (
+            <div className="grid gap-6 sm:grid-cols-2">
+              {cartItems.map((item, index) => {
+                const { title, price, imageUrl, description, id, category } =
+                  item;
+                return (
+                  <div
+                    key={index}
+                    className={`flex flex-col bg-white rounded-2xl shadow-xl border border-gray-200 ${
+                      mode === "dark" ? "bg-[#23272f] border-gray-700" : ""
+                    } transition hover:scale-[1.01]`}
+                  >
+                    <img
+                      src={imageUrl}
+                      onClick={() =>
+                        (window.location.href = `/productinfo/${id}`)
+                      }
+                      alt="product-image"
+                      className="w-full h-48 object-cover rounded-t-2xl cursor-pointer"
+                    />
+                    <div className="flex-1 flex flex-col justify-between p-4">
+                      <div>
+                        <h2
+                          className="text-lg font-bold mb-1"
+                          style={{ color: mode === "dark" ? "white" : "" }}
+                        >
+                          {title}
+                        </h2>
+                        <p className="text-xs text-gray-500 mb-1">{category}</p>
+                        <p
+                          className="text-sm mb-2"
+                          style={{ color: mode === "dark" ? "white" : "" }}
+                        >
+                          {description}
+                        </p>
+                      </div>
+                      <div className="flex items-center justify-between mt-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg font-bold text-green-600">
+                            ₹{calcOffer(Number(price))}
+                          </span>
+                          <span className="text-sm line-through text-gray-400">
+                            ₹{price}
+                          </span>
+                        </div>
+                        <RiDeleteBin6Fill
+                          onClick={() => deleteCart(item)}
+                          className="text-2xl cursor-pointer hover:text-[#377a5f]"
+                          title="Remove from cart"
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div className="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
-                    <RiDeleteBin6Fill
-                      onClick={() => deleteCart(item)}
-                      className="text-2xl cursor-pointer hover:text-amber-600"
-                    />
-                  </div>
-                </div>
-              </div>
-            );
-          }) : <NoOrderFound />}
+                );
+              })}
+            </div>
+          ) : (
+            <NoOrderFound />
+          )}
         </div>
 
         {/* TOTAL AMOUT OF ALL ITEM CARD */}
@@ -260,33 +291,9 @@ function Cart() {
               {shipping.toFixed(2)}
             </p>
           </div>
-          <hr className="my-4" />
-          <p
-            className="text-base ml-5 mb-3 font-bold text-red-500 flex gap-1 items-center "
-            style={{ color: mode === "dark" ? "#FF5733" : "" }}
-          >
-            Special Discount by our team{" "}
-            <BsEmojiSunglasses className="text-xl text-black" />
-          </p>
 
           <div className="flex justify-between mb-3">
-            <div>
-              <p
-                className="text-base font-bold"
-                style={{ color: mode === "dark" ? "white" : "" }}
-              >
-                Overall Discount <span className=" text-amber-700">10%</span>
-              </p>
-            </div>
-            <div className="text-base font-bold line-through ">
-              <p
-                className="mb-1 text-base font-bold flex text-red-500  items-center"
-                style={{ color: mode === "dark" ? "#FF5733" : "" }}
-              >
-                <FaIndianRupeeSign />
-                {grandTotal.toFixed(2)}
-              </p>
-            </div>
+            <div className="text-base font-bold line-through "></div>
           </div>
 
           <hr />

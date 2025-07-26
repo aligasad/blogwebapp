@@ -11,13 +11,15 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.2",
+    "@react-three/drei": "^10.6.0",
+    "@react-three/fiber": "^9.2.0",
     "@reduxjs/toolkit": "^2.8.1",
     "@tabler/icons-react": "^3.31.0",
     "@tailwindcss/vite": "^4.1.6",
     "axios": "^1.9.0",
     "clsx": "^2.1.1",
     "firebase": "^11.7.1",
-    "framer-motion": "^12.11.3",
+    "framer-motion": "^12.23.9",
     "lucide-react": "^0.510.0",
     "motion": "^12.12.1",
     "react": "^19.1.0",
@@ -30,7 +32,8 @@
     "react-toastify": "^11.0.5",
     "slick-carousel": "^1.8.1",
     "tailwind-merge": "^3.3.0",
-    "tailwindcss": "^4.1.6"
+    "tailwindcss": "^4.1.6",
+    "three": "^0.178.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

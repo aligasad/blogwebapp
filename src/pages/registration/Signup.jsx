@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useData } from "../../context/data/MyState";
 import { toast } from "react-toastify";
@@ -53,48 +53,55 @@ function Signup() {
     }
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
   return (
-    <div className=" flex justify-center items-center my-8">
+
+    <div className="flex justify-center items-center bg-[#f1fdee] min-h-screen">
       <form
-        className="bg-gray-800 p-8 rounded-xl shadow-md w-96"
+        className="bg-white p-8 rounded-xl shadow-lg w-96 border border-green-200"
         onSubmit={handleSubmit}
       >
-        <h2 className="text-2xl font-bold mb-6 text-center text-white">
-          Register
+        <h2 className="text-2xl font-bold mb-6 text-center text-green-900">
+          Ayura C Serum 🌿
         </h2>
+
         <input
           type="name"
           name="name"
           placeholder="Enter your name"
           value={form.name}
           onChange={handleChange}
-          className="w-full p-2 mb-4 outline-0 bg-gray-400 border border-gray-300 rounded"
+          className="w-full p-3 mb-6 border border-green-300 bg-[#f9fff9] text-green-900 placeholder-green-500 rounded-lg outline-none focus:ring-2 focus:ring-green-400 transition-all"
         />
         <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          className="w-full p-2 mb-4 outline-0 bg-gray-400 border border-gray-300 rounded"
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          className="w-full p-2 mb-4 outline-0 bg-gray-400 border border-gray-300 rounded"
-        />
-        <button
-          type="submit"
-          className="w-full bg-yellow-400 text-black font-semibold py-2 rounded hover:bg-yellow-500"
-        >
-          Register
-        </button>
-        <p className="mt-4 text-center text-white">
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            value={form.email}
+            onChange={handleChange}
+            className="w-full p-3 mb-4 border border-green-300 bg-[#f9fff9] text-green-900 placeholder-green-500 rounded-lg outline-none focus:ring-2 focus:ring-green-400 transition-all"
+          />
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            value={form.password}
+            onChange={handleChange}
+            className="w-full p-3 mb-6 border border-green-300 bg-[#f9fff9] text-green-900 placeholder-green-500 rounded-lg outline-none focus:ring-2 focus:ring-green-400 transition-all"
+          />
+
+          <button
+            type="submit"
+            className="w-full bg-gradient-to-r from-green-600 to-lime-500 text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-lg hover:from-green-700 hover:to-lime-600 transition-all cursor-pointer"
+          >SignUp</button>
+
+        <p className="mt-4 text-center text-green-700">
           Already have an account?{" "}
-          <Link to="/login" className="text-yellow-500">
+          <Link to="/login" className="text-green-600 underline hover:text-green-800">
             Login
           </Link>
         </p>

@@ -37,7 +37,7 @@ function DashboardTab() {
               <Tab>
                 <button
                   type="button"
-                  className="font-medium border-b-2 hover:shadow-purple-700 border-purple-500 text-purple-500 rounded-lg text-xl shadow-[inset_0_0_8px_rgba(0,0,0,0.6)]  px-5 py-1.5 text-center bg-[#605d5d12] "
+                  className="font-medium border-b-2 hover:shadow-purple-700 border-purple-500 text-purple-500 rounded-lg text-xl shadow-[inset_0_0_8px_rgba(0,0,0,0.6)]  px-5 py-1.5 text-center cursor-pointer bg-[#605d5d12] "
                 >
                   <div className="flex gap-2 items-center">
                     <MdOutlineProductionQuantityLimits />
@@ -48,7 +48,7 @@ function DashboardTab() {
               <Tab>
                 <button
                   type="button"
-                  className="font-medium border-b-2 border-yellow-500 bg-[#605d5d12] text-yellow-500  hover:shadow-yellow-700  rounded-lg text-xl shadow-[inset_0_0_8px_rgba(0,0,0,0.6)]    px-5 py-1.5 text-center "
+                  className="font-medium border-b-2 border-[#439373] bg-[#605d5d12] text-[#439373]  hover:shadow-[#306852]  rounded-lg text-xl shadow-[inset_0_0_8px_rgba(0,0,0,0.6)]    px-5 py-1.5 text-center cursor-pointer "
                 >
                   <div className="flex gap-2 items-center">
                     <AiFillShopping /> Order
@@ -58,7 +58,7 @@ function DashboardTab() {
               <Tab>
                 <button
                   type="button"
-                  className="font-medium border-b-2 border-green-500 bg-[#605d5d12] text-green-500 rounded-lg text-xl  hover:shadow-green-700 shadow-[inset_0_0_8px_rgba(0,0,0,0.6)]   px-5 py-1.5 text-center "
+                  className="font-medium border-b-2 border-green-500 bg-[#605d5d12] text-green-500 rounded-lg text-xl  hover:shadow-green-700 shadow-[inset_0_0_8px_rgba(0,0,0,0.6)]   px-5 py-1.5 text-center cursor-pointer "
                 >
                   <div className="flex gap-2 items-center">
                     <FaUser /> Users
@@ -81,7 +81,7 @@ function DashboardTab() {
                   <button
                     onClick={add}
                     type="button"
-                    className="text-white bg-[#FF9900] hover:bg-[#cc7a00] font-semibold rounded-lg text-sm px-5 py-2.5 mb-2 mr-4 transition-all duration-300 shadow-md"
+                    className="text-white bg-[#439373] hover:bg-[#437f67] font-semibold rounded-lg text-sm px-5 py-2.5 mb-2 mr-4 transition-all duration-300 shadow-md cursor-pointer"
                     style={{
                       backgroundColor: mode === "dark" ? "#232F3E" : "",
                       color: mode === "dark" ? "white" : "",

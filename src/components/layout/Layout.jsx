@@ -1,11 +1,10 @@
-import React from 'react'
-import NavAmazon from '../navbar/NavAmazon';
+import Header from '../navbar/Header.jsx';
 import Footer from '../footer/Footer';
 import { Outlet } from 'react-router-dom';
 function Layout() {
   return (
     <>
-      <NavAmazon />
+      <Header />
       <main>
         <Outlet />
       </main>
@@ -14,4 +13,4 @@ function Layout() {
   )
 }
 
-export default Layout
+export default Layout;
