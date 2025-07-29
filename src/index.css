@@ -5,6 +5,21 @@
 @import "slick-carousel/slick/slick-theme.css";
 
 
+@keyframes bgPulse {
+  0%, 100% {
+    background-color: #ff2f28b2;
+  }
+  50% {
+    background-color: #9f5ccfb2;
+  }
+}
+
+.bg-pulse {
+  animation: bgPulse 2s infinite ease-in-out;
+}
+
+
+
 .leaf {
   position: absolute;
   width: 40px;

@@ -267,13 +267,13 @@ function Navbar() {
             <img src={logo} alt="Logo" className="w-10 h-auto rounded" />
           </Link>
           <nav className="hidden lg:flex gap-6 text-sm text-gray-800">
-            <Link to="/serum1" className="hover:text-green-700">
-              Serum1
+            <Link to="/serum1" className="hover:text-green-700 font-bold">
+              Serum
             </Link>
-            <Link to="/mobile" className="hover:text-green-700">
-              Serum2
+            <Link to="/mobile" className="hover:text-green-700 font-bold">
+              Shampoo
             </Link>
-            <Link to="/orders" className="hover:text-green-700">
+            <Link to="/orders" className="hover:text-green-700 font-bold">
               Orders
             </Link>
             {user?.user?.email === "asadalam4291@gmail.com" && (

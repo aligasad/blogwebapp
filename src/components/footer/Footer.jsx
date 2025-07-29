@@ -47,7 +47,7 @@ const Footer = () => {
               <MdEmail /> office@thezaphira.com
             </li>
             <li className="flex items-center gap-2">
-              <MdPhone /> +1 (555) 123-4567
+              <MdPhone /> +91 74173 31926
             </li>
             <li className="flex items-center gap-2">
               <MdLocationOn /> Lucknow, India

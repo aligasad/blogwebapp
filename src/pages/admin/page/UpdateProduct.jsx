@@ -10,6 +10,8 @@ function UpdateProduct() {
     window.scrollTo(0, 0);
   }, []);
 
+  
+
   return (
     <div className=" py-3 ">
       <div className=" flex justify-center items-center h-full">
@@ -76,6 +78,18 @@ function UpdateProduct() {
               value={products.type}
               onChange={(e) =>
                 setProducts({ ...products, type: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="category"
+              className=" bg-gray-600 mb-4 px-2 py-2 w-full lg:w-[20em] rounded-lg text-white placeholder:text-gray-200 outline-none"
+              placeholder="Stock"
+              value={products.stock}
+              onChange={(e) =>
+                setProducts({ ...products, stock: e.target.value })
               }
             />
           </div>

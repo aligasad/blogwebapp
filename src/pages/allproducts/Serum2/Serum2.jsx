@@ -78,7 +78,7 @@ function Mobile() {
 
             <div className="flex flex-wrap -m-4">
               {product
-                .filter((obj) => obj.type.toLowerCase().includes("mobile"))
+                .filter((obj) => obj.type.toLowerCase().includes("shampo"))
                 .filter(
                   (obj) =>
                     obj.title.toLowerCase().includes(searchkey) ||
@@ -91,7 +91,7 @@ function Mobile() {
                     .includes(filterType)
                 )
                 .map((item, index) => {
-                  const { title, price, category, imageUrl, id } = item;
+                  const { title, price, originalPrice, category, imageUrl, id } = item;
                   return (
                    
 
@@ -107,7 +107,9 @@ function Mobile() {
                           color: mode === "dark" ? "#FFFFFF" : "#000000",
                         }}
                       >
-                        <div className="flex justify-center items-center p-4">
+                        <div className="flex justify-center items-center p-4 relative">
+                          {item.stock > 0 ? (<p className=" absolute top-3 left-3 bg-[#459575] px-2 rounded-full text-[13px] text-white font-semibold z-10 ">On Sale</p>) : (<p className=" absolute top-3 left-3 bg-[#b35d52] px-2 rounded-full text-[13px] text-white font-semibold z-10 ">Sold Out</p>)}
+                          {item.isNew ? (<p className="absolute bottom-0 right-0 px-3 text-[13px] text-white font-semibold z-10 bg-pulse"> New </p> ) : ""}
                           <img
                             onClick={() =>
                               (window.location.href = `/productinfo/${id}`)
@@ -131,27 +133,30 @@ function Mobile() {
                           </h2>
                           <div className="flex items-baseline gap-1">
                             <p className="text-base font-bold text-gray-600 mt-1">
-                              ₹{calcOffer(Number(price))}
+                              ₹{price}
                             </p>
                             <p className="text-sm font-semibold text-red-600 line-through">
-                              ₹{price}
+                              ₹{originalPrice}
                             </p>
                           </div>
 
-                          <div className="flex items-center justify-between mt-4 w-[70%] sm:w-[50%] ">
-                            <button
-                              onClick={() => addCart(item)}
-                              className="flex-1 py-2 mr-2 text-sm font-semibold rounded-lg text-white bg-green-600 hover:bg-green-700 transition duration-300 cursor-pointer "
-                            >
-                              Add to Cart
-                            </button>
+                          <div className="flex items-center justify-between mt-4 w-[70%] sm:w-[55%] ">
+                            {item.stock > 0 ? (<button
+                          onClick={() => addCart(item)}
+                          className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm md:flex-1 font-semibold rounded-lg text-white bg-[#459575] hover:bg-[#459575] transition duration-300 cursor-pointer md:w-[50%]"
+                        >
+                          Add to Cart
+                        </button>
+                        ) : ( 
+                          <button
+                            disabled
+                            className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm md:flex-1 font-semibold rounded-lg text-white bg-gray-400 cursor-not-allowed md:w-[55%]"
+                          >
+                            Out of Stock
+                          </button>
+                        )}
 
-                            {/* <button
-                              onClick={() => addWishlist(item)}
-                              className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 grid place-items-center dark:bg-gray-700 dark:hover:bg-gray-600 transition cursor-pointer"
-                            >
-                              <FaHeart className="text-xl text-amber-400" />
-                            </button> */}
+                            
                           </div>
                         </div>
                       </div>

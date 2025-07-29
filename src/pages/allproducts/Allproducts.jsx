@@ -20,6 +20,7 @@ function Allproducts() {
     calcOffer,
   } = context;
 
+  console.log("JULY:::",product)
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
   console.log(cartItems);
@@ -87,7 +88,7 @@ function Allproducts() {
             )
             .filter((obj) => obj.price.trim().includes(filterPrice))
             .map((item, index) => {
-              const { title, price, category, imageUrl, id } = item;
+              const { title, price, originalPrice, category, onSale, stock, imageUrl, id } = item;
               console.log("ID CARD", id);
               return (
                 
@@ -102,7 +103,10 @@ function Allproducts() {
                       color: mode === "dark" ? "#FFFFFF" : "#000000",
                     }}
                   >
-                    <div className="flex justify-center items-center p-4 ">
+                    <div className="flex justify-center items-center p-4 relative ">
+                      {item.stock > 0 ? (<p className=" absolute top-3 left-3 bg-[#459575] px-2 rounded-full text-[13px] text-white font-semibold z-10 ">On Sale</p>) : (<p className=" absolute top-3 left-3 bg-[#b35d52] px-2 rounded-full text-[13px] text-white font-semibold z-10 ">Sold Out</p>)}
+                      {item.isNew ? (<p className="absolute bottom-0 right-0 px-3 text-[13px] text-white font-semibold z-10 bg-pulse"> New </p> ) : ""}
+                      
                       <img
                         onClick={() =>
                           (window.location.href = `/productinfo/${id}`)
@@ -130,23 +134,31 @@ function Allproducts() {
                           className="text-[14px] md:text-base font-bold text-grey-300 mt-1"
                           style={{ color: mode === "dark" ? "#D97706" : "" }}
                         >
-                          ₹{calcOffer(Number(price))}
+                          ₹{price}
                         </p>
                         <p
                           className="text-[12px] md:text-sm font-semibold text-red-600 line-through"
                           style={{ color: mode === "dark" ? "white" : "" }}
                         >
-                          ₹{price}
+                          ₹{originalPrice}
                         </p>
                       </div>
 
                       <div className=" mt-4">
-                        <button
+                        {item.stock > 0 ? (<button
                           onClick={() => addCart(item)}
                           className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm md:flex-1 font-semibold rounded-lg text-white bg-[#459575] hover:bg-[#459575] transition duration-300 cursor-pointer md:w-[50%]"
                         >
                           Add to Cart
                         </button>
+                        ) : ( 
+                          <button
+                            disabled
+                            className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm md:flex-1 font-semibold rounded-lg text-white bg-gray-400 cursor-not-allowed md:w-[55%]"
+                          >
+                            Out of Stock
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>

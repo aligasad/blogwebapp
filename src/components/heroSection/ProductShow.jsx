@@ -119,7 +119,7 @@ const ProductShow = () => {
           viewport={{ once: true }}
         >
           <img
-            src="https://zaphira-serum.vercel.app/assets/ingredients-Cm-9GOld.png"
+            src="https://i.ibb.co/6JskvgZx/banner2.jpg"
             alt="Serum"
             className="rounded-xl shadow-lg w-full"
           />
@@ -157,10 +157,10 @@ const ProductShow = () => {
               <span className="text-sm text-gray-600">(1,247 reviews)</span>
             </div>
 
-            <p className="text-3xl font-bold text-green-800">$89.99</p>
+            <p className="text-3xl font-bold text-green-800">₹2999</p>
 
             <button className="w-full cursor-pointer bg-[#449474] text-white font-semibold py-3 rounded-xl hover:bg-[#449474] transition">
-              Buy at - $89.99
+              Buy at - ₹3999
             </button>
           </div>
         </motion.div>
