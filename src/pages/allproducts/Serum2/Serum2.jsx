@@ -91,7 +91,7 @@ function Mobile() {
                     .includes(filterType)
                 )
                 .map((item, index) => {
-                  const { title, price, originalPrice, category, imageUrl, id } = item;
+                  const { title, price, originalPrice, category, type, quantity, imageUrl, id } = item;
                   return (
                    
 
@@ -109,7 +109,7 @@ function Mobile() {
                       >
                         <div className="flex justify-center items-center p-4 relative">
                           {item.stock > 0 ? (<p className=" absolute top-3 left-3 bg-[#459575] px-2 rounded-full text-[13px] text-white font-semibold z-10 ">On Sale</p>) : (<p className=" absolute top-3 left-3 bg-[#b35d52] px-2 rounded-full text-[13px] text-white font-semibold z-10 ">Sold Out</p>)}
-                          {item.isNew ? (<p className="absolute bottom-0 right-0 px-3 text-[13px] text-white font-semibold z-10 bg-pulse"> New </p> ) : ""}
+                          {item.isNew ? (<p className="absolute bottom-0 right-0 px-3 text-[13px] text-white font-semibold z-10 bg-black"> New </p> ) : ""}
                           <img
                             onClick={() =>
                               (window.location.href = `/productinfo/${id}`)
@@ -121,7 +121,7 @@ function Mobile() {
                         </div>
                         <div className="px-4 pb-4 border-t rounded-b-xl border-gray-100 bg-[#94eed0]">
                           <p className="text-xs text-gray-500 mt-2 mb-1">
-                            {category}
+                            {type} / {category}
                           </p>
                           <h2
                             className="text-sm font-semibold truncate"
@@ -129,7 +129,7 @@ function Mobile() {
                               color: mode === "dark" ? "#FFD814" : "",
                             }}
                           >
-                            {title}
+                            {title} / {quantity} ml
                           </h2>
                           <div className="flex items-baseline gap-1">
                             <p className="text-base font-bold text-gray-600 mt-1">

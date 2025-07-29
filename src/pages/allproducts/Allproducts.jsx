@@ -88,7 +88,7 @@ function Allproducts() {
             )
             .filter((obj) => obj.price.trim().includes(filterPrice))
             .map((item, index) => {
-              const { title, price, originalPrice, category, onSale, stock, imageUrl, id } = item;
+              const { title, price, originalPrice, category, type, quantity, onSale, stock, imageUrl, id } = item;
               console.log("ID CARD", id);
               return (
                 
@@ -105,7 +105,7 @@ function Allproducts() {
                   >
                     <div className="flex justify-center items-center p-4 relative ">
                       {item.stock > 0 ? (<p className=" absolute top-3 left-3 bg-[#459575] px-2 rounded-full text-[13px] text-white font-semibold z-10 ">On Sale</p>) : (<p className=" absolute top-3 left-3 bg-[#b35d52] px-2 rounded-full text-[13px] text-white font-semibold z-10 ">Sold Out</p>)}
-                      {item.isNew ? (<p className="absolute bottom-0 right-0 px-3 text-[13px] text-white font-semibold z-10 bg-pulse"> New </p> ) : ""}
+                      {item.isNew ? (<p className="absolute bottom-0 right-0 px-3 text-[13px] text-white font-semibold z-10 bg-black"> New </p> ) : ""}
                       
                       <img
                         onClick={() =>
@@ -121,7 +121,7 @@ function Allproducts() {
                         className="text-xs text-gray-500 mt-2 mb-1"
                         style={{ color: mode === "dark" ? "white" : "" }}
                       >
-                        {category}
+                       {type} / {category}
                       </p>
                       <h2
                         className="text-sm font-semibold truncate"

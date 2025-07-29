@@ -87,7 +87,7 @@ function Serum1() {
                     .includes(filterType)
                 )
                 .map((item, index) => {
-                  const { title, price, originalPrice, category, imageUrl, id } = item;
+                  const { title, price, originalPrice, category, type, quantity, imageUrl, id } = item;
                   return (
                    
 
@@ -105,7 +105,7 @@ function Serum1() {
                       >
                         <div className="flex justify-center items-center p-4 relative ">
                           {item.stock > 0 ? (<p className=" absolute top-3 left-3 bg-[#459575] px-2 rounded-full text-[13px] text-white font-semibold z-10 ">On Sale</p>) : (<p className=" absolute top-3 left-3 bg-[#b35d52] px-2 rounded-full text-[13px] text-white font-semibold z-10 ">Sold Out</p>)}
-                          {item.isNew ? (<p className="absolute bottom-0 right-0 px-3 text-[13px] text-white font-semibold z-10 bg-pulse"> New </p> ) : ""}
+                          {item.isNew ? (<p className="absolute bottom-0 right-0 px-3 text-[13px] text-white font-semibold z-10 bg-black"> New </p> ) : ""}
                           <img
                             onClick={() =>
                               (window.location.href = `/productinfo/${id}`)
@@ -117,7 +117,7 @@ function Serum1() {
                         </div>
                         <div className="px-4 pb-4 border-t rounded-b-xl border-gray-100 bg-[#94eed0]">
                           <p className="text-xs text-gray-500 mt-2 mb-1">
-                            {category}
+                            {type} / {category}
                           </p>
                           <h2
                             className="text-sm font-semibold truncate"
@@ -127,16 +127,20 @@ function Serum1() {
                           >
                             {title}
                           </h2>
+                          <p className="text-xs text-gray-500 ">
+                            {quantity} ml
+                          </p>
                           <div className="flex items-baseline gap-1">
                             <p className="text-base font-bold text-gray-600 mt-1">
                               ₹{price}
                             </p>
                             <p className="text-sm font-semibold text-red-600 line-through">
-                              ₹{originalPrice}
+                              ₹{originalPrice} 
                             </p>
                           </div>
+                          
 
-                          <div className="flex items-center justify-between mt-4 w-[70%] sm:w-[50%] ">
+                          <div className="flex items-center justify-between mt-4 w-[70%] sm:w-[55%] ">
                             {item.stock > 0 ? (<button
                           onClick={() => addCart(item)}
                           className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm md:flex-1 font-semibold rounded-lg text-white bg-[#459575] hover:bg-[#459575] transition duration-300 cursor-pointer md:w-[50%]"

@@ -111,7 +111,9 @@ function ProductInfo() {
                   ))}
                 </div>
 
-                <ReviewSection productId={params} />
+                <div className=" hidden sm:block ">
+                  <ReviewSection productId={params} />
+                </div>
               </div>
               {/* Product Info Section */}
               <div className="flex flex-col justify-between">
@@ -131,7 +133,7 @@ function ProductInfo() {
                       }
                   </div>
                   <h1 className="text-gray-900 text-2xl md:text-3xl title-font font-bold mb-2">
-                    {products.title}
+                    {products.title} <span className="text-red-600 text-[20px]">{products.quantity }</span>
                   </h1>
                   <h2 className="text-xs md:text-sm title-font text-yellow-600 font-semibold tracking-widest mb-2">
                     {products.category?.toUpperCase()}
@@ -229,7 +231,11 @@ function ProductInfo() {
                   </div>
                   {/* --- Description --- */}
                   <p className="leading-relaxed border-b-2 mb-5 pb-5 text-sm md:text-base">
-                    {products.description}
+                    {products.description ? (
+                      <span className="font-semibold text-green-700">
+                        Description: 
+                      </span>) : "N/A"}
+                    { products.description}
                   </p>
                   {/* --- Review --- */}
                   {products.review && (
@@ -280,6 +286,10 @@ function ProductInfo() {
                   }
                 </div>
               </div>
+
+              <div className=" sm:hidden ">
+                  <ReviewSection productId={params} />
+                </div>
             </div>
           </div>
         )}

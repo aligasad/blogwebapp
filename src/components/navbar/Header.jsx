@@ -273,6 +273,7 @@ function Navbar() {
             <Link to="/mobile" className="hover:text-green-700 font-bold">
               Shampoo
             </Link>
+            
             <Link to="/orders" className="hover:text-green-700 font-bold">
               Orders
             </Link>
