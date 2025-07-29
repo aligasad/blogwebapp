@@ -20,8 +20,9 @@ import { ToastContainer, Bounce } from "react-toastify";
 import AuthProvider from "./components/protector/AuthContext.jsx";
 import ProtectedRoute from "./components/protector/ProtectedRoute.jsx";
 import Allproducts from "./pages/allproducts/Allproducts.jsx";
-import Mobile from "./pages/allproducts/Serum2/Serum2.jsx";
-import Serum1 from "./pages/allproducts/Serum1/Serum1.jsx";
+import Mobile from "./pages/allproducts/Shampoo/Shampoo.jsx";
+import Serum1 from "./pages/allproducts/Serum/Serum.jsx";
+import AboutUs from "./components/aboutUs/AboutUs.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -76,6 +77,10 @@ function App() {
         {
           path: "/serum",
           element: <Serum1 />,
+        },
+        {
+          path: "about",
+          element: <AboutUs />
         },
         {
           path: "/shampoo",

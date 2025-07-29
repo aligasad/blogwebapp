@@ -95,21 +95,23 @@ function ProductInfo() {
                 </div>
                 {/* Thumbnails */}
                 <div className="flex gap-3 justify-center">
-                  {[...Array(5)].map((_, idx) => (
-                    <img
-                      key={idx}
-                      src={products.imageUrl}
-                      alt={`thumb-${idx}`}
-                      className={`w-14 h-14 object-cover rounded-lg cursor-pointer border-2 transition-all duration-200 ${
-                        (selectedImage || products.imageUrl) ===
-                        products.imageUrl
-                          ? "border-[#449474] shadow"
-                          : "border-gray-200"
-                      }`}
-                      onClick={() => setSelectedImage(products.imageUrl)}
-                    />
-                  ))}
-                </div>
+  {[products.imageUrl, products.imageUrl2, products.imageUrl3, products.imageUrl4]
+    .filter(Boolean) // Filter out any undefined or null images
+    .map((url, idx) => (
+      <img
+        key={idx}
+        src={url}
+        alt={`thumb-${idx}`}
+        className={`w-14 h-14 object-cover rounded-lg cursor-pointer border-2 transition-all duration-200 ${
+          (selectedImage || products.imageUrl) === url
+            ? "border-[#449474] shadow"
+            : "border-gray-200"
+        }`}
+        onClick={() => setSelectedImage(url)}
+      />
+    ))}
+</div>
+
 
                 <div className=" hidden sm:block ">
                   <ReviewSection productId={params} />
@@ -202,9 +204,20 @@ function ProductInfo() {
                       )}
                     </div>
                   </div>
-                  {/* --- Ingredients & Benefits --- */}
+                  
+                  {/* --- Description, Ingredients & Benefits --- */}
+                  
                   <div className="mb-4">
                     <div className="mb-2">
+                      {/* --- Description --- */}
+                      <p className="leading-relaxed mb-5 pb-5 text-sm md:text-base">
+                        {products.description ? (
+                          <span className="font-semibold text-green-700">
+                            Description: 
+                          </span>) : "N/A"}
+                        { products.description}
+                      </p>
+                      <hr />
                       <span className="font-semibold text-green-700">
                         Ingredients:
                       </span>{" "}
@@ -216,8 +229,9 @@ function ProductInfo() {
                         <span className="text-gray-400">N/A</span>
                       )}
                     </div>
-                    <div>
-                      <span className="font-semibold text-green-700">
+                    <hr />
+                    <div className="border-b-2 pb-5">
+                      <span className="font-semibold  text-green-700">
                         Benefits:
                       </span>{" "}
                       {products.benefits ? (
@@ -229,24 +243,6 @@ function ProductInfo() {
                       )}
                     </div>
                   </div>
-                  {/* --- Description --- */}
-                  <p className="leading-relaxed border-b-2 mb-5 pb-5 text-sm md:text-base">
-                    {products.description ? (
-                      <span className="font-semibold text-green-700">
-                        Description: 
-                      </span>) : "N/A"}
-                    { products.description}
-                  </p>
-                  {/* --- Review --- */}
-                  {products.review && (
-                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4">
-                      <span className="font-semibold text-yellow-700">
-                        Review:
-                      </span>{" "}
-                      <span className="text-gray-700">{products.review}</span>
-                    </div>
-                  )}
-                </div>
                 <div>
                   <div className="flex items-baseline gap-2 mb-4">
                     <p className="text-2xl font-bold text-red-600 mt-1">
@@ -270,7 +266,7 @@ function ProductInfo() {
                   {
                     products.stock > 0 ? (
                       <button
-                        className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200"
+                        className="bg-green-600 text-white cursor-pointer px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200"
                         onClick={() => addCart(products)}
                       >
                         Add to Cart
@@ -285,6 +281,8 @@ function ProductInfo() {
                     )
                   }
                 </div>
+                </div>
+                
               </div>
 
               <div className=" sm:hidden ">

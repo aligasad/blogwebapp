@@ -83,6 +83,36 @@ function AddProduct() {
               setProducts({ ...products, imageUrl: e.target.value })
             }
           />
+          <input
+            type="text"
+            name="imageUrl2"
+            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
+            placeholder="Image URL"
+            value={products.imageUrl2}
+            onChange={(e) =>
+              setProducts({ ...products, imageUrl2: e.target.value })
+            }
+          />
+          <input
+            type="text"
+            name="imageUrl3"
+            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
+            placeholder="Image URL"
+            value={products.imageUrl3}
+            onChange={(e) =>
+              setProducts({ ...products, imageUrl3: e.target.value })
+            }
+          />
+          <input
+            type="text"
+            name="imageUrl4"
+            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
+            placeholder="Image URL"
+            value={products.imageUrl4}
+            onChange={(e) =>
+              setProducts({ ...products, imageUrl4: e.target.value })
+            }
+          />
           
           <input
             type="text"

@@ -1,12 +1,12 @@
-import { useEffect } from "react";
-import ProductCard from "../../components/productCard/ProductCard";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useData } from "../../context/data/MyState";
-import { addToCart } from "../../redux/CartSlice";
+import { useData } from "../../../context/data/MyState.jsx";
+import { addToCart } from "../../../redux/CartSlice.jsx";
 import { toast } from "react-toastify";
 import { FaHeart } from "react-icons/fa6";
+import { motion } from "framer-motion";
 
-function Allproducts() {
+function Serum1() {
   const context = useData();
   const {
     mode,
@@ -20,18 +20,17 @@ function Allproducts() {
     calcOffer,
   } = context;
 
-  console.log("JULY:::",product)
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
   console.log(cartItems);
 
-  // add to cart if item is not already present
+  // add to cart if item is not already present   -- -- --- ---- ------ -----
   const user = JSON.parse(localStorage.getItem("user"));
   const addCart = (product) => {
     if (user) {
       const existingItem = cartItems.some((item) => {
         return item.id === product.id;
-      });
+      }); 
       console.log("EXISTING", existingItem);
       if (!existingItem) {
         dispatch(addToCart(product));
@@ -53,46 +52,44 @@ function Allproducts() {
   }, []);
 
   return (
+    <div>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 1 }}
+        onAnimationComplete={() => setIsFirstVisit(false)} // Remove animation after it's done
+      >
+        <section className="text-gray-600 body-font bg-[#caf5e7a7]">
+          <div className="container px-5 py-8 md:py-16 mx-auto">
+            <div class="lg:w-1/2 w-full mb-6 lg:mb-10">
+              <h1
+                class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900"
+                style={{ color: mode === "dark" ? "white" : "" }}
+              >
+                Serum Collection
+              </h1>
+              <div class="h-1 w-25 bg-green-700 rounded"></div>
+            </div>
 
-
-    <section className="text-gray-600 body-font bg-[#caf5e7a7] ">
-      <div className="container px-5 py-8 md:py-16 mx-auto">
-        <div class="lg:w-1/2 w-full mb-6 lg:mb-10">
-          <h1
-            class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900"
-            style={{ color: mode === "dark" ? "white" : "" }}
-          > 
-            All Products
-          </h1>
-          <div class="h-1 w-25 bg-green-700 rounded"></div>
-        </div>
-
-        <div className="flex flex-wrap -m-4 ">
-          {product
-            .filter(
-              (obj) =>
-                obj.title
-                  .toLowerCase()
-                  .includes(
-                    searchkey.toLowerCase().trim().replace(/\s+/g, " ")
-                  ) ||
-                obj.type
-                  .toLowerCase()
-                  .includes(searchkey.toLowerCase().trim().replace(/\s+/g, " "))
-            )
-            .filter((item) =>
-              item.category
-                .replace(/\s+/g, "")
-                .toLowerCase()
-                .includes(filterType)
-            )
-            .filter((obj) => obj.price.trim().includes(filterPrice))
-            .map((item, index) => {
-              const { title, price, originalPrice, category, type, quantity, isNew, stock, imageUrl, id } = item;
-              console.log("ID CARD", id);
-              return (
-                
-                <div
+            <div className="flex flex-wrap -m-4">
+              {product
+                .filter((obj) => obj.type.toLowerCase().includes("serum"))
+                .filter(
+                  (obj) =>
+                    obj.title.toLowerCase().includes(searchkey) ||
+                    obj.type.toLowerCase().includes(searchkey)
+                )
+                .filter((item) =>
+                  item.category
+                    .replace(/\s+/g, "")
+                    .toLowerCase()
+                    .includes(filterType)
+                )
+                .map((item, index) => {
+                  const { title, price, originalPrice, category, type, stock, isNew, quantity, imageUrl, id } = item;
+                  return (
+                   <div
                   key={index}
                   className="w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2"
                 >
@@ -153,13 +150,14 @@ function Allproducts() {
                     </div>
                   </div>
                 </div>
-              );
-            })}
-        </div>
-      </div>
-    </section>
-
+                  );
+                })}
+            </div>
+          </div>
+        </section>
+      </motion.div>
+    </div>
   );
 }
 
-export default Allproducts;
+export default Serum1;

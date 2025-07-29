@@ -7,7 +7,7 @@ import { FaAngleDown, FaUserAlt } from "react-icons/fa";
 import { FiSun } from "react-icons/fi";
 import { Home, User, Layers, ShoppingCart, Menu, X } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
-import { BsSearchHeart } from "react-icons/bs";
+import { RiSearchLine } from "react-icons/ri";
 import logo from "../../assets/logo.jpg";
 import {
   Dialog,
@@ -115,7 +115,7 @@ function Navbar() {
               onClick={() => setSearchBarOpen(true)}
               className="text-xl text-gray-600"
             >
-              <BsSearchHeart />
+              <RiSearchLine />
             </button>
           ) : (
             <input
@@ -219,6 +219,15 @@ function Navbar() {
                   </span>
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/about"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-green-700 transition"
+                >
+                  About
+                </Link>
+              </li>
               {user?.user?.email === "asadalam4291@gmail.com" && (
                 <li>
                   <Link
@@ -261,16 +270,19 @@ function Navbar() {
           <Link to="/" className="text-2xl font-bold text-green-700">
             <img src={logo} alt="Logo" className="w-10 h-auto rounded" />
           </Link>
-          <nav className="hidden lg:flex gap-6 text-sm text-gray-800">
-            <Link to="/serum1" className="hover:text-green-700 font-bold">
+          <nav className="hidden lg:flex gap-6 text-sm text-[#003d29]">
+            <Link to="/serum" className="hover:text-green-700 font-bold">
               Serum
             </Link>
-            <Link to="/mobile" className="hover:text-green-700 font-bold">
+            <Link to="/shampoo" className="hover:text-green-700 font-bold">
               Shampoo
             </Link>
             
             <Link to="/orders" className="hover:text-green-700 font-bold">
               Orders
+            </Link>
+            <Link to="/about" className="hover:text-green-700 font-bold">
+              About
             </Link>
             {user?.user?.email === "asadalam4291@gmail.com" && (
               <Link to="/dashboard" className="text-red-600 font-bold">
@@ -294,7 +306,7 @@ function Navbar() {
                 onClick={() => setSearchBarOpen(true)}
                 className="text-xl cursor-pointer"
               >
-                <BsSearchHeart
+                <RiSearchLine
                   className="text-black hover:text-[#449474]"
                   size={21}
                 />

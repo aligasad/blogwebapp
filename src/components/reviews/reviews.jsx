@@ -98,29 +98,33 @@ function ReviewSection({ productId }) {
 
       <hr className="my-4" />
       <h4 className="font-semibold">Leave a Review</h4>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="number"
-          required
-          placeholder="Rating (1-5)"
-          value={rating}
-          onChange={(e) => setRating(e.target.value)}
-          className="border p-2 w-full mb-2"
-          min="1"
-          max="5"
-        />
-        <textarea
-          placeholder="Write your comment"
-          required
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          className="border p-2 w-full mb-2"
-          rows="3"
-        />
-        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
-          Submit Review
-        </button>
-      </form>
+      <form onSubmit={handleSubmit} className="space-y-2">
+  <input
+    type="number"
+    required
+    placeholder="Rating (1-5)"
+    value={rating}
+    onChange={(e) => setRating(e.target.value)}
+    className="border border-gray-300 focus:border-[#003d29] focus:ring-1 focus:ring-[#003d29] rounded-md p-2 w-full transition duration-200 outline-none"
+    min="1"
+    max="5"
+  />
+  <textarea
+    placeholder="Write your comment"
+    required
+    value={comment}
+    onChange={(e) => setComment(e.target.value)}
+    className="border border-gray-300 focus:border-[#003d29] focus:ring-1 focus:ring-[#003d29] rounded-md p-2 w-full transition duration-200 outline-none"
+    rows="3"
+  />
+  <button
+    type="submit"
+    className="bg-[#376a55] cursor-pointer hover:bg-[#003d29] transition duration-200 text-white px-4 py-2 rounded-md w-full font-semibold shadow-sm"
+  >
+    Submit Review
+  </button>
+</form>
+
     </div>
   );
 }

@@ -54,7 +54,7 @@ function ProductCard() {
 
 
   return (
-    <section className="text-gray-600 body-font">
+    <section className="text-gray-600 bg-[#dcf8ef] body-font">
       <div className="container px-5 py-8 md:py-16 mx-auto">
         <div className="lg:w-1/2 w-full mb-6 lg:mb-10">
           <h1
@@ -94,77 +94,15 @@ function ProductCard() {
                 imageUrl,
                 id,
                 category,
+                type,
+                isNew,
+                stock,
+                quantity,
+                originalPrice,
                 description,
                 date,
               } = item;
               return (
-                // <div
-                //   key={index}
-                //   className="w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2"
-                // >
-                //   <div
-                //     className="h-full border border-gray-200 rounded-md shadow-gray-300 bg-white hover:shadow-lg transition-shadow hover:shadow-gray-600 duration-300"
-                //     style={{
-                //       backgroundColor: mode === "dark" ? "#232F3E" : "#FFFFFF",
-                //       color: mode === "dark" ? "#FFFFFF" : "#000000",
-                //     }}
-                //   >
-                //     <div className="flex justify-center items-center p-4">
-                //       <img
-                //         onClick={() =>
-                //           (window.location.href = `/productinfo/${id}`)
-                //         }
-                //         className="h-36 sm:h-44 object-contain transition-transform rounded-md duration-300 hover:scale-110 cursor-pointer"
-                //         src={imageUrl}
-                //         alt={title}
-                //       />
-                //     </div>
-                //     <div className=" px-2 md:px-4 pb-4 border-t border-gray-100 dark:border-gray-600">
-                //       <p
-                //         className="text-xs text-gray-500 mt-2 mb-1"
-                //         style={{ color: mode === "dark" ? "white" : "" }}
-                //       >
-                //         {category}
-                //       </p>
-                //       <h2
-                //         className="text-sm font-semibold truncate"
-                //         style={{ color: mode === "dark" ? "#FFD814" : "" }}
-                //       >
-                //         {title}
-                //       </h2>
-                //       <div className="flex items-baseline gap-1">
-                //         <p
-                //           className="text-[14px] md:text-base font-bold text-red-600 mt-1"
-                //           style={{ color: mode === "dark" ? "#D97706" : "" }}
-                //         >
-                //           ₹{calcOffer(Number(price))}
-                //         </p>
-                //         <p
-                //           className="text-[12px] md:text-sm font-semibold text-gray-600 line-through"
-                //           style={{ color: mode === "dark" ? "white" : "" }}
-                //         >
-                //           ₹{price}
-                //         </p>
-                //       </div>
-
-                //       <div className="flex items-center justify-between mt-4">
-                //         <button
-                //           onClick={() => addCart(item)}
-                //           className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm md:flex-1 font-semibold rounded-lg  bg-orange-600 hover:bg-orange-700 text-black hover:text-white transition duration-300 cursor-pointer"
-                //         >
-                //           Add to Cart
-                //         </button>
-
-                //         <button
-                //           onClick={() => addWishlist(item)}
-                //           className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 grid place-items-center dark:bg-gray-700 dark:hover:bg-gray-600 transition cursor-pointer"
-                //         >
-                //           <FaHeart className="text-base sm:text-xl text-white hover:text-orange-600" />
-                //         </button>
-                //       </div>
-                //     </div>
-                //   </div>
-                // </div>
                 <div
                   key={index}
                   className="w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2"
@@ -176,7 +114,9 @@ function ProductCard() {
                       color: mode === "dark" ? "#FFFFFF" : "#000000",
                     }}
                   >
-                    <div className="flex justify-center items-center p-4 bg-white rounded-t-lg">
+                    <div className="flex justify-center items-center p-4 bg-white rounded-t-lg border-2 border-b-0 border-[#003d29] relative">
+                      {stock > 0 ? (<p className=" absolute bottom-0 left-0 bg-green-700 px-2 rounded-tr-lg text-[10px] sm:text-[13px] text-white font-semibold z-10 ">On Sale</p>) : (<p className=" absolute bottom-0 left-0 bg-[#b35d52] px-2 rounded-tr-lg text-[10px] sm:text-[13px] text-white font-semibold z-10 ">Sold Out</p>)}
+                      {isNew ? (<p className="absolute bottom-0 right-0 px-3 text-[13px] text-white font-semibold z-10 bg-black rounded-tl-lg"> New </p> ) : ""}
                       <img
                         onClick={() =>
                           (window.location.href = `/productinfo/${id}`)
@@ -186,29 +126,39 @@ function ProductCard() {
                         alt={title}
                       />
                     </div>
-                    <div className="px-2 md:px-4 pb-4 border-t border-gray-300">
-                      <p className="text-xs text-gray-700 mt-2 mb-1">
-                        {category}
+                    <div className="px-2 md:px-4 pb-4 border-t bg-[#003d29]  rounded-b-lg  border-gray-300">
+                      <p className="text-xs text-white mt-2">
+                        <span className=" font-semibold">{type}</span> / {category}
                       </p>
-                      <h2 className="text-sm font-semibold truncate text-black">
+                      <h2 className="text-sm font-semibold truncate text-gray-300">
                         {title}
                       </h2>
+                      <h2 className="text-[12px] font-semibold truncate text-gray-300">
+                        <span>Quantity: </span>{quantity}
+                      </h2>
+                      <hr className="text-white mt-[3px]"/>
                       <div className="flex items-baseline gap-1">
                         <p className="text-[14px] md:text-base font-bold text-red-600 mt-1">
-                          ₹{calcOffer(Number(price))}
-                        </p>
-                        <p className="text-[12px] md:text-sm font-semibold text-gray-700 line-through">
                           ₹{price}
+                        </p>
+                        <p className="text-[12px] md:text-sm font-semibold text-gray-100 line-through">
+                          ₹{originalPrice}
                         </p>
                       </div>
 
-                      <div className="flex items-center justify-between mt-4">
-                        <button
+                      <div className="flex items-center justify-between mt-2 w-[70%] sm:w-[55%]">
+                        {stock > 0 ? 
+                        (<button
                           onClick={() => addCart(item)}
-                          className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg bg-[#439373] hover:bg-[#439373] text-white hover:text-black transition duration-300 cursor-pointer"
+                          className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg bg-[#439373] text-black hover:bg-black hover:text-white transition duration-800 hover:scale-105 cursor-pointer"
                         >
                           Add to Cart
-                        </button>
+                        </button>) : (<button
+                            disabled
+                            className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm md:flex-1 font-semibold rounded-lg text-white bg-[#b35d52] hover:bg-[#ffbbb0] cursor-not-allowed md:w-[55%]"
+                          >
+                            Out of Stock
+                          </button>) }
 
                       </div>
                     </div>
