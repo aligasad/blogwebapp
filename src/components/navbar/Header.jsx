@@ -179,20 +179,24 @@ function Navbar() {
               </li>
               <li>
                 <Link
-                  to="/orders"
-                  onClick={() => setMenuOpen(false)}
-                  className="hover:text-green-700 transition"
-                >
-                  Shampoo
-                </Link>
-                <Link
-                  to="/orders"
+                  to="/serum"
                   onClick={() => setMenuOpen(false)}
                   className="hover:text-green-700 transition"
                 >
                   Serum
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/shampoo"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-green-700 transition"
+                >
+                  Shampoo
+                </Link>
+                
+              </li>
+              
               <li>
                 <Link
                   to="/orders"
@@ -210,18 +214,9 @@ function Navbar() {
                 >
                   <ShoppingCart className="h-5 w-5" />
                   <span className="ml-1">Cart</span>
-                  <span className="bg-amber-400 text-black rounded-full px-1 text-xs">
+                  <span className="bg-green-400 text-black rounded-full px-1 text-xs">
                     {(cartItems || []).length}
                   </span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/account"
-                  onClick={() => setMenuOpen(false)}
-                  className="hover:text-green-700 transition"
-                >
-                  Account Settings
                 </Link>
               </li>
               {user?.user?.email === "asadalam4291@gmail.com" && (

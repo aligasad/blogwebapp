@@ -74,11 +74,11 @@ function App() {
           element: <Allproducts />,
         },
         {
-          path: "/serum1",
+          path: "/serum",
           element: <Serum1 />,
         },
         {
-          path: "/mobile",
+          path: "/shampoo",
           element: <Mobile />,
         },
         {
