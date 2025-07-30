@@ -23,6 +23,8 @@ import Allproducts from "./pages/allproducts/Allproducts.jsx";
 import Mobile from "./pages/allproducts/Shampoo/Shampoo.jsx";
 import Serum1 from "./pages/allproducts/Serum/Serum.jsx";
 import AboutUs from "./components/aboutUs/AboutUs.jsx";
+import Profile from "./components/profile/Profile.jsx";
+import CompleteProfile from "./components/profile/CompleteProfile.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -79,8 +81,16 @@ function App() {
           element: <Serum1 />,
         },
         {
+          path: "/complete-profile",
+          element: <CompleteProfile />,
+        },
+        {
           path: "about",
           element: <AboutUs />
+        },
+        {
+          path: "profile",
+          element: <Profile />
         },
         {
           path: "/shampoo",

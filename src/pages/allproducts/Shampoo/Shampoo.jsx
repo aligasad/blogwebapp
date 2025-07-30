@@ -71,7 +71,7 @@ function Mobile() {
                 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900"
                 style={{ color: mode === "dark" ? "white" : "" }}
               >
-                Serum1 Collection
+                Shampoo Collection
               </h1>
               <div class="h-1 w-25 bg-green-700 rounded"></div>
             </div>

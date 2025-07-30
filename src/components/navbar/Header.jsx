@@ -284,7 +284,7 @@ function Navbar() {
             <Link to="/about" className="hover:text-green-700 font-bold">
               About
             </Link>
-            {user?.user?.email === "asadalam4291@gmail.com" && (
+            {user?.user?.email === "asadalamalig@gmail.com" && (
               <Link to="/dashboard" className="text-red-600 font-bold">
                 Admin
               </Link>
@@ -325,7 +325,7 @@ function Navbar() {
             )}
           </div>
 
-          {user ? (
+          {/* {user ? (
             <button
               title="Logout"
               onClick={handleLogout}
@@ -340,6 +340,22 @@ function Navbar() {
               className="flex flex-col hover:text-[#449474]"
             >
               <FaUserAlt />
+            </Link>
+          )} */}
+          {user ? (
+            <button
+              title="Logout"
+              className="flex items-center gap-1 cursor-pointer hover:text-[#449474] "
+            >
+              <Link to={'/profile'}><p className="flex items-center gap-1 "><FaUserAlt  /><span className="font-bold">Profile</span></p></Link>
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              title="Login"
+              className="flex flex-col hover:text-[#449474]"
+            >
+              <FaUserAlt size={22} />
             </Link>
           )}
           <Link

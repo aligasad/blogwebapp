@@ -71,7 +71,8 @@ function ProductInfo() {
 
   function calculateDiscount(original, selling) {
     if (!original || !selling || Number(original) === 0) return 0;
-    const discount = ((Number(original) - Number(selling)) / Number(original)) * 100;
+    const discount =
+      ((Number(original) - Number(selling)) / Number(original)) * 100;
 
     return discount.toFixed(2);
   }
@@ -91,27 +92,30 @@ function ProductInfo() {
                     className="w-full max-h-[55vh] object-contain rounded-xl transition-all duration-300"
                     src={selectedImage || products.imageUrl}
                   />
-                  
                 </div>
                 {/* Thumbnails */}
                 <div className="flex gap-3 justify-center">
-  {[products.imageUrl, products.imageUrl2, products.imageUrl3, products.imageUrl4]
-    .filter(Boolean) // Filter out any undefined or null images
-    .map((url, idx) => (
-      <img
-        key={idx}
-        src={url}
-        alt={`thumb-${idx}`}
-        className={`w-14 h-14 object-cover rounded-lg cursor-pointer border-2 transition-all duration-200 ${
-          (selectedImage || products.imageUrl) === url
-            ? "border-[#449474] shadow"
-            : "border-gray-200"
-        }`}
-        onClick={() => setSelectedImage(url)}
-      />
-    ))}
-</div>
-
+                  {[
+                    products.imageUrl,
+                    products.imageUrl2,
+                    products.imageUrl3,
+                    products.imageUrl4,
+                  ]
+                    .filter(Boolean) // Filter out any undefined or null images
+                    .map((url, idx) => (
+                      <img
+                        key={idx}
+                        src={url}
+                        alt={`thumb-${idx}`}
+                        className={`w-14 h-14 object-cover rounded-lg cursor-pointer border-2 transition-all duration-200 ${
+                          (selectedImage || products.imageUrl) === url
+                            ? "border-[#449474] shadow"
+                            : "border-gray-200"
+                        }`}
+                        onClick={() => setSelectedImage(url)}
+                      />
+                    ))}
+                </div>
 
                 <div className=" hidden sm:block ">
                   <ReviewSection productId={params} />
@@ -129,20 +133,22 @@ function ProductInfo() {
                         New
                       </span>
                     )}
-                    {<span className="bg-yellow-200 text-yellow-800 text-xs font-semibold px-2 py-0.5 rounded-full">
-                        {Number(products.stock) !== 0 ? "On Sale" : "Sold Out"} 
+                    {
+                      <span className="bg-yellow-200 text-yellow-800 text-xs font-semibold px-2 py-0.5 rounded-full">
+                        {Number(products.stock) !== 0 ? "On Sale" : "Sold Out"}
                       </span>
-                      }
+                    }
                   </div>
                   <h1 className="text-gray-900 text-2xl md:text-3xl title-font font-bold mb-2">
-                    {products.title} <span className="text-red-600 text-[20px]">{products.quantity }</span>
+                    {products.title}{" "}
+                    <span className="text-red-600 text-[20px]">
+                      {products.quantity}
+                    </span>
                   </h1>
                   <h2 className="text-xs md:text-sm title-font text-yellow-600 font-semibold tracking-widest mb-2">
                     {products.category?.toUpperCase()}
                   </h2>
-                  <div className="flex flex-wrap items-center mb-4">
-                    
-                  </div>
+                  <div className="flex flex-wrap items-center mb-4"></div>
                   {/* --- Details Card --- */}
                   <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                     <div>
@@ -204,18 +210,20 @@ function ProductInfo() {
                       )}
                     </div>
                   </div>
-                  
+
                   {/* --- Description, Ingredients & Benefits --- */}
-                  
+
                   <div className="mb-4">
                     <div className="mb-2">
-                      {/* --- Description --- */}
                       <p className="leading-relaxed mb-5 pb-5 text-sm md:text-base">
                         {products.description ? (
                           <span className="font-semibold text-green-700">
-                            Description: 
-                          </span>) : "N/A"}
-                        { products.description}
+                            Description:
+                          </span>
+                        ) : (
+                          "N/A"
+                        )}
+                        {products.description}
                       </p>
                       <hr />
                       <span className="font-semibold text-green-700">
@@ -243,28 +251,27 @@ function ProductInfo() {
                       )}
                     </div>
                   </div>
-                <div>
-                  <div className="flex items-baseline gap-2 mb-4">
-                    <p className="text-2xl font-bold text-red-600 mt-1">
-                      ₹{products.price}
-                    </p>
-                    {products.originalPrice && (
-                      <p className="text-lg md:text-xl font-semibold text-gray-400 line-through">
-                        ₹{products.originalPrice}
+                  <div>
+                    <div className="flex items-baseline gap-2 mb-4">
+                      <p className="text-2xl font-bold text-red-600 mt-1">
+                        ₹{products.price}
                       </p>
-                    )}
-                    {products.originalPrice && products.price && (
-                      <span className="ml-3 bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-bold">
-                        {calculateDiscount(
-                          products.originalPrice,
-                          products.price
-                        )}
-                        % OFF
-                      </span>
-                    )}
-                  </div>
-                  {
-                    products.stock > 0 ? (
+                      {products.originalPrice && (
+                        <p className="text-lg md:text-xl font-semibold text-gray-400 line-through">
+                          ₹{products.originalPrice}
+                        </p>
+                      )}
+                      {products.originalPrice && products.price && (
+                        <span className="ml-3 bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-bold">
+                          {calculateDiscount(
+                            products.originalPrice,
+                            products.price
+                          )}
+                          % OFF
+                        </span>
+                      )}
+                    </div>
+                    {products.stock > 0 ? (
                       <button
                         className="bg-green-600 text-white cursor-pointer px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200"
                         onClick={() => addCart(products)}
@@ -278,16 +285,14 @@ function ProductInfo() {
                       >
                         Out of Stock
                       </button>
-                    )
-                  }
+                    )}
+                  </div>
                 </div>
-                </div>
-                
               </div>
 
               <div className=" sm:hidden ">
-                  <ReviewSection productId={params} />
-                </div>
+                <ReviewSection productId={params} />
+              </div>
             </div>
           </div>
         )}

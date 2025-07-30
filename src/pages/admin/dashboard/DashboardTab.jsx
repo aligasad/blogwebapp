@@ -6,6 +6,7 @@ import { AiFillShopping, AiFillPlusCircle, AiFillDelete } from "react-icons/ai";
 import { useData } from "../../../context/data/MyState";
 import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
+
 function DashboardTab() {
   const context = useData();
   const { mode, product, editHandle, deleteProduct, order, users } = context;
@@ -468,13 +469,13 @@ function DashboardTab() {
                             className="px-6 py-4 text-black "
                             style={{ color: mode === "dark" ? "white" : "" }}
                           >
-                            {uid.slice(0, 15)}.....
+                            {uid?.slice(0, 15) }.....
                           </td>
                           <td
                             className="px-6 py-4 text-black "
                             style={{ color: mode === "dark" ? "white" : "" }}
                           >
-                            {signedupAt.slice(0, 10)}
+                            {signedupAt?.slice(0, 10)}
                           </td>
                         </tr>
                       </tbody>

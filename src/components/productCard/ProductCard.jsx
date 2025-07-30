@@ -155,7 +155,7 @@ function ProductCard() {
                           Add to Cart
                         </button>) : (<button
                             disabled
-                            className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm md:flex-1 font-semibold rounded-lg text-white bg-[#b35d52] hover:bg-[#ffbbb0] cursor-not-allowed md:w-[55%]"
+                            className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm md:flex-1 font-semibold rounded-lg text-white bg-[#b35d52] hover:bg-[#ffbbb0]F cursor-not-allowed md:w-[55%]"
                           >
                             Out of Stock
                           </button>) }
