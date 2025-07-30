@@ -194,9 +194,8 @@ function Navbar() {
                 >
                   Shampoo
                 </Link>
-                
               </li>
-              
+
               <li>
                 <Link
                   to="/orders"
@@ -239,6 +238,16 @@ function Navbar() {
                   </Link>
                 </li>
               )}
+              <li>
+                <Link
+                  to="/profile"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-green-700 transition"
+                >
+                  Profile
+                </Link>
+                
+              </li>
               {user ? (
                 <li>
                   <button
@@ -277,7 +286,7 @@ function Navbar() {
             <Link to="/shampoo" className="hover:text-green-700 font-bold">
               Shampoo
             </Link>
-            
+
             <Link to="/orders" className="hover:text-green-700 font-bold">
               Orders
             </Link>
@@ -347,7 +356,12 @@ function Navbar() {
               title="Logout"
               className="flex items-center gap-1 cursor-pointer hover:text-[#449474] "
             >
-              <Link to={'/profile'}><p className="flex items-center gap-1 "><FaUserAlt  /><span className="font-bold">Profile</span></p></Link>
+              <Link to={"/profile"}>
+                <p className="flex items-center gap-1 ">
+                  <FaUserAlt />
+                  <span className="font-bold">Profile</span>
+                </p>
+              </Link>
             </button>
           ) : (
             <Link
