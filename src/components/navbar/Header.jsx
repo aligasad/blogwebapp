@@ -293,7 +293,7 @@ function Navbar() {
             <Link to="/about" className="hover:text-green-700 font-bold">
               About
             </Link>
-            {user?.user?.email === "asadalamalig@gmail.com" || user?.user?.email === "asadalamalig@gmail.com" && (
+            {user?.user?.email === "asadalam4291@gmail.com" || user?.user?.email === "asadalamalig@gmail.com" && (
               <Link to="/dashboard" className="text-red-600 font-bold">
                 Admin
               </Link>

@@ -13,6 +13,7 @@ import ProductShow from "../../components/heroSection/ProductShow";
 import TransformSection from "../../components/heroSection/TransforSection";
 import TestimonialAnim from "../../components/testimonial/TestimonialAnim";
 import { FaArrowUp } from "react-icons/fa6";
+import CategoriesSection from "../../components/ProductCategory/ProductCategory";
 
 function Home() {
   const { resetFilter } = useData();
@@ -37,6 +38,14 @@ function Home() {
       >
         {/* <HeroSection /> */}
         <HeroSection2 />
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, x: -100 }} // start off-screen to the left
+        animate={{ opacity: 1, x: 0 }} // move to center
+        exit={{ opacity: 0 }} // exit off-screen to the right
+        transition={{ duration: 1 }}
+      >
+        <CategoriesSection />
       </motion.div>
 
       <motion.div

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection2 = () => {
   return (
-    <section className="relative bg-[#f5fdf7] overflow-hidden py-16 px-6 md:px-20">
+    <section className="relative bg-[#e2fce7] overflow-hidden py-16 px-6 md:px-20">
       {/* Floating leaves */}
       <img src={leaf1} className="leaf floating-1" alt="leaf" />
       <img src={leaf2} className="leaf floating-2" alt="leaf" />
