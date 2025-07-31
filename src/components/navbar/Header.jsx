@@ -334,23 +334,7 @@ function Navbar() {
             )}
           </div>
 
-          {/* {user ? (
-            <button
-              title="Logout"
-              onClick={handleLogout}
-              className="flex items-center gap-1 cursor-pointer hover:text-[#449474] "
-            >
-              <IoLogOut size={22} />
-            </button>
-          ) : (
-            <Link
-              to="/login"
-              title="Login"
-              className="flex flex-col hover:text-[#449474]"
-            >
-              <FaUserAlt />
-            </Link>
-          )} */}
+        
           {user ? (
             <button
               title="Logout"
@@ -369,7 +353,10 @@ function Navbar() {
               title="Login"
               className="flex flex-col hover:text-[#449474]"
             >
-              <FaUserAlt size={22} />
+              <p className="flex items-center gap-1 ">
+                  <FaUserAlt />
+                  <span className="font-bold">Login</span>
+                </p>
             </Link>
           )}
           <Link

@@ -6,7 +6,7 @@ import { firebaseDB } from "../../firebase/FirebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/CartSlice";
 import { toast } from "react-toastify";
-import { FaRegStar, FaStar } from "react-icons/fa";
+import { FaLongArrowAltRight } from "react-icons/fa";
 import ReviewSection from "../../components/reviews/reviews";
 
 function ProductInfo() {
@@ -77,6 +77,13 @@ function ProductInfo() {
     return discount.toFixed(2);
   }
 
+  // --------------FOR ACCORDION REVIEW SECTION------------------
+  const [openSection, setOpenSection] = useState(null);
+
+  const toggleSection = (section) => {
+    setOpenSection(openSection === section ? null : section);
+  };
+
   return (
     <section className="text-gray-700 body-font overflow-hidden bg-gradient-to-br from-green-50 to-blue-100 min-h-screen">
       <div className="container px-2 md:px-5 py-5 mx-auto">
@@ -142,13 +149,14 @@ function ProductInfo() {
                   <h1 className="text-gray-900 text-2xl md:text-3xl title-font font-bold mb-2">
                     {products.title}{" "}
                     <span className="text-red-600 text-[20px]">
-                      {products.quantity}
+                      ({products.quantity})
                     </span>
                   </h1>
                   <h2 className="text-xs md:text-sm title-font text-yellow-600 font-semibold tracking-widest mb-2">
                     {products.category?.toUpperCase()}
                   </h2>
                   <div className="flex flex-wrap items-center mb-4"></div>
+
                   {/* --- Details Card --- */}
                   <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                     <div>
@@ -212,47 +220,74 @@ function ProductInfo() {
                   </div>
 
                   {/* --- Description, Ingredients & Benefits --- */}
-
-                  <div className="mb-4">
-                    <div className="mb-2">
-                      <p className="leading-relaxed mb-5 pb-5 text-sm md:text-base">
-                        {products.description ? (
-                          <span className="font-semibold text-green-700">
-                            Description:
-                          </span>
-                        ) : (
-                          "N/A"
-                        )}
-                        {products.description}
-                      </p>
-                      <hr />
-                      <span className="font-semibold text-green-700">
-                        Ingredients:
-                      </span>{" "}
-                      {products.ingredients ? (
-                        <span className="text-gray-700">
-                          {products.ingredients}
+                  <div className="space-y-4">
+                    {/* Description */}
+                    <div className="border-2 rounded border-[#449474] mb-4">
+                      <button
+                        className="w-full text-left px-4 py-2 bg-green-100 font-semibold text-green-700"
+                        onClick={() => toggleSection("description")}
+                      >
+                        <span className="flex items-end gap-1 cursor-pointer hover:scale-103 transition-transform duration-200">
+                          Description <FaLongArrowAltRight />
                         </span>
-                      ) : (
-                        <span className="text-gray-400">N/A</span>
+                      </button>
+                      {openSection === "description" && (
+                        <div className="px-4 py-2 text-sm md:text-base text-gray-700">
+                          {products.description ? (
+                            products.description
+                          ) : (
+                            <span className="text-gray-400">N/A</span>
+                          )}
+                        </div>
                       )}
                     </div>
-                    <hr />
-                    <div className="border-b-2 pb-5">
-                      <span className="font-semibold  text-green-700">
-                        Benefits:
-                      </span>{" "}
-                      {products.benefits ? (
-                        <span className="text-gray-700">
-                          {products.benefits}
+
+                    {/* Ingredients */}
+                    <div className="border-2 rounded border-[#449474]">
+                      <button
+                        className="w-full text-left px-4 py-2 bg-green-100 font-semibold text-green-700"
+                        onClick={() => toggleSection("ingredients")}
+                      >
+                        <span className="flex items-end gap-1 cursor-pointer">
+                          Ingredients <FaLongArrowAltRight />
                         </span>
-                      ) : (
-                        <span className="text-gray-400">N/A</span>
+                      </button>
+                      {openSection === "ingredients" && (
+                        <div className="px-4 py-2 text-sm text-gray-700">
+                          {products.ingredients ? (
+                            products.ingredients
+                          ) : (
+                            <span className="text-gray-400">N/A</span>
+                          )}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Benefits */}
+                    <div className="border-2 rounded border-[#449474]">
+                      <button
+                        className="w-full text-left px-4 py-2 bg-green-100 font-semibold text-green-700"
+                        onClick={() => toggleSection("benefits")}
+                      >
+                        <span className="flex items-end gap-1 cursor-pointer">
+                          {" "}
+                          Benefits <FaLongArrowAltRight />
+                        </span>
+                      </button>
+                      {openSection === "benefits" && (
+                        <div className="px-4 py-2 text-sm text-gray-700">
+                          {products.benefits ? (
+                            products.benefits
+                          ) : (
+                            <span className="text-gray-400">N/A</span>
+                          )}
+                        </div>
                       )}
                     </div>
                   </div>
+
                   <div>
-                    <div className="flex items-baseline gap-2 mb-4">
+                    <div className="flex items-baseline gap-2 mb-2 mt-4">
                       <p className="text-2xl font-bold text-red-600 mt-1">
                         ₹{products.price}
                       </p>

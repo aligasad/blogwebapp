@@ -1,40 +1,36 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useData } from "../../../context/data/MyState.jsx";
 import { addToCart } from "../../../redux/CartSlice.jsx";
 import { toast } from "react-toastify";
+import { FaHeart } from "react-icons/fa6";
 import { motion } from "framer-motion";
 
-function Shampoo() {
+function Choclates() {
   const context = useData();
   const {
     mode,
     product,
     searchkey,
-    searchkey1,
     setSearchkey,
-    setSearchkey1,
     filterType,
     setFilterType,
     filterPrice,
     setFilterPrice,
     calcOffer,
-    pageType,
-    setPageType,
   } = context;
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
-  const wishListitems = useSelector((state) => state.wishlist);
   console.log(cartItems);
 
-  // Add to cart if item is not already present -- -- -- -- -- -- -- -- -- -- --
+  // add to cart if item is not already present   -- -- --- ---- ------ -----
   const user = JSON.parse(localStorage.getItem("user"));
   const addCart = (product) => {
     if (user) {
       const existingItem = cartItems.some((item) => {
         return item.id === product.id;
-      });
+      }); 
       console.log("EXISTING", existingItem);
       if (!existingItem) {
         dispatch(addToCart(product));
@@ -49,15 +45,15 @@ function Shampoo() {
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
-    localStorage.setItem("wishlist", JSON.stringify(wishListitems));
-  }, [cartItems, wishListitems]);
+  }, [cartItems]);
   // got to top
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <motion.div
+    <div>
+      <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
@@ -71,14 +67,14 @@ function Shampoo() {
                 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900"
                 style={{ color: mode === "dark" ? "white" : "" }}
               >
-                Shampoo Collection
+                Organic Choclates
               </h1>
               <div class="h-1 w-25 bg-green-700 rounded"></div>
             </div>
 
             <div className="flex flex-wrap -m-4">
               {product
-                .filter((obj) => obj.type.toLowerCase().includes("shampo"))
+                .filter((obj) => obj.type.toLowerCase().replace(/\s+/g, "").includes("choclate"))
                 .filter(
                   (obj) =>
                     obj.title.toLowerCase().includes(searchkey) ||
@@ -160,7 +156,8 @@ function Shampoo() {
           </div>
         </section>
       </motion.div>
+    </div>
   );
 }
 
-export default Shampoo;
+export default Choclates;

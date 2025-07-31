@@ -20,12 +20,14 @@ import { ToastContainer, Bounce } from "react-toastify";
 import AuthProvider from "./components/protector/AuthContext.jsx";
 import ProtectedRoute from "./components/protector/ProtectedRoute.jsx";
 import Allproducts from "./pages/allproducts/Allproducts.jsx";
-import Mobile from "./pages/allproducts/Shampoo/Shampoo.jsx";
 import Serum1 from "./pages/allproducts/Serum/Serum.jsx";
 import AboutUs from "./components/aboutUs/AboutUs.jsx";
 import Profile from "./components/profile/Profile.jsx";
 import CompleteProfile from "./components/profile/CompleteProfile.jsx";
 import Soap from "./pages/allproducts/Soap/Soap.jsx";
+import LipGloss from "./pages/allproducts/LipGloss/LipGloss.jsx";
+import Shampoo from "./pages/allproducts/Shampoo/Shampoo.jsx";
+import Choclates from "./pages/allproducts/Choclates/Choclates.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -83,11 +85,19 @@ function App() {
         },
         {
           path: "/shampoo",
-          element: <Mobile />,
+          element: <Shampoo />,
         },
         {
           path: "/soap",
           element: <Soap />,
+        },
+        {
+          path: "/lipgloss",
+          element: <LipGloss />,
+        },
+        {
+          path: "organicchocolates",
+          element: <Choclates />
         },
         {
           path: "/complete-profile",

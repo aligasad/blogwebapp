@@ -18,7 +18,6 @@
   animation: bgPulse 2s infinite ease-in-out;
 }
 
-
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }

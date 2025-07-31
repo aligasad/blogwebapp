@@ -51,7 +51,7 @@ function ReviewSection({ productId }) {
     const emptyStars = 5 - fullStars - (hasHalf ? 1 : 0);
 
     return (
-      <div className="flex items-center text-yellow-500 text-xl">
+      <div className="flex items-center text-yellow-500 text-xl mb-2">
         {[...Array(fullStars)].map((_, i) => (
           <FaStar key={`full-${i}`} />
         ))}
@@ -70,9 +70,9 @@ function ReviewSection({ productId }) {
       <h3 className="text-xl font-bold mb-2">Reviews</h3>
 
       {reviews.length > 0 && (
-        <div className="mb-3 flex items-center gap-2">
+        <div className="mb-3 flex items-center gap-2 border-b-2">
           {renderStars(avgRating)}
-          <span className="text-gray-700 font-medium text-lg">
+          <span className="text-gray-700 font-medium text-lg mb-2">
             {avgRating} Rating
           </span>
         </div>
@@ -81,7 +81,8 @@ function ReviewSection({ productId }) {
       {reviews.length === 0 && <p>No reviews yet. Be the first!</p>}
 
       {/* Scrollable reviews container */}
-      <div className="max-h-64 overflow-y-auto pr-1 space-y-4">
+      <div className="max-h-64 overflow-y-auto scrollbar-hide pr-1 space-y-4 relative">
+        
   {reviews.map((r) => (
     <div
       key={r.id}
@@ -91,6 +92,7 @@ function ReviewSection({ productId }) {
         <span className="font-semibold text-yellow-800">Review:</span>{" "}
         <span className="text-gray-800 text-[14px]">{r.comment}</span>
       </p>
+      <p className="text-[12px]">{r.userName}</p>
     </div>
   ))}
 </div>
