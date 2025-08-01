@@ -73,7 +73,7 @@ function AddProduct() {
             value={products.tags || ""}
             onChange={(e) => setProducts({ ...products, tags: e.target.value })}
           />
-          {/* <input
+          <input
             type="text"
             name="imageUrl"
             className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
@@ -112,36 +112,8 @@ function AddProduct() {
             onChange={(e) =>
               setProducts({ ...products, imageUrl4: e.target.value })
             }
-          /> */}
-
-          <label className="text-sm text-green-700">
-            Upload Product Images
-          </label>
-
-          <input
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={(e) => {
-              const files = Array.from(e.target.files);
-              const previews = files.map((file) => URL.createObjectURL(file));
-              setProducts({ ...products, images: previews });
-            }}
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 outline-none"
           />
-
-          {/* Preview Uploaded Images */}
-          <div className="flex gap-3 flex-wrap mt-2">
-            {products.images?.map((img, i) => (
-              <img
-                key={i}
-                src={img}
-                alt={`preview-${i}`}
-                className="w-20 h-20 object-cover rounded border"
-              />
-            ))}
-          </div>
-
+          
           <input
             type="text"
             name="category"
@@ -255,6 +227,8 @@ function AddProduct() {
         </button>
       </div>
     </div>
+
+    
   );
 }
 

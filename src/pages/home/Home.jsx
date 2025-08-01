@@ -22,14 +22,15 @@ function Home() {
     window.scrollTo(0, 0);
   }, []);
 
-  function toUp() {
-    window.scrollTo(0, 0);
-  }
-
   return (
     <>
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="z-20 fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white px-2 py-5 cursor-pointer rounded-full shadow-lg transition"
+      >
+        <FaArrowUp className="w-5 h-5" />
+      </button>
 
-    <div className="bg-[#376a55] fixed bottom-6 right-8 w-8 h-10 z-10 grid place-items-center text-white rounded-sm cursor-pointer hover:bg-[#67b55b] " onClick={toUp}> <FaArrowUp /></div>
       <motion.div
         initial={{ opacity: 0, x: -100 }} // start off-screen to the left
         animate={{ opacity: 1, x: 0 }} // move to center

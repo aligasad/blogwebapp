@@ -28,6 +28,7 @@ import Soap from "./pages/allproducts/Soap/Soap.jsx";
 import LipGloss from "./pages/allproducts/LipGloss/LipGloss.jsx";
 import Shampoo from "./pages/allproducts/Shampoo/Shampoo.jsx";
 import Choclates from "./pages/allproducts/Choclates/Choclates.jsx";
+import { FaArrowUp } from "react-icons/fa";
 
 function App() {
   const router = createBrowserRouter([
@@ -97,7 +98,7 @@ function App() {
         },
         {
           path: "organicchocolates",
-          element: <Choclates />
+          element: <Choclates />,
         },
         {
           path: "/complete-profile",
@@ -105,11 +106,11 @@ function App() {
         },
         {
           path: "about",
-          element: <AboutUs />
+          element: <AboutUs />,
         },
         {
           path: "profile",
-          element: <Profile />
+          element: <Profile />,
         },
         {
           path: "/addproduct",
@@ -135,19 +136,27 @@ function App() {
     },
   ]);
   return (
-    <AnimatePresence mode="wait">
-      <AuthProvider>
-        <MyState>
-          <RouterProvider router={router} />
-          <ToastContainer
-            position="top-center"
-            autoClose={1000}
-            theme="dark"
-            transition={Bounce}
-          />
-        </MyState>
-      </AuthProvider>
-    </AnimatePresence>
+    <>
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="z-20 fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 hover:shadow-lg hover:scale-105 text-white px-2 py-5 cursor-pointer rounded-full shadow-lg transition"
+      >
+        <FaArrowUp className="w-5 h-5" />
+      </button>
+      <AnimatePresence mode="wait">
+        <AuthProvider>
+          <MyState>
+            <RouterProvider router={router} />
+            <ToastContainer
+              position="top-center"
+              autoClose={1000}
+              theme="dark"
+              transition={Bounce}
+            />
+          </MyState>
+        </AuthProvider>
+      </AnimatePresence>
+    </>
   );
 }
 

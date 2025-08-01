@@ -61,7 +61,7 @@ const CategoriesSection = () => {
                   <img
                     src={cat.image}
                     alt={cat.name}
-                    className="w-full h-[160px] object-cover"
+                    className="h-[160px] w-[100%]  object-cover"
                   />
                   <div className="text-center py-2 text-sm font-medium">
                     {cat.name} →

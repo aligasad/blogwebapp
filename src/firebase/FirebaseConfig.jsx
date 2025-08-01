@@ -6,15 +6,9 @@ import { getStorage } from "firebase/storage";
 
 
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyDcWTBXit_K-h8cuh_NOLLG44oXPkllEjw",
-//   authDomain: "zaphira-12860.firebaseapp.com",
-//   projectId: "zaphira-12860",
-//   storageBucket: "zaphira-12860.firebasestorage.app",
-//   messagingSenderId: "627407717364",
-//   appId: "1:627407717364:web:5f3f69c8f464946615efa1"
-// };
 
+// all the values are stored in .env file
+// and we are using vite so we have to use import.meta.env.VITE_variableName
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_apiKey,
   authDomain: import.meta.env.VITE_authDomain,
@@ -27,7 +21,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// yaha pe banane se hame baar baar har jagah nahi bnana pdega direct import kr ke use kar sakte hai
+// ye baba ke ek baar initialize ho gaya hai to baar baar nahi hoga
+// and we can use it in our application
 const firebaseDB = getFirestore(app);
 const auth = getAuth(app);
 const firebaseStorage = getStorage(app);

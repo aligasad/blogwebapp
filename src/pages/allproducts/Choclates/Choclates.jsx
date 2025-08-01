@@ -30,7 +30,7 @@ function Choclates() {
     if (user) {
       const existingItem = cartItems.some((item) => {
         return item.id === product.id;
-      }); 
+      });
       console.log("EXISTING", existingItem);
       if (!existingItem) {
         dispatch(addToCart(product));
@@ -74,7 +74,12 @@ function Choclates() {
 
             <div className="flex flex-wrap -m-4">
               {product
-                .filter((obj) => obj.type.toLowerCase().replace(/\s+/g, "").includes("choclate"))
+                .filter((obj) =>
+                  obj.type
+                    .toLowerCase()
+                    .replace(/\s+/g, "")
+                    .includes("choclate")
+                )
                 .filter(
                   (obj) =>
                     obj.title.toLowerCase().includes(searchkey) ||
@@ -87,69 +92,110 @@ function Choclates() {
                     .includes(filterType)
                 )
                 .map((item, index) => {
-                  const { title, price, originalPrice, category, type, stock, isNew, quantity, imageUrl, id } = item;
+                  const {
+                    title,
+                    price,
+                    originalPrice,
+                    category,
+                    type,
+                    stock,
+                    isNew,
+                    quantity,
+                    imageUrl,
+                    id,
+                  } = item;
                   return (
-                   <div
-                  key={index}
-                  className="w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2"
-                >
-                  <div
-                    className="h-full rounded-lg shadow-md bg-[#A7EAD5] hover:shadow-lg transition-shadow hover:shadow-gray-500 duration-300"
-                    style={{
-                      backgroundColor: mode === "dark" ? "#232F3E" : "#A7EAD5",
-                      color: mode === "dark" ? "#FFFFFF" : "#000000",
-                    }}
-                  >
-                    <div className="flex justify-center items-center p-4 bg-white rounded-t-lg border-2 border-b-0 border-[#003d29] relative">
-                      {stock > 0 ? (<p className=" absolute bottom-0 left-0 bg-green-700 px-2 rounded-tr-lg text-[10px] sm:text-[13px] text-white font-semibold z-10 ">On Sale</p>) : (<p className=" absolute bottom-0 left-0 bg-[#b35d52] px-2 rounded-tr-lg text-[10px] sm:text-[13px] text-white font-semibold z-10 ">Sold Out</p>)}
-                      {isNew ? (<p className="absolute bottom-0 right-0 px-3 text-[13px] text-white font-semibold z-10 bg-black rounded-tl-lg"> New </p> ) : ""}
-                      <img
-                        onClick={() =>
-                          (window.location.href = `/productinfo/${id}`)
-                        }
-                        className="h-36 sm:h-44 object-contain transition-transform rounded-md duration-300 hover:scale-110 cursor-pointer"
-                        src={imageUrl}
-                        alt={title}
-                      />
-                    </div>
-                    <div className="px-2 md:px-4 pb-4 border-t bg-[#003d29]  rounded-b-lg  border-gray-300">
-                      <p className="text-xs text-white mt-2">
-                        <span className=" font-semibold">{type}</span> / {category}
-                      </p>
-                      <h2 className="text-sm font-semibold truncate text-gray-300">
-                        {title}
-                      </h2>
-                      <h2 className="text-[12px] font-semibold truncate text-gray-300">
-                        <span>Quantity: </span>{quantity}
-                      </h2>
-                      <hr className="text-white mt-[3px]"/>
-                      <div className="flex items-baseline gap-1">
-                        <p className="text-[14px] md:text-base font-bold text-red-600 mt-1">
-                          ₹{price}
-                        </p>
-                        <p className="text-[12px] md:text-sm font-semibold text-gray-100 line-through">
-                          ₹{originalPrice}
-                        </p>
-                      </div>
-
-                      <div className="flex items-center justify-between mt-2 w-[70%] sm:w-[55%]">
-                        {stock > 0 ? 
-                        (<button
-                          onClick={() => addCart(item)}
-                          className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg bg-[#439373] text-black hover:bg-black hover:text-white transition duration-800 hover:scale-105 cursor-pointer"
+                    <div
+                      key={index}
+                      className="w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2"
+                    >
+                      <motion.div
+                        key={index}
+                        className=""
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        whileHover={{ y: -5 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        viewport={{ once: true }}
+                      >
+                        <div
+                          className="h-full rounded-lg shadow-md bg-[#A7EAD5] hover:shadow-lg transition-shadow hover:shadow-gray-500 duration-300"
+                          style={{
+                            backgroundColor:
+                              mode === "dark" ? "#232F3E" : "#A7EAD5",
+                            color: mode === "dark" ? "#FFFFFF" : "#000000",
+                          }}
                         >
-                          Add to Cart
-                        </button>) : (<button
-                            disabled
-                            className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm md:flex-1 font-semibold rounded-lg text-white bg-[#b35d52] hover:bg-[#ffbbb0] cursor-not-allowed md:w-[55%]"
-                          >
-                            Out of Stock
-                          </button>) }
+                          <div className="flex justify-center items-center p-4 bg-white rounded-t-lg border-2 border-b-0 border-[#003d29] relative">
+                            {stock > 0 ? (
+                              <p className=" absolute bottom-0 left-0 bg-green-700 px-2 rounded-tr-lg text-[10px] sm:text-[13px] text-white font-semibold z-10 ">
+                                On Sale
+                              </p>
+                            ) : (
+                              <p className=" absolute bottom-0 left-0 bg-[#b35d52] px-2 rounded-tr-lg text-[10px] sm:text-[13px] text-white font-semibold z-10 ">
+                                Sold Out
+                              </p>
+                            )}
+                            {isNew ? (
+                              <p className="absolute bottom-0 right-0 px-3 text-[13px] text-white font-semibold z-10 bg-black rounded-tl-lg">
+                                {" "}
+                                New{" "}
+                              </p>
+                            ) : (
+                              ""
+                            )}
+                            <img
+                              onClick={() =>
+                                (window.location.href = `/productinfo/${id}`)
+                              }
+                              className="h-36 sm:h-44 object-contain transition-transform rounded-md duration-300 hover:scale-110 cursor-pointer"
+                              src={imageUrl}
+                              alt={title}
+                            />
+                          </div>
+                          <div className="px-2 md:px-4 pb-4 border-t bg-[#003d29]  rounded-b-lg  border-gray-300">
+                            <p className="text-xs text-white mt-2">
+                              <span className=" font-semibold">{type}</span> /{" "}
+                              {category}
+                            </p>
+                            <h2 className="text-sm font-semibold truncate text-gray-300">
+                              {title}
+                            </h2>
+                            <h2 className="text-[12px] font-semibold truncate text-gray-300">
+                              <span>Quantity: </span>
+                              {quantity}
+                            </h2>
+                            <hr className="text-white mt-[3px]" />
+                            <div className="flex items-baseline gap-1">
+                              <p className="text-[14px] md:text-base font-bold text-red-600 mt-1">
+                                ₹{price}
+                              </p>
+                              <p className="text-[12px] md:text-sm font-semibold text-gray-100 line-through">
+                                ₹{originalPrice}
+                              </p>
+                            </div>
 
-                      </div>
+                            <div className="flex items-center justify-between mt-2 w-[70%] sm:w-[55%]">
+                              {stock > 0 ? (
+                                <button
+                                  onClick={() => addCart(item)}
+                                  className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg bg-[#439373] text-black hover:bg-black hover:text-white transition duration-800 hover:scale-105 cursor-pointer"
+                                >
+                                  Add to Cart
+                                </button>
+                              ) : (
+                                <button
+                                  disabled
+                                  className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm md:flex-1 font-semibold rounded-lg text-white bg-[#b35d52] hover:bg-[#ffbbb0] cursor-not-allowed md:w-[55%]"
+                                >
+                                  Out of Stock
+                                </button>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
                     </div>
-                  </div>
-                </div>
                   );
                 })}
             </div>

@@ -27,7 +27,11 @@ const HeroSection2 = () => {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-bold text-[#449474] mb-4 leading-tight">
-            Zaphira <span className="bg-gradient-to-r from-pink-500 via-[#79e63a] to-[#449474] bg-clip-text text-transparent ">Organic</span> <br /> Facial Serum
+            Zaphira{" "}
+            <span className="bg-gradient-to-r from-pink-500 via-[#79e63a] to-[#449474] bg-clip-text text-transparent ">
+              Organic
+            </span>{" "}
+            <br /> Facial Serum
           </h1>
 
           <p className="text-md text-gray-600 mb-6 max-w-md">
@@ -65,12 +69,20 @@ const HeroSection2 = () => {
           transition={{ duration: 1 }}
           className="flex-1 z-10"
         >
-          <img
-            src={serumBottle}
-            alt="Serum Bottle"
-            className="w-56 md:w-72 hover:rotate-12 transition-transform duration-500"
-            style={{ transformStyle: "preserve-3d" }}
-          />
+          <div className="relative inline-block p-2 rounded-3xl bg-gradient-to-br from-[#449474] to-[#003604] shadow-lg hover:shadow-2xl transition duration-500 ease-in-out">
+  <div className="rounded-2xl bg-white p-2 relative overflow-hidden">
+    <img
+      src="https://i.ibb.co/6JskvgZx/banner2.jpg"
+      alt="Serum Bottle"
+      className="w-56 md:w-[420px] rounded-xl transform hover:scale-105 transition duration-500 ease-in-out"
+      style={{ transformStyle: "preserve-3d" }}
+    />
+
+    {/* Pulse ring effect */}
+    <div className="absolute inset-0 rounded-3xl ring ring-[#003604] animate-pulse pointer-events-none"></div>
+  </div>
+</div>
+
         </motion.div>
       </div>
     </section>
