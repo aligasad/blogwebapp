@@ -36,7 +36,7 @@ function MyState({ children }) {
   const [products, setProducts] = useState({
     title: null,
     price: null,
-    imageUrl: null,
+    imageUrl: [],
     category: null,
     description: null,
     time: Timestamp.now(),

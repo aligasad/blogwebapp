@@ -14,20 +14,6 @@ const TestimonialAnim = ({ autoplay = false }) => {
 
   const testimonials = [
     {
-      name: "Asad Alam",
-      designation: "Frontend Developer at Zaphira Pvt. Ltd.",
-      quote:
-        "As a React Developer at Zaphira, I build responsive web applications, optimize performance, and collaborate with teams to deliver clean, efficient, and user-friendly front-end solutions",
-      src: "https://i.ibb.co/HL36n1gq/asadslfijj.jpg",
-    },
-    {
-      name: "Syed Saad Hussain",
-      designation: "Frontend Developer at Zaphira Pvt. Ltd.",
-      quote:
-        "Using this platform improved our workflow tremendously. The animations are smooth and the interface is super intuitive",
-      src: "https://i.ibb.co/V0y7StZv/Screenshot-562.png",
-    },
-    {
       name: "Aisha Khan",
       designation: "Frontend Developer at CodeCraft",
       quote:
