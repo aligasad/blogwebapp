@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { firebaseDB } from "../../firebase/FirebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/CartSlice";
+import { addToCart, deleteFromCart } from "../../redux/CartSlice";
 import { toast } from "react-toastify";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import ReviewSection from "../../components/reviews/reviews";
@@ -12,7 +12,7 @@ import ReviewSection from "../../components/reviews/reviews";
 function ProductInfo() {
   const context = useData();
   const [isWished, setIsWished] = useState(false);
-  const { loading, setLoading, calcOffer } = context;
+  const { loading, setLoading, calcOffer, product } = context;
 
   const [products, setProducts] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
@@ -43,20 +43,20 @@ function ProductInfo() {
 
   // add to cart if item is not already present
   const user = JSON.parse(localStorage.getItem("user"));
-  const addCart = (product) => {
-    if (user) {
-      const existingItem = cartItems.some((item) => {
-        return item.id === product.id;
-      });
-      console.log("EXISTING", existingItem);
-      if (!existingItem) {
-        dispatch(addToCart(product));
-        toast.success("Item added to cart");
-      } else {
-        toast.warning("Item already added!");
-      }
-    } else {
+  const toggleCart = (product) => {
+    if (!user) {
       toast.warning("Please login first!");
+      return;
+    }
+
+    const isInCart = cartItems.some((item) => item.id === product.id);
+
+    if (isInCart) {
+      dispatch(deleteFromCart(product));
+      toast.info("Item removed from cart");
+    } else {
+      dispatch(addToCart(product));
+      toast.success("Item added to cart");
     }
   };
 
@@ -308,15 +308,21 @@ function ProductInfo() {
                     </div>
                     {products.stock > 0 ? (
                       <button
-                        className="bg-green-600 text-white cursor-pointer px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200"
-                        onClick={() => addCart(products)}
+                        onClick={() => toggleCart(products)}
+                        className={`px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg transition duration-800 hover:scale-105 cursor-pointer ${
+                          cartItems.some((p) => p.id === products.id)
+                            ? "bg-red-700 text-white hover:bg-black"
+                            : "bg-[#439373] text-black hover:bg-black hover:text-white"
+                        }`}
                       >
-                        Add to Cart
+                        {cartItems.some((p) => p.id === products.id)
+                          ? "Remove"
+                          : "Add to Cart"}
                       </button>
                     ) : (
                       <button
-                        className="bg-red-600 text-white px-4 py-2 rounded-lg cursor-not-allowed opacity-50"
                         disabled
+                        className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg text-white bg-[#b35d52] cursor-not-allowed"
                       >
                         Out of Stock
                       </button>

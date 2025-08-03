@@ -22,7 +22,7 @@ function Allproducts() {
     calcOffer,
   } = context;
 
-  console.log("JULY:::", product);
+  // console.log("JULY:::", product);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
   console.log(cartItems);
