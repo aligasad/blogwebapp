@@ -15,7 +15,6 @@ import { deleteFromCart } from "../../redux/CartSlice";
 import { toast } from "react-toastify";
 import { addDoc, doc, setDoc, collection, getDoc } from "firebase/firestore";
 import { auth, firebaseDB } from "../../firebase/FirebaseConfig";
-import { BsEmojiSunglasses } from "react-icons/bs";
 import NoOrderFound from "../../components/noorder/NoOrderFound";
 import { onAuthStateChanged } from "firebase/auth";
 import { original } from "@reduxjs/toolkit";
@@ -34,7 +33,7 @@ function Cart() {
     toast.warning("delete item sucessfully");
   };
 
-  // also delete from local storage
+  // also delete from local storage---------------------
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);

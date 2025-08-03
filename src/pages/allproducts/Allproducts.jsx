@@ -5,8 +5,10 @@ import { useData } from "../../context/data/MyState";
 import { addToCart, deleteFromCart } from "../../redux/CartSlice";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 function Allproducts() {
+  const navigate = useNavigate();
   const context = useData();
   const {
     mode,
@@ -146,7 +148,7 @@ function Allproducts() {
                         )}
                         <img
                           onClick={() =>
-                            (window.location.href = `/productinfo/${id}`)
+                            navigate(`/product/${id}`)
                           }
                           className="h-36 sm:h-44 object-contain transition-transform rounded-md duration-300 hover:scale-110 cursor-pointer"
                           src={imageUrl}
