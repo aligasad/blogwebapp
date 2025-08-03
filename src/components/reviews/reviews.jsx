@@ -73,7 +73,7 @@ function ReviewSection({ productId }) {
         <div className="mb-3 flex items-center gap-2 border-b-2">
           {renderStars(avgRating)}
           <span className="text-gray-700 font-medium text-lg mb-2">
-            {avgRating} Rating
+            {avgRating} Rating <span className="text-[14px]">({reviews.length} reviews)</span>
           </span>
         </div>
       )}

@@ -5,7 +5,15 @@ import { IoLogOut } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { FaAngleDown, FaUserAlt } from "react-icons/fa";
 import { FiSun } from "react-icons/fi";
-import { Home, User, Layers, ShoppingCart, Menu, X } from "lucide-react";
+import {
+  Home,
+  User,
+  Layers,
+  ShoppingCart,
+  Menu,
+  X,
+  ChevronDown,
+} from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import { RiSearchLine } from "react-icons/ri";
 import logo from "../../assets/logo.jpg";
@@ -50,7 +58,15 @@ function Navbar() {
   const [open, setOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // For dark and light mode--------------------
+  // For select Options in header------------------
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleSelect = (path) => {
+    setIsOpen(false);
+    navigate(path);
+  };
+
+  // For dark and light mode-----------------------
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
@@ -113,7 +129,7 @@ function Navbar() {
           {!searchBarOpen ? (
             <button
               onClick={() => setSearchBarOpen(true)}
-              className="text-xl text-gray-600"
+              className="text-xl text-gray-700"
             >
               <RiSearchLine />
             </button>
@@ -129,6 +145,16 @@ function Navbar() {
               style={{ maxWidth: "220px" }}
             />
           )}
+
+          {/* Cart button */}
+          <Link to="/cart">
+            <div className="relative">
+              <ShoppingCart className="h-5 w-5 font-bold text-gray-700 " />
+            <span className="bg-green-400 text-black text-[12px] rounded-full px-[5px] absolute -top-2 -right-3">
+              {(cartItems || []).length}
+            </span>
+            </div>
+          </Link>
 
           {/* Menu button */}
           <button
@@ -169,31 +195,90 @@ function Navbar() {
             </div>
             <ul className="space-y-4 text-gray-800 px-6 py-6 font-medium">
               <li>
-                <Link
-                  to="/allproducts"
-                  onClick={() => setMenuOpen(false)}
-                  className="hover:text-green-700 transition"
-                >
-                  All Products
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/serum"
-                  onClick={() => setMenuOpen(false)}
-                  className="hover:text-green-700 transition"
-                >
-                  Serum
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/shampoo"
-                  onClick={() => setMenuOpen(false)}
-                  className="hover:text-green-700 transition"
-                >
-                  Shampoo
-                </Link>
+                <div className="relative inline-block text-left">
+                  <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b cursor-pointer] transition"
+                  >
+                    Products{" "}
+                    <ChevronDown size={16} className="cursor-pointer" />
+                  </button>
+
+                  {isOpen && (
+                    <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
+                      <li
+                        onClick={() => {
+                          handleSelect("/allproducts"),
+                            setIsOpen(false),
+                            setMenuOpen(false);
+                        }}
+                        className="hover:underline hover:cursor-pointer"
+                      >
+                        All Products
+                      </li>
+                      <li
+                        onClick={() => {
+                          handleSelect("/serum"),
+                            setIsOpen(false),
+                            setMenuOpen(false);
+                        }}
+                        className="hover:underline hover:cursor-pointer"
+                      >
+                        Serum
+                      </li>
+                      <li
+                        onClick={() => {
+                          handleSelect("/shampoo"),
+                            setIsOpen(false),
+                            setMenuOpen(false);
+                        }}
+                        className="hover:underline hover:cursor-pointer"
+                      >
+                        Shampoo
+                      </li>
+                      <li
+                        onClick={() => {
+                          handleSelect("/soap"),
+                            setIsOpen(false),
+                            setMenuOpen(false);
+                        }}
+                        className="hover:underline hover:cursor-pointer"
+                      >
+                        Soap
+                      </li>
+                      <li
+                        onClick={() => {
+                          handleSelect("/lipgloss"),
+                            setIsOpen(false),
+                            setMenuOpen(false);
+                        }}
+                        className="hover:underline hover:cursor-pointer"
+                      >
+                        Lip Gloss
+                      </li>
+                      <li
+                        onClick={() => {
+                          handleSelect("/organicchocolates"),
+                            setIsOpen(false),
+                            setMenuOpen(false);
+                        }}
+                        className="hover:underline hover:cursor-pointer"
+                      >
+                        Choclates
+                      </li>
+                      <li
+                        onClick={() => {
+                          handleSelect("/candles"),
+                            setIsOpen(false),
+                            setMenuOpen(false);
+                        }}
+                        className="hover:underline hover:cursor-pointer"
+                      >
+                        Candles
+                      </li>
+                    </ul>
+                  )}
+                </div>
               </li>
 
               <li>
@@ -202,22 +287,10 @@ function Navbar() {
                   onClick={() => setMenuOpen(false)}
                   className="hover:text-green-700 transition"
                 >
-                  Your Orders
+                  Orders
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/cart"
-                  onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-2 hover:text-green-700 transition"
-                >
-                  <ShoppingCart className="h-5 w-5" />
-                  <span className="ml-1">Cart</span>
-                  <span className="bg-green-400 text-black rounded-full px-1 text-xs">
-                    {(cartItems || []).length}
-                  </span>
-                </Link>
-              </li>
+              
               <li>
                 <Link
                   to="/about"
@@ -227,17 +300,18 @@ function Navbar() {
                   About
                 </Link>
               </li>
-              {user?.user?.email === "asadalam4291@gmail.com" || user?.user?.email === "asadalamalig@gmail.com" && (
-                <li>
-                  <Link
-                    to="/dashboard"
-                    className="font-bold text-red-600"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    ADMIN
-                  </Link>
-                </li>
-              )}
+              {user?.user?.email === "asadalam4291@gmail.com" ||
+                (user?.user?.email === "asadalamalig@gmail.com" && (
+                  <li>
+                    <Link
+                      to="/dashboard"
+                      className="font-bold text-red-600"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      ADMIN
+                    </Link>
+                  </li>
+                ))}
               <li>
                 <Link
                   to="/profile"
@@ -246,7 +320,6 @@ function Navbar() {
                 >
                   Profile
                 </Link>
-                
               </li>
               {user ? (
                 <li>
@@ -276,16 +349,67 @@ function Navbar() {
       {/* Desktop Header-------------------------------------------- */}
       <div className="hidden md:flex items-center justify-between px-8 py-3 bg-[#dfe3d6]">
         <div className="flex items-center gap-6">
-          <Link to="/" className="text-2xl font-bold text-green-700">
+          <Link
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            to="/"
+            className="text-2xl font-bold text-green-700"
+          >
             <img src={logo} alt="Logo" className="w-10 h-auto rounded" />
           </Link>
           <nav className="hidden lg:flex gap-6 text-sm text-[#003d29]">
-            <Link to="/serum" className="hover:text-green-700 font-bold">
-              Serum
+            <Link to="/" className="hover:text-green-700 font-bold">
+              Home
             </Link>
-            <Link to="/shampoo" className="hover:text-green-700 font-bold">
-              Shampoo
-            </Link>
+
+            <div className="relative inline-block text-left">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b cursor-pointer] transition"
+              >
+                Products <ChevronDown size={16} className="cursor-pointer" />
+              </button>
+
+              {isOpen && (
+                <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
+                  <li
+                    onClick={() => handleSelect("/serum")}
+                    className="hover:underline hover:cursor-pointer"
+                  >
+                    Serum
+                  </li>
+                  <li
+                    onClick={() => handleSelect("/shampoo")}
+                    className="hover:underline hover:cursor-pointer"
+                  >
+                    Shampoo
+                  </li>
+                  <li
+                    onClick={() => handleSelect("/soap")}
+                    className="hover:underline hover:cursor-pointer"
+                  >
+                    Soap
+                  </li>
+                  <li
+                    onClick={() => handleSelect("/lipgloss")}
+                    className="hover:underline hover:cursor-pointer"
+                  >
+                    Lip Gloss
+                  </li>
+                  <li
+                    onClick={() => handleSelect("/organicchocolates")}
+                    className="hover:underline hover:cursor-pointer"
+                  >
+                    Choclates
+                  </li>
+                  <li
+                    onClick={() => handleSelect("/candles")}
+                    className="hover:underline hover:cursor-pointer"
+                  >
+                    Candles
+                  </li>
+                </ul>
+              )}
+            </div>
 
             <Link to="/orders" className="hover:text-green-700 font-bold">
               Orders
@@ -293,11 +417,12 @@ function Navbar() {
             <Link to="/about" className="hover:text-green-700 font-bold">
               About
             </Link>
-            {user?.user?.email === "asadalam4291@gmail.com" || user?.user?.email === "asadalamalig@gmail.com" && (
-              <Link to="/dashboard" className="text-red-600 font-bold">
-                Admin
-              </Link>
-            )}
+            {user?.user?.email === "asadalam4291@gmail.com" ||
+              (user?.user?.email === "asadalamalig@gmail.com" && (
+                <Link to="/dashboard" className="text-red-600 font-bold">
+                  Admin
+                </Link>
+              ))}
           </nav>
         </div>
 
@@ -334,7 +459,6 @@ function Navbar() {
             )}
           </div>
 
-        
           {user ? (
             <button
               title="Logout"
@@ -354,9 +478,9 @@ function Navbar() {
               className="flex flex-col hover:text-[#449474]"
             >
               <p className="flex items-center gap-1 ">
-                  <FaUserAlt />
-                  <span className="font-bold">Login</span>
-                </p>
+                <FaUserAlt />
+                <span className="font-bold">Login</span>
+              </p>
             </Link>
           )}
           <Link

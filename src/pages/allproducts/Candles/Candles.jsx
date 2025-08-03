@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { FaHeart } from "react-icons/fa6";
 import { motion } from "framer-motion";
 
-function Choclates() {
+function Candles() {
   const context = useData();
   const {
     mode,
@@ -78,7 +78,7 @@ function Choclates() {
                   obj.type
                     .toLowerCase()
                     .replace(/\s+/g, "")
-                    .includes("choclate")
+                    .includes("candles")
                 )
                 .filter(
                   (obj) =>
@@ -212,4 +212,4 @@ function Choclates() {
   );
 }
 
-export default Choclates;
+export default Candles;

@@ -25,6 +25,11 @@ const categories = [
     image:
       "https://cdn11.bigcommerce.com/s-oyt6pom1dt/images/stencil/1024x1024/uploaded_images/almond-butter-crunch-menu.jpg",
   },
+  {
+    name: "Candles",
+    image:
+      "https://isavii.com/cdn/shop/files/WhatsApp_Image_2025-07-31_at_18.29.55_1867e042.jpg?v=1754037465&width=823",
+  },
 ];
 
 const CategoriesSection = () => {

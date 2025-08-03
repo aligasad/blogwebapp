@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useData } from "../../context/data/MyState";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/CartSlice";
+import { addToCart, deleteFromCart } from "../../redux/CartSlice";
 import { toast } from "react-toastify";
 import { Timestamp } from "firebase/firestore";
 import { motion } from "framer-motion";
@@ -27,24 +27,25 @@ function ProductCard() {
   const cartItems = useSelector((state) => state.cart);
   // =============================================================
   console.log("cartItems", cartItems);
-  console.log("SELECTED", isWished);
+  // console.log("SELECTED", isWished);
 
   const user = JSON.parse(localStorage.getItem("user"));
-  // add to cart if item is not already present
-  const addCart = (product) => {
-    if (user) {
-      const existingItem = cartItems.some((item) => {
-        return item.id === product.id;
-      });
-      console.log("EXISTING", existingItem);
-      if (!existingItem) {
-        dispatch(addToCart(product));
-        toast.success("Item added to cart");
-      } else {
-        toast.warning("Item already added!");
-      }
-    } else {
+  // add to cart and remove from cart function-------------------------------------------
+
+  const toggleCart = (product) => {
+    if (!user) {
       toast.warning("Please login first!");
+      return;
+    }
+
+    const isInCart = cartItems.some((item) => item.id === product.id);
+
+    if (isInCart) {
+      dispatch(deleteFromCart(product));
+      toast.info("Item removed from cart");
+    } else {
+      dispatch(addToCart(product));
+      toast.success("Item added to cart");
     }
   };
 
@@ -84,7 +85,7 @@ function ProductCard() {
                 .toLowerCase()
                 .includes(filterType)
             )
-            .slice(0, 10)
+            .slice(3, 8)
             .filter((obj) => obj.price.trim().includes(filterPrice))
             .map((item, index) => {
               const {
@@ -175,15 +176,21 @@ function ProductCard() {
                         <div className="flex items-center justify-between mt-2 w-[70%] sm:w-[55%]">
                           {stock > 0 ? (
                             <button
-                              onClick={() => addCart(item)}
-                              className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg bg-[#439373] text-black hover:bg-black hover:text-white transition duration-800 hover:scale-105 cursor-pointer"
+                              onClick={() => toggleCart(item)}
+                              className={`px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg transition duration-800 hover:scale-105 cursor-pointer ${
+                                cartItems.some((p) => p.id === item.id)
+                                  ? "bg-red-700 text-white hover:bg-black"
+                                  : "bg-[#439373] text-black hover:bg-black hover:text-white"
+                              }`}
                             >
-                              Add to Cart
+                              {cartItems.some((p) => p.id === item.id)
+                                ? "Remove"
+                                : "Add to Cart"}
                             </button>
                           ) : (
                             <button
                               disabled
-                              className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm md:flex-1 font-semibold rounded-lg text-white bg-[#b35d52] hover:bg-[#ffbbb0]F cursor-not-allowed md:w-[55%]"
+                              className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg text-white bg-[#b35d52] cursor-not-allowed"
                             >
                               Out of Stock
                             </button>

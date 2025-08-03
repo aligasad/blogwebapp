@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useData } from "../../../context/data/MyState.jsx";
-import { addToCart } from "../../../redux/CartSlice.jsx";
+import { addToCart, deleteFromCart } from "../../../redux/CartSlice.jsx";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { FaArrowUp } from "react-icons/fa";
@@ -31,20 +31,20 @@ function Shampoo() {
 
   // Add to cart if item is not already present -- -- -- -- -- -- -- -- -- -- --
   const user = JSON.parse(localStorage.getItem("user"));
-  const addCart = (product) => {
-    if (user) {
-      const existingItem = cartItems.some((item) => {
-        return item.id === product.id;
-      });
-      console.log("EXISTING", existingItem);
-      if (!existingItem) {
-        dispatch(addToCart(product));
-        toast.success("Item added to cart");
-      } else {
-        toast.warning("Item already added!");
-      }
-    } else {
+  const toggleCart = (product) => {
+    if (!user) {
       toast.warning("Please login first!");
+      return;
+    }
+
+    const isInCart = cartItems.some((item) => item.id === product.id);
+
+    if (isInCart) {
+      dispatch(deleteFromCart(product));
+      toast.info("Item removed from cart");
+    } else {
+      dispatch(addToCart(product));
+      toast.success("Item added to cart");
     }
   };
 
@@ -59,7 +59,6 @@ function Shampoo() {
 
   return (
     <>
-      
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -180,15 +179,21 @@ function Shampoo() {
                             <div className="flex items-center justify-between mt-2 w-[70%] sm:w-[55%]">
                               {stock > 0 ? (
                                 <button
-                                  onClick={() => addCart(item)}
-                                  className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg bg-[#439373] text-black hover:bg-black hover:text-white transition duration-800 hover:scale-105 cursor-pointer"
+                                  onClick={() => toggleCart(item)}
+                                  className={`px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg transition duration-800 hover:scale-105 cursor-pointer ${
+                                    cartItems.some((p) => p.id === item.id)
+                                      ? "bg-red-700 text-white hover:bg-black"
+                                      : "bg-[#439373] text-black hover:bg-black hover:text-white"
+                                  }`}
                                 >
-                                  Add to Cart
+                                  {cartItems.some((p) => p.id === item.id)
+                                    ? "Remove"
+                                    : "Add to Cart"}
                                 </button>
                               ) : (
                                 <button
                                   disabled
-                                  className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm md:flex-1 font-semibold rounded-lg text-white bg-[#b35d52] hover:bg-[#ffbbb0] cursor-not-allowed md:w-[55%]"
+                                  className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg text-white bg-[#b35d52] cursor-not-allowed"
                                 >
                                   Out of Stock
                                 </button>

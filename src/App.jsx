@@ -29,6 +29,7 @@ import LipGloss from "./pages/allproducts/LipGloss/LipGloss.jsx";
 import Shampoo from "./pages/allproducts/Shampoo/Shampoo.jsx";
 import Choclates from "./pages/allproducts/Choclates/Choclates.jsx";
 import { FaArrowUp } from "react-icons/fa";
+import Candles from "./pages/allproducts/Candles/Candles.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -99,6 +100,10 @@ function App() {
         {
           path: "organicchocolates",
           element: <Choclates />,
+        },
+        {
+          path: "candles",
+          element: <Candles />,
         },
         {
           path: "/complete-profile",
