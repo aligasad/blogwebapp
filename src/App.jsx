@@ -30,6 +30,7 @@ import Shampoo from "./pages/allproducts/Shampoo/Shampoo.jsx";
 import Choclates from "./pages/allproducts/Choclates/Choclates.jsx";
 import { FaArrowUp } from "react-icons/fa";
 import Candles from "./pages/allproducts/Candles/Candles.jsx";
+import { BsWhatsapp } from "react-icons/bs";
 
 function App() {
   const router = createBrowserRouter([
@@ -140,13 +141,26 @@ function App() {
       ],
     },
   ]);
+  // For whatsapp button----------------------
+  const handleWhatsAppClick = () => {
+    const phoneNumber = "917807040707";
+    const message = "Hi, I am interested in your product!";
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank"); // opens in new tab
+  };
   return (
     <>
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="z-20 fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 hover:shadow-lg hover:scale-105 text-white px-2 py-5 cursor-pointer rounded-full shadow-lg transition"
+        className="z-20 fixed bottom-3 right-6 bg-[#019664] hover:bg-green-600 hover:shadow-lg hover:scale-105 text-white p-[10px] cursor-pointer rounded-full shadow-lg transition"
       >
         <FaArrowUp className="w-5 h-5" />
+      </button>
+      <button
+        onClick={handleWhatsAppClick}
+        className="z-20 fixed bottom-15 right-6 bg-[#019664] hover:bg-green-600 hover:shadow-lg hover:scale-105 text-white p-[10px] cursor-pointer rounded-full shadow-lg transition"
+      >
+        <BsWhatsapp className="w-5 h-5" />
       </button>
       <AnimatePresence mode="wait">
         <AuthProvider>

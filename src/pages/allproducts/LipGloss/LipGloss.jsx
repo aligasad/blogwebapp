@@ -168,10 +168,10 @@ function LipGloss() {
                             <hr className="text-white mt-[3px]" />
                             <div className="flex items-baseline gap-1">
                               <p className="text-[14px] md:text-base font-bold text-red-600 mt-1">
-                                ₹{price}
+                                ${price}
                               </p>
-                              <p className="text-[12px] md:text-sm font-semibold text-gray-100 line-through">
-                                ₹{originalPrice}
+                              <p className="text-[12px] md:text-[13px] sm:ml-1 font-semibold text-gray-100 line-through">
+                                ${originalPrice}
                               </p>
                             </div>
 

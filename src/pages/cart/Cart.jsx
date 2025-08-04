@@ -3,7 +3,6 @@ import { useData } from "../../context/data/MyState";
 import Modal from "../../components/modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { doc, getDoc } from "firebase/firestore";
 
 import {
   RiDeleteBin6Fill,
@@ -58,7 +57,7 @@ function Cart() {
 
   const GST = calcGST(totalAmount);
 
-  const shipping = Number(100);
+  const shipping = Number(5); // Flat shipping cost
   const grandTotal =
     Number(totalAmount) > 0 ? totalAmount + shipping + Number(GST) : 0;
 
@@ -261,10 +260,10 @@ function Cart() {
                     <div className="flex justify-between items-center mt-2">
                       <div className="text-left">
                         <p className="text-green-600 font-bold text-[16px] sm:text-lg">
-                          ₹{price}
+                          ${price}
                         </p>
                         <p className="text-sm line-through text-gray-400">
-                          ₹{originalPrice}
+                          ${originalPrice}
                         </p>
                       </div>
                       <RiDeleteBin6Fill
@@ -295,9 +294,8 @@ function Cart() {
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
               <span>Subtotal</span>
-              <span className="flex items-center">
-                <FaIndianRupeeSign className="mr-1" />
-                {totalAmount.toFixed(2)}
+              <span className="flex items-center font-medium text-semibold">
+                <span className="flex items-center mr-0.5 text-gray-700"> $ </span> {totalAmount.toFixed(2)}
               </span>
             </div>
             {/* <div className="flex justify-between">
@@ -310,18 +308,17 @@ function Cart() {
               </span>
             </div> */}
             <div className="flex justify-between">
-              <span>Shipping</span>
-              <span className="flex items-center font-medium">
-                <FaIndianRupeeSign className="mr-1" />
-                {shipping.toFixed(2)}
+              <span> {totalAmount > 60 ? "Shipping Free" : "Shipping Charged"} </span>
+              <span className="flex items-center font-medium text-semibold">
+                <span className="flex items-center mr-0.5 text-gray-900"> $ </span> {totalAmount > 60 ? "0.00" : shipping.toFixed(2)}
               </span>
             </div>
             <hr />
             <div className="flex justify-between text-base font-bold">
               <span>Grand Total</span>
-              <span className="flex items-center">
-                <FaIndianRupeeSign className="mr-1" />
-                {totalAmount > 0 ? (totalAmount + shipping).toFixed(2) : "0.00"}
+              <span className="flex items-center text-gray-700">
+                <span className="text-gray-800 mr-1">$</span>
+                {totalAmount > 60 ? totalAmount.toFixed(2) : (totalAmount + shipping).toFixed(2)}
               </span>
             </div>
           </div>

@@ -4,9 +4,10 @@ import { Leaf, Droplets } from "lucide-react";
 import serumBottle from "../../assets/heroImg.png";
 import leaf1 from "../../assets/leaves.png";
 import leaf2 from "../../assets/leaves2.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const HeroSection2 = () => {
+  const navigate = useNavigate();
   return (
     <section className="relative bg-[#e2fce7] overflow-hidden py-16 px-6 md:px-20">
       {/* Floating leaves */}
@@ -56,9 +57,11 @@ const HeroSection2 = () => {
                 Shop Now 🌿
               </button>
             </Link>
-            <button className="border cursor-pointer border-green-700 text-green-700 hover:bg-green-100 px-6 py-3 rounded-full font-medium transition-all duration-300 bg-[#859e9450]">
-              Learn More
-            </button>
+            <Link to={"/about"} className="hover:text-green-700"  >
+              <button className="border cursor-pointer border-green-700 text-green-700 hover:bg-green-100 px-6 py-3 rounded-full font-medium transition-all duration-300 bg-[#859e9450]">
+                Learn More
+              </button>
+            </Link>
           </div>
         </motion.div>
 
@@ -70,19 +73,18 @@ const HeroSection2 = () => {
           className="flex-1 z-10"
         >
           <div className="relative inline-block p-2 rounded-3xl bg-gradient-to-br from-[#449474] to-[#003604] shadow-lg hover:shadow-2xl transition duration-500 ease-in-out">
-  <div className="rounded-2xl bg-white p-2 relative overflow-hidden">
-    <img
-      src="https://i.ibb.co/6JskvgZx/banner2.jpg"
-      alt="Serum Bottle"
-      className="w-56 md:w-[420px] rounded-xl transform hover:scale-105 transition duration-500 ease-in-out"
-      style={{ transformStyle: "preserve-3d" }}
-    />
+            <div className="rounded-2xl bg-white p-2 relative overflow-hidden">
+              <img
+                src="https://i.ibb.co/6JskvgZx/banner2.jpg"
+                alt="Serum Bottle"
+                className="w-56 md:w-[420px] rounded-xl transform hover:scale-105 transition duration-500 ease-in-out"
+                style={{ transformStyle: "preserve-3d" }}
+              />
 
-    {/* Pulse ring effect */}
-    <div className="absolute inset-0 rounded-3xl ring ring-[#003604] animate-pulse pointer-events-none"></div>
-  </div>
-</div>
-
+              {/* Pulse ring effect */}
+              <div className="absolute inset-0 rounded-3xl ring ring-[#003604] animate-pulse pointer-events-none"></div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

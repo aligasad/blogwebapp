@@ -24,12 +24,6 @@ function Home() {
 
   return (
     <>
-      <button
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="z-20 fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white px-2 py-5 cursor-pointer rounded-full shadow-lg transition"
-      >
-        <FaArrowUp className="w-5 h-5" />
-      </button>
 
       <motion.div
         initial={{ opacity: 0, x: -100 }} // start off-screen to the left

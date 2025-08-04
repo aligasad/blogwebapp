@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaCheckCircle, FaStar } from "react-icons/fa";
 import { useData } from "../../context/data/MyState";
@@ -75,37 +75,10 @@ const itemVariants = {
 };
 
 const ProductShow = () => {
+
+
   const [activeTab, setActiveTab] = useState("Ingredients");
 
-  const context = useData();
-  const { product } = context;
-
-  const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart);
-
-  // add to cart if item is not already present -- -- -- -- -- -- -- -- -- -- -- --
-  const user = JSON.parse(localStorage.getItem('user'));
-
-  function addCart(product) {
-    if(user) {
-      const existingItem = cartItems.some((item) =>{
-        return item.id === product.id;
-      });
-
-      if(!existingItem){
-        dispatch(addToCart(product));
-        toast.success("Item added to cart");
-      } else {
-        toast.warning("Item already added!");
-      }
-    } else {
-      toast.warning("please login first");
-    }
-  }
-
-  useState(()=> {
-    localStorage.setItem("cart", JSON.stringify(cartItems));
-  }, [cartItems])
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 p-6 max-w-6xl mx-auto">
