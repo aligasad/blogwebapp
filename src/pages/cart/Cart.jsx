@@ -27,18 +27,18 @@ function Cart() {
   const cartItems = useSelector((state) => state.cart);
   console.log(cartItems);
 
-  // delete item from cart----------------
+  // delete item from cart---------------------------------------------
   const deleteCart = (item) => {
     dispatch(deleteFromCart(item));
     toast.warning("delete item sucessfully");
   };
 
-  // also delete from local storage---------------------
+  // also delete from local storage-------------------------------------
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // For calculating total amount of all product-------------
+  // For calculating total amount of all product------------------------
   const [totalAmount, setTotalAmount] = useState(0);
   useEffect(() => {
     // let temp = 0;
@@ -247,6 +247,7 @@ function Cart() {
                 imageUrl,
                 description,
                 originalPrice,
+                quan,
                 id,
                 category,
               } = item;
@@ -276,12 +277,15 @@ function Cart() {
                       <p className="text-[13px] sm:text-sm text-gray-600">
                         {description.slice(0, 60)}...
                       </p>
+                      <p className="text-[13px] sm:text-sm text-gray-600">
+                        {Number(quan) > 1 ? `${Number(quan)} items` : `${Number(quan)} item`} / <span>Total Price: </span> ${Number(item.quan) * Number(item.price)}
+                      </p>
                     </div>
                     <div className="flex justify-between items-center mt-2">
                       <div className="flex items-center gap-2">
                         <button
                           className="px-2 py-1 border-2 border-[#376a55]  rounded cursor-pointer"
-                          onClick={() => dispatch(decreaseQuantity(item.id))}
+                          onClick={() => item.quan > 1 ? dispatch(decreaseQuantity(item.id)) : deleteCart(item)}
                         >
                           <FaMinus size={12} className="text-[#376a55]"/>
                         </button>

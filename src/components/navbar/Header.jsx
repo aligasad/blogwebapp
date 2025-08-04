@@ -4,7 +4,6 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { IoLogOut } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { FaAngleDown, FaUserAlt } from "react-icons/fa";
-import { FiSun } from "react-icons/fi";
 import {
   Home,
   User,
@@ -150,9 +149,9 @@ function Navbar() {
           <Link to="/cart">
             <div className="relative">
               <ShoppingCart className="h-5 w-5 font-bold text-gray-700 " />
-            <span className="bg-green-400 text-black text-[12px] rounded-full px-[5px] absolute -top-2 -right-3">
-              {(cartItems || []).length}
-            </span>
+              <span className="bg-green-400 text-black text-[12px] rounded-full px-[5px] absolute -top-2 -right-3">
+                {(cartItems || []).length}
+              </span>
             </div>
           </Link>
 
@@ -290,7 +289,7 @@ function Navbar() {
                   Orders
                 </Link>
               </li>
-              
+
               <li>
                 <Link
                   to="/about"
@@ -361,54 +360,49 @@ function Navbar() {
               Home
             </Link>
 
-            <div className="relative inline-block text-left">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b cursor-pointer] transition"
-              >
+            <div className="relative inline-block text-left group">
+              <button className="flex items-center gap-1 text-[#003d29] font-bold group-hover:text-[#00823b] transition">
                 Products <ChevronDown size={16} className="cursor-pointer" />
               </button>
 
-              {isOpen && (
-                <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
-                  <li
-                    onClick={() => handleSelect("/serum")}
-                    className="hover:underline hover:cursor-pointer"
-                  >
-                    Serum
-                  </li>
-                  <li
-                    onClick={() => handleSelect("/shampoo")}
-                    className="hover:underline hover:cursor-pointer"
-                  >
-                    Shampoo
-                  </li>
-                  <li
-                    onClick={() => handleSelect("/soap")}
-                    className="hover:underline hover:cursor-pointer"
-                  >
-                    Soap
-                  </li>
-                  <li
-                    onClick={() => handleSelect("/lipgloss")}
-                    className="hover:underline hover:cursor-pointer"
-                  >
-                    Lip Gloss
-                  </li>
-                  <li
-                    onClick={() => handleSelect("/organicchocolates")}
-                    className="hover:underline hover:cursor-pointer"
-                  >
-                    Choclates
-                  </li>
-                  <li
-                    onClick={() => handleSelect("/candles")}
-                    className="hover:underline hover:cursor-pointer"
-                  >
-                    Candles
-                  </li>
-                </ul>
-              )}
+              <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
+                <li
+                  onClick={() => handleSelect("/serum")}
+                  className="hover:underline cursor-pointer"
+                >
+                  Serum
+                </li>
+                <li
+                  onClick={() => handleSelect("/shampoo")}
+                  className="hover:underline cursor-pointer"
+                >
+                  Shampoo
+                </li>
+                <li
+                  onClick={() => handleSelect("/soap")}
+                  className="hover:underline cursor-pointer"
+                >
+                  Soap
+                </li>
+                <li
+                  onClick={() => handleSelect("/lipgloss")}
+                  className="hover:underline cursor-pointer"
+                >
+                  Lip Gloss
+                </li>
+                <li
+                  onClick={() => handleSelect("/organicchocolates")}
+                  className="hover:underline cursor-pointer"
+                >
+                  Chocolates
+                </li>
+                <li
+                  onClick={() => handleSelect("/candles")}
+                  className="hover:underline cursor-pointer"
+                >
+                  Candles
+                </li>
+              </ul>
             </div>
 
             <Link to="/orders" className="hover:text-green-700 font-bold">
