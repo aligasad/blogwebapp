@@ -65,14 +65,16 @@ function Order() {
                               {item.category}
                             </p>
                             <p className="text-sm mb-2">{item.description}</p>
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-2 border-b">
                               <span className="text-lg font-bold text-green-600">
-                                ₹{calcOffer(Number(item.price))}
+                                ${item.price}
                               </span>
-                              <span className="text-sm line-through text-gray-400">
-                                ₹{item.price}
+                              <span className="text-sm line-through text-gray-600">
+                                ${item.originalPrice} 
                               </span>
+                              <span className="text-[11px] font-semibold">(No of items - {item.quan})</span>
                             </div>
+                            <p><span className="text-[13px] font-semibold">Total Amount: </span> <span className="text-[12px]">{item.quan} x {item.price} = </span> <span className="text-[14px] font-semibold">${item.price * item.quan}</span>  </p>
                           </div>
                         </div>
                       ))}

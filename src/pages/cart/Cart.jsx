@@ -10,13 +10,14 @@ import {
   RiDiscountPercentLine,
 } from "react-icons/ri";
 import { FaIndianRupeeSign, FaRupeeSign } from "react-icons/fa6";
-import { deleteFromCart } from "../../redux/CartSlice";
+import { decreaseQuantity, deleteFromCart, increaseQuantity } from "../../redux/CartSlice";
 import { toast } from "react-toastify";
 import { addDoc, doc, setDoc, collection, getDoc } from "firebase/firestore";
 import { auth, firebaseDB } from "../../firebase/FirebaseConfig";
 import NoOrderFound from "../../components/noorder/NoOrderFound";
 import { onAuthStateChanged } from "firebase/auth";
 import { original } from "@reduxjs/toolkit";
+import { FaMinus, FaPlus } from "react-icons/fa";
 
 function Cart() {
   const context = useData();
@@ -40,18 +41,27 @@ function Cart() {
   // For calculating total amount of all product-------------
   const [totalAmount, setTotalAmount] = useState(0);
   useEffect(() => {
+    // let temp = 0;
+    // cartItems.forEach((cartItem) => {
+    //   temp = Number(temp) + parseFloat(calcOffer(cartItem.price));
+    // });
+    // setTotalAmount(temp);
+
+    // calculate total amount with quantity and store in local storage
     let temp = 0;
     cartItems.forEach((cartItem) => {
-      temp = Number(temp) + parseFloat(calcOffer(cartItem.price));
+      const qty = cartItem.quan || 1;
+      temp = Number(temp) + parseFloat(calcOffer(cartItem.price)) * qty;
     });
     setTotalAmount(temp);
-    console.log(temp);
   }, [cartItems]);
+
+  
 
   // Calculate GST------------------ -- -- -- -- -- -- -- --
   const calcGST = (price) => {
     let discount = 0.18;
-    const discountedPrice = price * discount; 
+    const discountedPrice = price * discount;
     return discountedPrice.toFixed(2);
   };
 
@@ -223,13 +233,23 @@ function Cart() {
                 {userData?.pincode}
               </span>
             </p>
-            <p className="text-[11px] font-semibold text-gray-700"> {userData?.address}</p>
+            <p className="text-[11px] font-semibold text-gray-700">
+              {" "}
+              {userData?.address}
+            </p>
           </div>
 
           {cartItems.length > 0 ? (
             cartItems.map((item, index) => {
-              const { title, price, imageUrl, description, originalPrice, id, category } =
-                item;
+              const {
+                title,
+                price,
+                imageUrl,
+                description,
+                originalPrice,
+                id,
+                category,
+              } = item;
               return (
                 <div
                   key={index}
@@ -258,13 +278,21 @@ function Cart() {
                       </p>
                     </div>
                     <div className="flex justify-between items-center mt-2">
-                      <div className="text-left">
-                        <p className="text-green-600 font-bold text-[16px] sm:text-lg">
-                          ${price}
-                        </p>
-                        <p className="text-sm line-through text-gray-400">
-                          ${originalPrice}
-                        </p>
+                      <div className="flex items-center gap-2">
+                        <button
+                          className="px-2 py-1 border-2 border-[#376a55]  rounded cursor-pointer"
+                          onClick={() => dispatch(decreaseQuantity(item.id))}
+                        >
+                          <FaMinus size={12} className="text-[#376a55]"/>
+                        </button>
+                        <span className="px-3">{item.quan || 1}</span>
+                        <button
+                          className="px-2 py-1 border-2 border-[#376a55] rounded cursor-pointer"
+                          onClick={() => dispatch(increaseQuantity(item.id))}
+                        >
+                          <FaPlus size={12} className="text-[#376a55]"/>
+                        </button>
+                        <span className="px-3">{item.quantity || 1}</span>
                       </div>
                       <RiDeleteBin6Fill
                         onClick={() => deleteCart(item)}
@@ -295,7 +323,11 @@ function Cart() {
             <div className="flex justify-between">
               <span>Subtotal</span>
               <span className="flex items-center font-medium text-semibold">
-                <span className="flex items-center mr-0.5 text-gray-700"> $ </span> {totalAmount.toFixed(2)}
+                <span className="flex items-center mr-0.5 text-gray-700">
+                  {" "}
+                  ${" "}
+                </span>{" "}
+                {totalAmount.toFixed(2)}
               </span>
             </div>
             {/* <div className="flex justify-between">
@@ -308,9 +340,16 @@ function Cart() {
               </span>
             </div> */}
             <div className="flex justify-between">
-              <span> {totalAmount > 60 ? "Shipping Free" : "Shipping Charged"} </span>
+              <span>
+                {" "}
+                {totalAmount > 60 ? "Shipping Free" : "Shipping Charged"}{" "}
+              </span>
               <span className="flex items-center font-medium text-semibold">
-                <span className="flex items-center mr-0.5 text-gray-900"> $ </span> {totalAmount > 60 ? "0.00" : shipping.toFixed(2)}
+                <span className="flex items-center mr-0.5 text-gray-900">
+                  {" "}
+                  ${" "}
+                </span>{" "}
+                {totalAmount > 60 ? "0.00" : shipping.toFixed(2)}
               </span>
             </div>
             <hr />
@@ -318,7 +357,9 @@ function Cart() {
               <span>Grand Total</span>
               <span className="flex items-center text-gray-700">
                 <span className="text-gray-800 mr-1">$</span>
-                {totalAmount > 60 ? totalAmount.toFixed(2) : (totalAmount + shipping).toFixed(2)}
+                {totalAmount > 60
+                  ? totalAmount.toFixed(2)
+                  : (totalAmount + shipping).toFixed(2)}
               </span>
             </div>
           </div>
