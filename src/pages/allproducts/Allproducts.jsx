@@ -148,7 +148,7 @@ function Allproducts() {
                         )}
                         <img
                           onClick={() =>
-                            navigate(`/product/${id}`)
+                            (window.location.href = `/productinfo/${id}`)
                           }
                           className="h-36 sm:h-44 object-contain transition-transform rounded-md duration-300 hover:scale-110 cursor-pointer"
                           src={imageUrl}
