@@ -57,13 +57,15 @@ function Navbar() {
   const [open, setOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // For select Options in header------------------
+  // For Select Options in header-=============================================
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelect = (path) => {
     setIsOpen(false);
     navigate(path);
   };
+  //    - --      ---       ---- -------           -----
+  
 
   // For dark and light mode-----------------------
   const toggleDropdown = () => {
@@ -112,7 +114,7 @@ function Navbar() {
   return (
     <div className="bg-[#dfe3d6] sticky top-0 z-50 shadow-md">
       {/* Mobile View */}
-      <div className="md:hidden flex justify-between items-center px-4 py-3">
+      <div className="lg:hidden flex justify-between items-center px-4 py-3">
         <Link to="/" className="text-2xl font-bold text-green-700">
           <img
             onClick={onTop}
@@ -346,7 +348,7 @@ function Navbar() {
       )}
 
       {/* Desktop Header-------------------------------------------- */}
-      <div className="hidden md:flex items-center justify-between px-8 py-3 bg-[#dfe3d6]">
+      <div className="hidden lg:flex items-center justify-between px-8 py-3 bg-[#dfe3d6]">
         <div className="flex items-center gap-6">
           <Link
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -458,12 +460,27 @@ function Navbar() {
               title="Logout"
               className="flex items-center gap-1 cursor-pointer hover:text-[#449474] "
             >
-              <Link to={"/profile"}>
-                <p className="flex items-center gap-1 ">
-                  <FaUserAlt />
-                  <span className="font-bold">Profile</span>
-                </p>
-              </Link>
+              <div className="relative inline-block text-left group">
+              <button className="flex items-center gap-1 text-[#003d29] font-bold group-hover:text-[#00823b] transition">
+                <FaUserAlt />Profile 
+              </button>
+
+              <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
+                <li
+                  onClick={() => handleSelect("/profile")}
+                  className="hover:underline cursor-pointer"
+                >
+                  Profile
+                </li>
+                <li
+                  onClick={handleLogout}
+                  className="hover:underline cursor-pointer"
+                >
+                  Logout
+                </li>
+              </ul>
+            </div>
+
             </button>
           ) : (
             <Link

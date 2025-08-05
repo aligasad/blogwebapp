@@ -14,7 +14,6 @@ function Profile() {
         try {
           const docRef = doc(firebaseDB, "users", user.uid);
           const docSnap = await getDoc(docRef);
-
           if (docSnap.exists()) {
             setUserData(docSnap.data());
           } else {
@@ -42,61 +41,63 @@ function Profile() {
   };
 
   return (
-    <div className="p-6 max-w-2xl mx-auto bg-gradient-to-br from-white to-[#e8f5ef] shadow-2xl rounded-3xl mt-12">
-      <h2 className="text-3xl font-extrabold text-center text-[#333] mb-6 border-b pb-3">
-        👤 Your Profile
-      </h2>
+    <div className="min-h-screen bg-[#f6fef9] flex items-center justify-center px-4 py-0  md:py-8">
+      <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-6">
+        {/* Header */}
+        <h2 className="text-xl font-semibold text-center text-gray-700 mb-6">My Profile</h2>
 
-      <div className="flex flex-col items-center space-y-6">
-        <div className="relative">
+        {/* Profile Info */}
+        <div className="flex flex-col items-center space-y-4">
           <img
             src={userData?.photoURL || "https://via.placeholder.com/100"}
             alt="Profile"
-            className="w-28 h-28 rounded-full object-cover border-4 border-[#449474] shadow-md transition-transform duration-300 hover:scale-105"
+            className="w-24 h-24 rounded-full object-cover shadow-md"
           />
+          <div className="text-center">
+            <h3 className="text-lg font-semibold text-gray-800">{userData?.name || "User"}</h3>
+            <p className="text-sm text-gray-500">{userData?.email || "No email"}</p>
+          </div>
+          <button
+            onClick={() => navigate("/complete-profile")}
+            className="bg-[#4CAF50] cursor-alias text-white px-4 py-2 rounded-lg hover:bg-[#3b873e] transition"
+          >
+            Edit Profile
+          </button>
         </div>
 
-        <div className="text-center">
-          <h3 className="text-xl font-semibold text-[#222]">
-            {userData?.name || "No name yet"}
-          </h3>
-          <p className="text-sm text-gray-500">{userData?.email}</p>
+        {/* Divider */}
+        <div className="border-t border-gray-200 my-6"></div>
+
+        {/* Additional Info */}
+        <div className="text-[11px] sm:text-sm text-gray-700">
+          <div className="flex items-center gap-3 pb-0.5">
+            <span className="font-semibold w-[22%]">📍 Address:</span>
+            <span className="text-gray-600">{userData?.address || "Not provided"}</span>
+          </div>
+          <hr />
+          <div className="flex items-center gap-3 py-1">
+            <span className="font-semibold w-[22%]">📦 Pin Code:</span>
+            <span className="text-gray-600">{userData?.pincode || "Not provided"}</span>
+          </div>
+          <hr />
+          <div className="flex gap-3 mt-1">
+            <span className="font-semibold ">📝 Bio: </span>
+            <span className="text-gray-600 w-[80%]">{(userData?.Biography) || "Not provided"}...</span>
+          </div>
         </div>
 
-        <div className="w-full bg-[#f3fdf9] rounded-lg p-4 shadow-inner">
-          <p className="text-gray-700 font-medium">
-            📍 Address:{" "}
-            <span className="text-gray-600 font-normal">
-              {userData?.address || "Not provided"}
-            </span>
-          </p>
-          <p className="text-gray-700 font-medium mt-1">
-            🧾 Pin Code:{" "}
-            <span className="text-gray-600 font-normal">
-              {userData?.pincode || "Not provided"}
-            </span>
-          </p>
-          <p className="text-gray-700 gap-1 font-medium mt-1">
-            📝 Bio:{" "}
-            <span className="text-gray-600 font-normal">
-              {userData?.Biography || "Not provided"}
-            </span>
-          </p>
+        {/* Logout Button */}
+        <div className="mt-8 flex justify-center">
+          <button
+            onClick={handleSignOut}
+            className="text-red-600 cursor-pointer border border-red-500 px-4 py-2 rounded-lg hover:bg-red-50 transition"
+          >
+            Log Out
+          </button>
         </div>
 
-        <button
-          onClick={() => navigate("/complete-profile")}
-          className="mt-6 px-6 py-2 bg-[#449474] text-white font-semibold rounded-full hover:bg-[#003d29] transition-all duration-300 shadow-md cursor-pointer flex items-center justify-center space-x-2"
-        >
-          ✏️ Complete / Edit Profile
-        </button>
-
-        <button
-          onClick={handleSignOut}
-          className="mt-2 px-6 py-2 bg-red-500 text-white font-semibold rounded-full hover:bg-red-700 transition-all duration-300 shadow-md cursor-pointer"
-        >
-          🚪 Sign Out
-        </button>
+        {/* App Version (Optional Footer) */}
+        <p className="text-xs text-gray-400 text-center mt-4">App version 0.1</p>
       </div>
     </div>
   );

@@ -152,15 +152,15 @@ function App() {
     <>
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="z-20 fixed bottom-3 right-6 bg-[#019664] hover:bg-green-600 hover:shadow-lg hover:scale-105 text-white p-[10px] cursor-pointer rounded-full shadow-lg transition"
+        className="z-20 fixed bottom-8 sm:bottom-3 right-6 bg-[#019664] hover:bg-green-600 hover:shadow-lg hover:scale-105 text-white p-[10px] cursor-pointer rounded-full shadow-lg transition"
       >
-        <FaArrowUp className="w-5 h-5" />
+        <FaArrowUp size={25} />
       </button>
       <button
         onClick={handleWhatsAppClick}
-        className="z-20 fixed bottom-15 right-6 bg-[#019664] hover:bg-green-600 hover:shadow-lg hover:scale-105 text-white p-[10px] cursor-pointer rounded-full shadow-lg transition"
+        className="z-20 fixed bottom-22 sm:bottom-16 right-6 bg-[#019664] hover:bg-green-600 hover:shadow-lg hover:scale-105 text-white p-[10px] cursor-pointer rounded-full shadow-lg transition"
       >
-        <BsWhatsapp className="w-5 h-5" />
+        <BsWhatsapp size={25} />
       </button>
       <AnimatePresence mode="wait">
         <AuthProvider>

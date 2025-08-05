@@ -43,7 +43,7 @@ function Shampoo() {
       dispatch(deleteFromCart(product));
       toast.info("Item removed from cart");
     } else {
-      dispatch(addToCart(product));
+      dispatch(addToCart({...product, quan: 1}));
       toast.success("Item added to cart");
     }
   };

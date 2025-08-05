@@ -247,6 +247,8 @@ function Cart() {
                 imageUrl,
                 description,
                 originalPrice,
+                type,
+                quantity,
                 quan,
                 id,
                 category,
@@ -272,7 +274,7 @@ function Cart() {
                         {title.slice(0, 40)}...
                       </h2>
                       <p className="text-[14px] sm:text-sm text-gray-500 mb-1">
-                        {category}
+                        {type} {quantity} / {category}
                       </p>
                       <p className="text-[13px] sm:text-sm text-gray-600">
                         {description.slice(0, 60)}...
@@ -296,7 +298,6 @@ function Cart() {
                         >
                           <FaPlus size={12} className="text-[#376a55]"/>
                         </button>
-                        <span className="px-3">{item.quantity || 1}</span>
                       </div>
                       <RiDeleteBin6Fill
                         onClick={() => deleteCart(item)}
