@@ -57,7 +57,7 @@ const HeroSection2 = () => {
                 Shop Now 🌿
               </button>
             </Link>
-            <Link to={"/about"} className="hover:text-green-700"  >
+            <Link to={"/about"} className="hover:text-green-700">
               <button className="border cursor-pointer border-green-700 text-green-700 hover:bg-green-100 px-6 py-3 rounded-full font-medium transition-all duration-300 bg-[#859e9450]">
                 Learn More
               </button>
@@ -67,22 +67,25 @@ const HeroSection2 = () => {
 
         {/* Right Image - Fake 3D Effect */}
         <motion.div
-          initial={{ opacity: 0, rotateY: -45 }}
+          initial={{ opacity: 0, rotateY: -30 }}
           animate={{ opacity: 1, rotateY: 0 }}
           transition={{ duration: 1 }}
-          className="flex-1 z-10"
+          className="flex-1 z-10 flex justify-center"
         >
-          <div className="relative inline-block p-2 rounded-3xl bg-gradient-to-br from-[#449474] to-[#003604] shadow-lg hover:shadow-2xl transition duration-500 ease-in-out">
-            <div className="rounded-2xl bg-white p-2 relative overflow-hidden">
+          <div className="relative p-2 rounded-3xl bg-gradient-to-br from-[#c8f7dc] to-[#449474] shadow-xl hover:shadow-2xl transition duration-500 ease-in-out max-w-sm">
+            <div className="rounded-2xl bg-white p-3 relative overflow-hidden shadow-inner">
               <img
                 src="https://i.ibb.co/6JskvgZx/banner2.jpg"
                 alt="Serum Bottle"
-                className="w-56 md:w-[420px] rounded-xl transform hover:scale-105 transition duration-500 ease-in-out"
+                className="w-52 md:w-72 lg:w-80 rounded-xl transform hover:scale-105 transition duration-500 ease-in-out"
                 style={{ transformStyle: "preserve-3d" }}
               />
 
-              {/* Pulse ring effect */}
-              <div className="absolute inset-0 rounded-3xl ring ring-[#003604] animate-pulse pointer-events-none"></div>
+              {/* Subtle ring effect */}
+              <div className="absolute inset-0 rounded-2xl ring-1 ring-[#449474] opacity-20 pointer-events-none"></div>
+
+              {/* Shine overlay */}
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-white/10 via-transparent to-white/10 rounded-xl pointer-events-none"></div>
             </div>
           </div>
         </motion.div>

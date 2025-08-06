@@ -41,13 +41,6 @@ function Cart() {
   // For calculating total amount of all product------------------------
   const [totalAmount, setTotalAmount] = useState(0);
   useEffect(() => {
-    // let temp = 0;
-    // cartItems.forEach((cartItem) => {
-    //   temp = Number(temp) + parseFloat(calcOffer(cartItem.price));
-    // });
-    // setTotalAmount(temp);
-
-    // calculate total amount with quantity and store in local storage
     let temp = 0;
     cartItems.forEach((cartItem) => {
       const qty = cartItem.quan || 1;

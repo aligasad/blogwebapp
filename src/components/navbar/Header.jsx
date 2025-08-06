@@ -65,7 +65,6 @@ function Navbar() {
     navigate(path);
   };
   //    - --      ---       ---- -------           -----
-  
 
   // For dark and light mode-----------------------
   const toggleDropdown = () => {
@@ -116,12 +115,14 @@ function Navbar() {
       {/* Mobile View */}
       <div className="lg:hidden flex justify-between items-center px-4 py-3">
         <Link to="/" className="text-2xl font-bold text-green-700">
-          <img
-            onClick={onTop}
-            src={logo}
-            alt="Logo"
-            className="w-10 h-auto rounded"
-          />
+          <div className="border-2 border-green-700 p-1 rounded-full">
+            <img
+              onClick={onTop}
+              src={logo}
+              alt="Logo"
+              className="w-10 h-auto rounded"
+            />
+          </div>
         </Link>
 
         {/* Right side icons */}
@@ -348,63 +349,104 @@ function Navbar() {
       )}
 
       {/* Desktop Header-------------------------------------------- */}
-      <div className="hidden lg:flex items-center justify-between px-8 py-3 bg-[#dfe3d6]">
+      <div className="hidden lg:flex items-center justify-between px-8 py-1 bg-[#dfe3d6] border-b-2 border-[#4b9878]">
         <div className="flex items-center gap-6">
           <Link
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             to="/"
             className="text-2xl font-bold text-green-700"
           >
-            <img src={logo} alt="Logo" className="w-10 h-auto rounded" />
+            <div className="border-2 border-green-700 p-1 rounded-full">
+              <img src={logo} alt="Logo" className="w-10 h-auto rounded" />
+            </div>
           </Link>
           <nav className="hidden lg:flex gap-6 text-sm text-[#003d29]">
             <Link to="/" className="hover:text-green-700 font-bold">
               Home
             </Link>
 
-            <div className="relative inline-block text-left group">
-              <button className="flex items-center gap-1 text-[#003d29] font-bold group-hover:text-[#00823b] transition">
+            <div className="relative inline-block text-left">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b cursor-pointer] transition"
+              >
                 Products <ChevronDown size={16} className="cursor-pointer" />
               </button>
 
-              <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
-                <li
-                  onClick={() => handleSelect("/serum")}
-                  className="hover:underline cursor-pointer"
-                >
-                  Serum
-                </li>
-                <li
-                  onClick={() => handleSelect("/shampoo")}
-                  className="hover:underline cursor-pointer"
-                >
-                  Shampoo
-                </li>
-                <li
-                  onClick={() => handleSelect("/soap")}
-                  className="hover:underline cursor-pointer"
-                >
-                  Soap
-                </li>
-                <li
-                  onClick={() => handleSelect("/lipgloss")}
-                  className="hover:underline cursor-pointer"
-                >
-                  Lip Gloss
-                </li>
-                <li
-                  onClick={() => handleSelect("/organicchocolates")}
-                  className="hover:underline cursor-pointer"
-                >
-                  Chocolates
-                </li>
-                <li
-                  onClick={() => handleSelect("/candles")}
-                  className="hover:underline cursor-pointer"
-                >
-                  Candles
-                </li>
-              </ul>
+              {isOpen && (
+                <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
+                  <li
+                    onClick={() => {
+                      handleSelect("/allproducts"),
+                        setIsOpen(false),
+                        setMenuOpen(false);
+                    }}
+                    className="hover:underline hover:cursor-pointer"
+                  >
+                    All Products
+                  </li>
+                  <li
+                    onClick={() => {
+                      handleSelect("/serum"),
+                        setIsOpen(false),
+                        setMenuOpen(false);
+                    }}
+                    className="hover:underline hover:cursor-pointer"
+                  >
+                    Serum
+                  </li>
+                  <li
+                    onClick={() => {
+                      handleSelect("/shampoo"),
+                        setIsOpen(false),
+                        setMenuOpen(false);
+                    }}
+                    className="hover:underline hover:cursor-pointer"
+                  >
+                    Shampoo
+                  </li>
+                  <li
+                    onClick={() => {
+                      handleSelect("/soap"),
+                        setIsOpen(false),
+                        setMenuOpen(false);
+                    }}
+                    className="hover:underline hover:cursor-pointer"
+                  >
+                    Soap
+                  </li>
+                  <li
+                    onClick={() => {
+                      handleSelect("/lipgloss"),
+                        setIsOpen(false),
+                        setMenuOpen(false);
+                    }}
+                    className="hover:underline hover:cursor-pointer"
+                  >
+                    Lip Gloss
+                  </li>
+                  <li
+                    onClick={() => {
+                      handleSelect("/organicchocolates"),
+                        setIsOpen(false),
+                        setMenuOpen(false);
+                    }}
+                    className="hover:underline hover:cursor-pointer"
+                  >
+                    Choclates
+                  </li>
+                  <li
+                    onClick={() => {
+                      handleSelect("/candles"),
+                        setIsOpen(false),
+                        setMenuOpen(false);
+                    }}
+                    className="hover:underline hover:cursor-pointer"
+                  >
+                    Candles
+                  </li>
+                </ul>
+              )}
             </div>
 
             <Link to="/orders" className="hover:text-green-700 font-bold">
@@ -461,26 +503,26 @@ function Navbar() {
               className="flex items-center gap-1 cursor-pointer hover:text-[#449474] "
             >
               <div className="relative inline-block text-left group">
-              <button className="flex items-center gap-1 text-[#003d29] font-bold group-hover:text-[#00823b] transition">
-                <FaUserAlt />Profile 
-              </button>
-
-              <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
-                <li
-                  onClick={() => handleSelect("/profile")}
-                  className="hover:underline cursor-pointer"
-                >
+                <button className="flex items-center gap-1 text-[#003d29] font-bold group-hover:text-[#00823b] transition">
+                  <FaUserAlt />
                   Profile
-                </li>
-                <li
-                  onClick={handleLogout}
-                  className="hover:underline cursor-pointer"
-                >
-                  Logout
-                </li>
-              </ul>
-            </div>
+                </button>
 
+                <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
+                  <li
+                    onClick={() => handleSelect("/profile")}
+                    className="hover:underline cursor-pointer"
+                  >
+                    Profile
+                  </li>
+                  <li
+                    onClick={handleLogout}
+                    className="hover:underline cursor-pointer"
+                  >
+                    Logout
+                  </li>
+                </ul>
+              </div>
             </button>
           ) : (
             <Link
