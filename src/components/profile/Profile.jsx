@@ -40,6 +40,8 @@ function Profile() {
     }
   };
 
+
+
   return (
     <div className="min-h-screen bg-[#f6fef9] flex items-center justify-center px-4 py-0  md:py-8">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-6">
@@ -87,12 +89,18 @@ function Profile() {
         </div>
 
         {/* Logout Button */}
-        <div className="mt-8 flex justify-center">
+        <div className="mt-8 flex justify-center gap-3">
           <button
             onClick={handleSignOut}
-            className="text-red-600 cursor-pointer border border-red-500 px-4 py-2 rounded-lg hover:bg-red-50 transition"
+            className="text-white hover:text-red-600 cursor-pointer border bg-rose-700 hover:bg-[#ffffff] border-red-500 px-4 py-2 rounded-lg transition-colors duration-300"
           >
             Log Out
+          </button>
+          <button
+            onClick={() => navigate('/orders')}
+            className="text-red-600 hover:text-white cursor-pointer border border-red-500 px-4 py-2 rounded-lg hover:bg-rose-700 transition-colors duration-300"
+          >
+            Your Orders
           </button>
         </div>
 

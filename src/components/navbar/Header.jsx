@@ -46,6 +46,7 @@ function Navbar() {
     pageType,
     setPageType,
   } = context;
+
   console.log("PAGE TYPE", pageType);
   const [location, setLocation] = useState("");
   useEffect(() => {
@@ -54,17 +55,17 @@ function Navbar() {
     setLocation(shortAddress);
   }, [address]); // Only re-run when address changes
 
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // For Select Options in header-=============================================
-  const [isOpen, setIsOpen] = useState(false);
+  const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
 
   const handleSelect = (path) => {
-    setIsOpen(false);
+    setIsProductDropdownOpen(false);
     navigate(path);
   };
-  //    - --      ---       ---- -------           -----
 
   // For dark and light mode-----------------------
   const toggleDropdown = () => {
@@ -109,6 +110,8 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [searchBarOpen, setSearchBarOpen] = useState(false); // <-- Add this line
+
+  
 
   return (
     <div className="bg-[#dfe3d6] sticky top-0 z-50 shadow-md">
@@ -199,19 +202,22 @@ function Navbar() {
               <li>
                 <div className="relative inline-block text-left">
                   <button
-                    onClick={() => setIsOpen(!isOpen)}
+                    onClick={() => {
+                      setIsProductDropdownOpen(!isProductDropdownOpen);
+                      setIsUserDropdownOpen(false);
+                    }}
                     className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b cursor-pointer] transition"
                   >
                     Products{" "}
                     <ChevronDown size={16} className="cursor-pointer" />
                   </button>
 
-                  {isOpen && (
+                  {isProductDropdownOpen && (
                     <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
                       <li
                         onClick={() => {
                           handleSelect("/allproducts"),
-                            setIsOpen(false),
+                            setIsProductDropdownOpen(false),
                             setMenuOpen(false);
                         }}
                         className="hover:underline hover:cursor-pointer"
@@ -367,18 +373,21 @@ function Navbar() {
 
             <div className="relative inline-block text-left">
               <button
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={() => {
+                  setIsProductDropdownOpen(!isProductDropdownOpen);
+                  setIsDropdownOpen(false); // Close the other if open
+                }}
                 className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b cursor-pointer] transition"
               >
                 Products <ChevronDown size={16} className="cursor-pointer" />
               </button>
 
-              {isOpen && (
+              {isProductDropdownOpen && (
                 <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
                   <li
                     onClick={() => {
                       handleSelect("/allproducts"),
-                        setIsOpen(false),
+                        setIsProductDropdownOpen(false),
                         setMenuOpen(false);
                     }}
                     className="hover:underline hover:cursor-pointer"
@@ -449,7 +458,7 @@ function Navbar() {
               )}
             </div>
 
-            <Link to="/orders" className="hover:text-green-700 font-bold">
+            <Link to={'/orders'} className="hover:text-green-700 font-bold">
               Orders
             </Link>
             <Link to="/about" className="hover:text-green-700 font-bold">
@@ -502,26 +511,37 @@ function Navbar() {
               title="Logout"
               className="flex items-center gap-1 cursor-pointer hover:text-[#449474] "
             >
-              <div className="relative inline-block text-left group">
-                <button className="flex items-center gap-1 text-[#003d29] font-bold group-hover:text-[#00823b] transition">
-                  <FaUserAlt />
-                  Profile
+              <div className="relative inline-block text-left">
+                <button
+                  onClick={() => {
+                    setIsUserDropdownOpen(!isUserDropdownOpen);
+                    setIsProductDropdownOpen(false); // Close the other if open
+                  }}
+                  className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b cursor-pointer] transition"
+                >
+                  Products <ChevronDown size={16} className="cursor-pointer" />
                 </button>
 
-                <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
-                  <li
-                    onClick={() => handleSelect("/profile")}
-                    className="hover:underline cursor-pointer"
-                  >
-                    Profile
-                  </li>
-                  <li
-                    onClick={handleLogout}
-                    className="hover:underline cursor-pointer"
-                  >
-                    Logout
-                  </li>
-                </ul>
+                {isUserDropdownOpen && (
+                  <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
+                    <li
+                      onClick={() => {
+                        handleSelect("/profile"),
+                          setIsUserDropdownOpen(false),
+                          setMenuOpen(false);
+                      }}
+                      className="hover:underline hover:cursor-pointer"
+                    >
+                      Profile
+                    </li>
+                    <li
+                      onClick={handleLogout}
+                      className="hover:underline hover:cursor-pointer"
+                    >
+                      Logout
+                    </li>
+                  </ul>
+                )}
               </div>
             </button>
           ) : (

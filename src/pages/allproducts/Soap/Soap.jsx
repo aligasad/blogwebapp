@@ -7,6 +7,7 @@ import { FaHeart } from "react-icons/fa6";
 import { motion } from "framer-motion";
 
 function Soap() {
+  const [isFirstVisit, setIsFirstVisit] = useState(true);
   const context = useData();
   const {
     mode,
@@ -24,6 +25,8 @@ function Soap() {
   const cartItems = useSelector((state) => state.cart);
   console.log(cartItems);
 
+
+  
   // add to cart if item is not already present   -- -- --- ---- ------ -----
   const user = JSON.parse(localStorage.getItem("user"));
   const toggleCart = (product) => {

@@ -1,8 +1,67 @@
-import React from "react";
+import {
+  addDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+  Timestamp,
+} from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { FaInstagram, FaFacebookF, FaTwitter } from "react-icons/fa";
 import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { firebaseDB } from "../../firebase/FirebaseConfig";
 
 const Footer = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const [email, setEmail] = useState("");
+
+  async function handleSubscribe() {
+
+    if(!user) {
+      toast.warning("Please login to subscribe.");
+      return;
+    }
+    if (!email) {
+      toast.error("Please enter your email address.");
+      return;
+    }
+
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!isValidEmail) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      const subscribersRef = collection(firebaseDB, "subscribers");
+      const q = query(subscribersRef, where("email", "==", email));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        toast.warning("This email is already subscribed.");
+        return;
+      }
+
+      await addDoc(subscribersRef, {
+        email,
+        subscribedAt: Timestamp.now(),
+      });
+
+      setEmail("");
+      toast.success("Thank you for subscribing!");
+    } catch (error) {
+      console.error("Error adding email:", error);
+      toast.error("Failed to subscribe. Please try again later.");
+    }
+  }
+
   return (
     <footer className="bg-[#003d29] text-white px-6 md:px-20 py-12">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
@@ -31,11 +90,23 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2 text-sm">
-            <li className="hover:underline cursor-pointer">About Us</li>
+            <li
+              className="hover:underline cursor-pointer"
+              onClick={() => navigate("about")}
+            >
+              About Us
+            </li>
             <li className="hover:underline cursor-pointer">Products</li>
-            <li className="hover:underline cursor-pointer">Ingredients</li>
+            <li
+              className="hover:underline cursor-pointer"
+              onClick={() => navigate("return-policy")}
+            >
+              Return Policy
+            </li>
             <li className="hover:underline cursor-pointer">Reviews</li>
-            <li className="hover:underline cursor-pointer"><a href="tel:+7417331926">Contact</a></li>
+            <li className="hover:underline cursor-pointer">
+              <a href="tel:+7417331926">Contact</a>
+            </li>
           </ul>
         </div>
 
@@ -64,9 +135,14 @@ const Footer = () => {
           <input
             type="email"
             placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full px-4 py-2 rounded-md border border-[#19523f] bg-transparent text-white placeholder-white mb-3 focus:outline-none focus:ring-2 focus:ring-green-400"
           />
-          <button className="w-full bg-[#3ca769] text-white font-medium py-2 rounded-md transition transform hover:scale-105 cursor-pointer">
+          <button
+            onClick={handleSubscribe}
+            className="w-full bg-[#3ca769] text-white font-medium py-2 rounded-md transition transform hover:scale-105 cursor-pointer"
+          >
             Subscribe
           </button>
         </div>
@@ -78,11 +154,17 @@ const Footer = () => {
           © 2024 Pure Organic Skincare. All rights reserved.
         </p>
         <div className="flex space-x-6">
-          <a href="#" className="hover:underline cursor-pointer">
+          <a
+            onClick={() => navigate("privacy-policy")}
+            className="hover:underline cursor-pointer"
+          >
             Privacy Policy
           </a>
-          <a href="#" className="hover:underline cursor-pointer">
-            Terms of Service
+          <a
+            onClick={() => navigate("terms&condition")}
+            className="hover:underline cursor-pointer"
+          >
+            Terms and Conditions
           </a>
           <a href="#" className="hover:underline cursor-pointer">
             Cookie Policy

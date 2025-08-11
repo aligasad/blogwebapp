@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { FaArrowUp } from "react-icons/fa";
 
 function Serum1() {
+  const [isFirstVisit, setIsFirstVisit] = useState(true);
   const context = useData();
   const {
     mode,

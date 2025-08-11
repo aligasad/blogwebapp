@@ -31,6 +31,9 @@ import Choclates from "./pages/allproducts/Choclates/Choclates.jsx";
 import { FaArrowUp } from "react-icons/fa";
 import Candles from "./pages/allproducts/Candles/Candles.jsx";
 import { BsWhatsapp } from "react-icons/bs";
+import ReturnPolicy from "./components/aboutUs/ReturnPolicy.jsx";
+import TermsAndConditions from "./components/aboutUs/TermsAndCondition.jsx";
+import PrivacyPolicy from "./components/aboutUs/PrivacyPolicy.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -133,6 +136,18 @@ function App() {
               <UpdateProduct />
             </ProtectedRouteForAdmin>
           ),
+        },
+        {
+          path: '/return-policy',
+          element: <ReturnPolicy />
+        },
+        {
+          path: '/privacy-policy',
+          element: <PrivacyPolicy />
+        },
+        {
+          path: '/terms&condition',
+          element: <TermsAndConditions />
         },
         {
           path: "/*",

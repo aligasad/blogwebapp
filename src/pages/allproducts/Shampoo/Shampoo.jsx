@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useData } from "../../../context/data/MyState.jsx";
 import { addToCart, deleteFromCart } from "../../../redux/CartSlice.jsx";
@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { FaArrowUp } from "react-icons/fa";
 
 function Shampoo() {
+  const [isFirstVisit, setIsFirstVisit] = useState(true);
   const context = useData();
   const {
     mode,

@@ -10,7 +10,11 @@ import {
   RiDiscountPercentLine,
 } from "react-icons/ri";
 import { FaIndianRupeeSign, FaRupeeSign } from "react-icons/fa6";
-import { decreaseQuantity, deleteFromCart, increaseQuantity } from "../../redux/CartSlice";
+import {
+  decreaseQuantity,
+  deleteFromCart,
+  increaseQuantity,
+} from "../../redux/CartSlice";
 import { toast } from "react-toastify";
 import { addDoc, doc, setDoc, collection, getDoc } from "firebase/firestore";
 import { auth, firebaseDB } from "../../firebase/FirebaseConfig";
@@ -48,8 +52,6 @@ function Cart() {
     });
     setTotalAmount(temp);
   }, [cartItems]);
-
-  
 
   // Calculate GST------------------ -- -- -- -- -- -- -- --
   const calcGST = (price) => {
@@ -105,12 +107,17 @@ function Cart() {
     if (name === "" || address == "" || pincode == "" || phoneNumber == "") {
       return toast.error("All fields are required");
     }
+
+    const orderDate = new Date();
+    const deliveryDate = new Date(orderDate);
+    deliveryDate.setDate(orderDate.getDate() + 7); // +7 days
+
     const addressInfo = {
       name,
       address,
       pincode,
       phoneNumber,
-      date: new Date().toLocaleString("en-US", {
+      date: orderDate.toLocaleString("en-US", {
         month: "short",
         day: "2-digit",
         year: "numeric",
@@ -122,21 +129,32 @@ function Cart() {
       const orderInfo = {
         cartItems,
         addressInfo,
-        date: new Date().toLocaleString("en-US", {
+        date: orderDate.toLocaleString("en-US", {
           month: "short",
           day: "2-digit",
           year: "numeric",
         }),
+        deliveryDate: deliveryDate.toISOString(), // fixed delivery date
         email: JSON.parse(localStorage.getItem("user")).user.email,
         userid: JSON.parse(localStorage.getItem("user")).user.uid,
+        status: "Ordered",
         paymentId: "COD",
         paymentMethod: "Cash on Delivery",
       };
 
+      //Reload  page for update order------------
+      setTimeout(() => {
+        window.location.href = "/cart";
+        //after completing order clear cart storage--------------
+        localStorage.removeItem("cart");
+      }, 1200);
+
       try {
         const orderRef = collection(firebaseDB, "orders");
         await addDoc(orderRef, orderInfo);
-        toast.success("Order placed successfully with Cash on Delivery!");
+        toast.success(
+          `Order placed! Expected delivery on ${deliveryDate.toDateString()}`
+        );
         // Optionally clear cart or redirect
       } catch (error) {
         console.log(error);
@@ -151,24 +169,30 @@ function Cart() {
       key_secret: "7vqkNgOjwnfx8a13WysHFoiV",
       amount: parseInt(grandTotal * 100),
       currency: "INR",
-      image:
-        "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+      image: "https://i.ibb.co/DHNXwRCH/logo.jpg",
       order_receipt: "order_rcptid_" + name,
       name: "Noor By Shayan",
       description: "Secured Payment Dude ",
       handler: function (response) {
         toast.success("Payment Successful");
+        //Reload  page for update order------------
+        setTimeout(() => {
+          window.location.href = "/cart";
+        }, 1200);
+        //after completing order clear cart storage--------------
+        localStorage.removeItem("cart");
         const paymentId = response.razorpay_payment_id;
 
         // store order information into firebase
         const orderInfo = {
           cartItems,
           addressInfo,
-          date: new Date().toLocaleString("en-US", {
+          date: orderDate.toLocaleString("en-US", {
             month: "short",
             day: "2-digit",
             year: "numeric",
           }),
+          deliveryDate: deliveryDate.toISOString(), // fixed delivery date
           email: JSON.parse(localStorage.getItem("user")).user.email,
           userid: JSON.parse(localStorage.getItem("user")).user.uid,
           paymentId,
@@ -214,6 +238,7 @@ function Cart() {
       <div className="mx-auto max-w-6xl flex flex-col md:flex-row gap-6 px-4 xl:px-0">
         {/* LEFT SIDE - CART ITEMS */}
         <div className="md:w-2/3  max-h-[80vh] overflow-y-auto scrollbar-hide  pr-2">
+          {/* Showing Delivary Address */}
           <div className="w-full bg-gray-200 px-5 py-2 mb-3 shadow-sm ">
             <p>
               <span className="text-[13px]">Deliver to:</span>
@@ -232,6 +257,7 @@ function Cart() {
             </p>
           </div>
 
+          {/* Showing added items */}
           {cartItems.length > 0 ? (
             cartItems.map((item, index) => {
               const {
@@ -273,23 +299,31 @@ function Cart() {
                         {description.slice(0, 60)}...
                       </p>
                       <p className="text-[13px] sm:text-sm text-gray-600">
-                        {Number(quan) > 1 ? `${Number(quan)} items` : `${Number(quan)} item`} / <span>Total Price: </span> ${Number(item.quan) * Number(item.price)}
+                        {Number(quan) > 1
+                          ? `${Number(quan)} items`
+                          : `${Number(quan)} item`}{" "}
+                        / <span>Total Price: </span> $
+                        {Number(item.quan) * Number(item.price)}
                       </p>
                     </div>
                     <div className="flex justify-between items-center mt-2">
                       <div className="flex items-center gap-2">
                         <button
                           className="px-2 py-1 border-2 border-[#376a55]  rounded cursor-pointer"
-                          onClick={() => item.quan > 1 ? dispatch(decreaseQuantity(item.id)) : deleteCart(item)}
+                          onClick={() =>
+                            item.quan > 1
+                              ? dispatch(decreaseQuantity(item.id))
+                              : deleteCart(item)
+                          }
                         >
-                          <FaMinus size={12} className="text-[#376a55]"/>
+                          <FaMinus size={12} className="text-[#376a55]" />
                         </button>
                         <span className="px-3">{item.quan || 1}</span>
                         <button
                           className="px-2 py-1 border-2 border-[#376a55] rounded cursor-pointer"
                           onClick={() => dispatch(increaseQuantity(item.id))}
                         >
-                          <FaPlus size={12} className="text-[#376a55]"/>
+                          <FaPlus size={12} className="text-[#376a55]" />
                         </button>
                       </div>
                       <RiDeleteBin6Fill

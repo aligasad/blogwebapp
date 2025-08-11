@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "../../components/productCard/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useData } from "../../context/data/MyState";
@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 function Allproducts() {
+  const [isFirstVisit, setIsFirstVisit] = useState(true);
   const navigate = useNavigate();
   const context = useData();
   const {
@@ -26,6 +27,19 @@ function Allproducts() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
   console.log(cartItems);
+
+  // Debounce search functionality---------
+  const [debouncedSearchKey, setDebouncedSearchKey] = useState(searchkey);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchKey(searchkey);
+    }, 700); // debounce delay: 300ms
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchkey]);
 
   // add to cart if item is not already present
   const user = JSON.parse(localStorage.getItem("user"));
@@ -69,23 +83,17 @@ function Allproducts() {
 
         <div className="flex flex-wrap -m-4 ">
           {product
-            .filter(
-              (obj) =>
-                obj.title
-                  .toLowerCase()
-                  .includes(
-                    searchkey.toLowerCase().trim().replace(/\s+/g, " ")
-                  ) ||
-                obj.type
-                  .toLowerCase()
-                  .includes(
-                    searchkey.toLowerCase().trim().replace(/\s+/g, " ")
-                  ) ||
-                obj.category
-                  .toLowerCase()
-                  .includes(searchkey.toLowerCase().trim().replace(/\s+/g, " "))
-            )
-            .filter((item) =>
+            .filter((obj) => {
+              const key = debouncedSearchKey
+                .toLowerCase()
+                .trim()
+                .replace(/\s+/g, " ");
+              return (
+                obj.title.toLowerCase().includes(key) ||
+                obj.type.toLowerCase().includes(key) ||
+                obj.category.toLowerCase().includes(key)
+              );
+            }).filter((item) =>
               item.category
                 .replace(/\s+/g, "")
                 .toLowerCase()
@@ -120,7 +128,7 @@ function Allproducts() {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    {/* <div
+                    <div
                       className="h-full rounded-lg shadow-md bg-[#A7EAD5] hover:shadow-lg transition-shadow hover:shadow-gray-500 duration-300"
                       style={{
                         backgroundColor:
@@ -128,7 +136,7 @@ function Allproducts() {
                         color: mode === "dark" ? "#FFFFFF" : "#000000",
                       }}
                     >
-                      <div className="flex justify-center items-center p-4 bg-white rounded-t-lg border-2 border-b-0 border-[#003d29] relative">
+                      <div className="flex justify-center items-center p-4 bg-white rounded-t-lg border-2 border-b-0 border-[#195f48] relative">
                         {stock > 0 ? (
                           <p className=" absolute bottom-0 left-0 bg-green-700 px-2 rounded-tr-lg text-[10px] sm:text-[13px] text-white font-semibold z-10 ">
                             On Sale
@@ -155,7 +163,7 @@ function Allproducts() {
                           alt={title}
                         />
                       </div>
-                      <div className="px-2 md:px-4 pb-4 border-t bg-[#003d29]  rounded-b-lg  border-gray-300">
+                      <div className="px-2 md:px-4 pb-4 border-t bg-[#195f48]  rounded-b-lg  border-gray-300">
                         <p className="text-xs text-white mt-2">
                           <span className=" font-semibold">{type}</span> /{" "}
                           {category}
@@ -195,83 +203,6 @@ function Allproducts() {
                             <button
                               disabled
                               className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg text-white bg-[#b35d52] cursor-not-allowed"
-                            >
-                              Out of Stock
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    </div> */}
-                    <div className="max-w-[230px] sm:max-w-[250px] md:max-w-[280px] rounded-xl shadow-md hover:shadow-xl transition duration-300 bg-white dark:bg-[#1f2a36] text-black dark:text-white">
-                      <div className="relative flex justify-center items-center bg-gray-100 dark:bg-[#2e3b4e] p-3 rounded-t-xl">
-                        {stock > 0 ? (
-                          <span className="absolute bottom-0 left-0 bg-green-600 text-white text-[10px] sm:text-xs px-2 py-0.5 rounded-tr-xl font-medium z-10">
-                            On Sale
-                          </span>
-                        ) : (
-                          <span className="absolute bottom-0 left-0 bg-red-600 text-white text-[10px] sm:text-xs px-2 py-0.5 rounded-tr-xl font-medium z-10">
-                            Sold Out
-                          </span>
-                        )}
-
-                        {isNew && (
-                          <span className="absolute bottom-0 right-0 bg-black text-white text-[10px] sm:text-xs px-2 py-0.5 rounded-tl-xl font-medium z-10">
-                            New
-                          </span>
-                        )}
-
-                        <img
-                          onClick={() =>
-                            (window.location.href = `/productinfo/${id}`)
-                          }
-                          src={imageUrl}
-                          alt={title}
-                          className="h-32 sm:h-36 md:h-40 object-contain transition-transform duration-300 hover:scale-105 cursor-pointer rounded-md"
-                        />
-                      </div>
-
-                      <div className="p-3 bg-[#e5f7f0] dark:bg-[#003d29] rounded-b-xl">
-                        <p className="text-[11px] sm:text-xs mb-1 text-gray-700 dark:text-gray-200">
-                          <span className="font-medium">{type}</span> /{" "}
-                          {category}
-                        </p>
-
-                        <h2 className="text-sm font-semibold truncate text-gray-800 dark:text-white">
-                          {title}
-                        </h2>
-
-                        <p className="text-[12px] text-gray-600 dark:text-gray-300 mt-1">
-                          Quantity:{" "}
-                          <span className="font-medium">{quantity}</span>
-                        </p>
-
-                        <div className="flex items-baseline gap-2 mt-2">
-                          <p className="text-red-600 text-sm font-bold">
-                            ${price}
-                          </p>
-                          <p className="text-[12px] line-through text-gray-500 dark:text-gray-300">
-                            ${originalPrice}
-                          </p>
-                        </div>
-
-                        <div className="mt-3">
-                          {stock > 0 ? (
-                            <button
-                              onClick={() => toggleCart(item)}
-                              className={`w-full py-1.5 text-xs sm:text-sm font-medium rounded-lg transition-all duration-300 ${
-                                cartItems.some((p) => p.id === item.id)
-                                  ? "bg-red-600 text-white hover:bg-black"
-                                  : "bg-emerald-600 text-white hover:bg-black"
-                              }`}
-                            >
-                              {cartItems.some((p) => p.id === item.id)
-                                ? "Remove from Cart"
-                                : "Add to Cart"}
-                            </button>
-                          ) : (
-                            <button
-                              disabled
-                              className="w-full py-1.5 text-xs sm:text-sm font-medium rounded-lg text-white bg-red-400 cursor-not-allowed"
                             >
                               Out of Stock
                             </button>

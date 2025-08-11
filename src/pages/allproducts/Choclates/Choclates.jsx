@@ -7,6 +7,7 @@ import { FaHeart } from "react-icons/fa6";
 import { motion } from "framer-motion";
 
 function Choclates() {
+  const [isFirstVisit, setIsFirstVisit] = useState(true);
   const context = useData();
   const {
     mode,

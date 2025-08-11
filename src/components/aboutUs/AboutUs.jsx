@@ -1,89 +1,84 @@
-import React from "react";
-import { Droplet, Sparkles, Leaf } from "lucide-react";
+import React, { useEffect } from "react";
 
-function AboutUs() {
+const AboutUs = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   return (
-    <section className="text-gray-800">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-br from-green-100 via-white to-green-50 py-16 px-6 text-center">
-        <h1 className="text-5xl font-bold text-green-800 mb-4">About Us</h1>
-        <p className="max-w-2xl mx-auto text-lg text-gray-700">
-          Nature's best for your skin and hair. We craft 100% organic shampoos, face serums, and soaps that cleanse,
-          nourish, and rejuvenate — naturally.
-        </p>
-      </div>
-
-      {/* Brand Story */}
-      <div className="max-w-6xl mx-auto py-20 px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-        <img
-          src="https://i.ibb.co/dwMqHHt0/banner.jpg"
-          alt="Organic Products"
-          className="rounded-3xl shadow-xl"
-        />
-        <div>
-          <h2 className="text-3xl font-semibold text-green-700 mb-4">Rooted in Nature</h2>
-          <p className="text-gray-600 leading-relaxed">
-            Every bottle of shampoo, every serum drop, every soap bar — is a reflection of our passion for clean beauty.
-            Handcrafted in small batches, our products are made using ancient Ayurvedic wisdom and modern sustainability.
-            Free from sulfates, parabens, and synthetic fragrances.
+    <section className="bg-[#fefdfb] py-20 px-6 text-[#2b2b2b]">
+      <div className="max-w-6xl mx-auto">
+        {/* Title */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#006b3c] to-[#003d29] bg-clip-text text-transparent mb-4">
+            About Noor By Shayan
+          </h1>
+          <p className="text-lg md:text-xl max-w-3xl mx-auto text-[#4a4a4a]">
+            Discover the elegance of nature and heritage blended into every
+            drop.
           </p>
         </div>
-      </div>
 
-      {/* What We Offer */}
-      <div className="bg-white py-20 px-6 text-center">
-        <h2 className="text-3xl font-bold text-green-700 mb-12">Our Specialities</h2>
-        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-10">
-          <div>
-            <div className="bg-green-100 inline-block p-4 rounded-full mb-4">
-              <Droplet className="h-8 w-8 text-green-700" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Herbal Shampoo</h3>
-            <p className="text-gray-600 text-sm">
-              Enriched with neem, bhringraj, and aloe vera — for strong, dandruff-free hair without harsh chemicals.
-            </p>
-          </div>
-          <div>
-            <div className="bg-green-100 inline-block p-4 rounded-full mb-4">
-              <Sparkles className="h-8 w-8 text-green-700" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Glow Serum</h3>
-            <p className="text-gray-600 text-sm">
-              A lightweight blend of tulsi, saffron, and rosehip oil that restores your skin's natural glow and reduces blemishes.
-            </p>
-          </div>
-          <div>
-            <div className="bg-green-100 inline-block p-4 rounded-full mb-4">
-              <Leaf className="h-8 w-8 text-green-700" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Ayurvedic Soap</h3>
-            <p className="text-gray-600 text-sm">
-              Cold-processed soaps with neem, turmeric, and sandalwood — gently cleansing while maintaining skin balance.
-            </p>
-          </div>
-        </div>
-      </div>
+        {/* Main Content */}
+        <div className="space-y-8 text-[17px] md:text-lg leading-relaxed text-justify">
+          <p>
+            <strong className="text-[#006b3c]">Noor By Shayan</strong> is more
+            than a skincare brand – it's a reflection of purity, heritage, and
+            healing, inspired by the timeless wisdom of Ayurveda and powered by
+            the elegance of nature. A proud creation under{" "}
+            <strong>Zaphira Organic Farms (OPC) Private Limited</strong>, Noor
+            blends handmade artistry with the science of skin wellness.
+          </p>
 
-      {/* Ethical Commitment */}
-      <div className="bg-green-50 py-16 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-green-800 mb-6">Our Promise</h2>
-          <p className="text-gray-700 leading-relaxed">
-            All our products are <strong>cruelty-free</strong>, <strong>vegan</strong>, and made with <strong>zero toxic chemicals</strong>.
-            We believe in transparency, sustainability, and holistic well-being — from our farms to your shelf.
+          <p>
+            Each product is a story of tradition, hand-blended with ingredients
+            like saffron, sandalwood, rose, turmeric, and organic oils. Free
+            from harmful chemicals, parabens, and artificial fragrances, Noor
+            promises authenticity – skincare that speaks the language of your
+            skin.
+          </p>
+
+          <p>
+            Founded with the belief that beauty should be clean, conscious, and
+            culturally rooted, Noor By Shayan is made for the modern soul
+            seeking results without compromise – elegance without excess.
           </p>
         </div>
-      </div>
 
-      {/* Founder Message */}
-      <div className="bg-white py-14 text-center">
-        <p className="italic text-lg max-w-3xl mx-auto text-green-800 mb-4">
-          “Organic beauty isn't a trend — it's a return to our roots. With every product we create, we honor the Earth and your body.”
-        </p>
-        <h4 className="text-green-700 font-semibold text-base">— Shayan, Founder</h4>
+        {/* Highlights Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-14">
+          <div className="bg-white p-6 rounded-2xl shadow-lg border border-[#e0e0e0]">
+            <h2 className="text-2xl font-semibold text-[#003d29] mb-4">
+              We are proudly:
+            </h2>
+            <ul className="list-disc list-inside space-y-2 text-[#444]">
+              <li>✅ 100% Organic & Handmade</li>
+              <li>✅ Based on Ayurvedic Formulations</li>
+              <li>✅ Cruelty-Free & Eco-Conscious</li>
+              <li>✅ Dermatologically Safe</li>
+              <li>✅ Made in India with Love</li>
+            </ul>
+          </div>
+
+          <div className="bg-gradient-to-br from-[#fdf6f0] to-[#fff] p-6 rounded-2xl shadow-lg border border-[#f2e9e0] flex items-center">
+            <p className="text-lg leading-relaxed text-[#2d2d2d]">
+              From our bestselling <strong>Kumkumadi Night Elixir</strong> to
+              our indulgent <strong>Sandal-Rose Ubtans</strong>, every jar is
+              handcrafted in small batches – ensuring freshness, quality, and
+              care.
+            </p>
+          </div>
+        </div>
+
+        {/* Closing Line */}
+        <div className="mt-16 text-center">
+          <p className="text-xl md:text-2xl italic text-[#006b3c] font-medium">
+            ✨ Noor is not just what you wear on your skin – it’s the light you
+            carry from within.
+          </p>
+        </div>
       </div>
     </section>
   );
-}
+};
 
 export default AboutUs;

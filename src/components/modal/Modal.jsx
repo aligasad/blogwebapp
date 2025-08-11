@@ -5,6 +5,7 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import { Fragment, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function Modal({
   name,
@@ -146,7 +147,7 @@ export default function Modal({
                                 closeModal();
                               }}
                               type="button"
-                              className="focus:outline-none w-full text-white bg-green-600 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5"
+                              className="cursor-pointer focus:outline-none w-full text-white bg-green-600 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5"
                             >
                               Cash on Delivery
                             </button>
@@ -156,7 +157,7 @@ export default function Modal({
                                 closeModal();
                               }}
                               type="button"
-                              className="focus:outline-none w-full text-white bg-violet-600 hover:bg-violet-800 font-medium rounded-lg text-sm px-5 py-2.5"
+                              className="cursor-pointer focus:outline-none w-full text-white bg-violet-600 hover:bg-violet-800 font-medium rounded-lg text-sm px-5 py-2.5"
                             >
                               Online Payment
                             </button>
@@ -181,7 +182,7 @@ function buyNow(method) {
     // Place the order directly for Cash on Delivery
     // Example:
     placeOrder({ paymentMethod: "Cash on Delivery" });
-    alert("Order placed successfully with Cash on Delivery!");
+    toast.success("Order placed successfully with Cash on Delivery!");
   } else if (method === "online") {
     // Trigger Razorpay payment flow
     openRazorpay();
