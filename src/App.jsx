@@ -34,6 +34,9 @@ import { BsWhatsapp } from "react-icons/bs";
 import ReturnPolicy from "./components/aboutUs/ReturnPolicy.jsx";
 import TermsAndConditions from "./components/aboutUs/TermsAndCondition.jsx";
 import PrivacyPolicy from "./components/aboutUs/PrivacyPolicy.jsx";
+import Contact from "./components/Contact/Contact.jsx";
+import { useState } from "react";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 function App() {
   const router = createBrowserRouter([
@@ -150,6 +153,10 @@ function App() {
           element: <TermsAndConditions />
         },
         {
+          path: '/contact',
+          element: <Contact />
+        },
+        {
           path: "/*",
           element: <NoPage />,
         },
@@ -163,6 +170,8 @@ function App() {
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank"); // opens in new tab
   };
+
+  const [isContactOpen, setIsContactOpen] = useState(false);
   return (
     <>
       <button
@@ -177,6 +186,16 @@ function App() {
       >
         <BsWhatsapp size={25} />
       </button>
+
+      <button
+        onClick={() => setIsContactOpen(!isContactOpen)}
+        className="cursor-pointer fixed bottom-6 left-6 bg-green-600 text-white p-3 rounded-full shadow-lg hover:bg-green-700 transition z-50"
+      >
+        {isContactOpen ? <Icon icon={'mdi:close'} className=" sm:text-2xl opacity-50" /> : <Icon icon={'mdi:email-arrow-right-outline'} className=" sm:text-2xl" />}
+      </button>
+
+      {/* Contact Form Panel */}
+      {isContactOpen && <Contact onClose={() => setIsContactOpen(false)} />}
       <AnimatePresence mode="wait">
         <AuthProvider>
           <MyState>

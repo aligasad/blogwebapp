@@ -105,7 +105,7 @@ const Footer = () => {
             </li>
             <li className="hover:underline cursor-pointer">Reviews</li>
             <li className="hover:underline cursor-pointer">
-              <a href="tel:+7417331926">Contact</a>
+              <Link to={'/contact'}>Contact</Link>
             </li>
           </ul>
         </div>
