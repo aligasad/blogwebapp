@@ -44,7 +44,7 @@ function Order() {
                 >
                   {/* Header */}
                   <div
-                    className={`p-4 flex items-center justify-between ${
+                    className={`p-4 flex items-center justify-between bg-green-50 ${
                       mode === "dark" ? "bg-[#1d2027]" : "bg-gray-50"
                     }`}
                   >
@@ -58,14 +58,14 @@ function Order() {
                   </div>
 
                   {/* Product List */}
-                  <div className="relative h-33 overflow-y-auto scrollbar-hide  divide-y">
+                  <div className="relative h-40 bg-red-50 overflow-y-auto scrollbar-hide  divide-y">
                     {order.cartItems.map((item, i) => (
                       <div
                         key={i}
                         onClick={() => {
                           window.location.href = `productInfo/${item.id}`;
                         }}
-                        className="group flex gap-4 p-4 hover:bg-gray-50 dark:hover:bg-[#2b2f38] transition"
+                        className="group cursor-pointer flex gap-4 p-4 hover:bg-gray-50 dark:hover:bg-gray-600 transition"
                       >
                         <img
                           src={item.imageUrl}
@@ -73,7 +73,7 @@ function Order() {
                           className="w-16 h-16 object-cover rounded-lg shadow"
                         />
                         <div className="flex-1">
-                          <h2 className="text-sm group-hover:text-rose-400 font-semibold">
+                          <h2 className="text-sm group-hover:text-rose-400 font-semibold line-clamp-1">
                             {item.title}
                           </h2>
                           <p className="text-[11px] group-hover:text-rose-200 text-gray-500">
@@ -98,7 +98,7 @@ function Order() {
                   </div>
 
                   {/* Total Section */}
-                  <div className="p-4 border-t dark:border-gray-700 flex justify-between items-center">
+                  <div className="px-4 py-2 border-t bg-green-50 dark:border-gray-700 flex justify-between items-center">
                     <span className="text-sm font-semibold">Total Amount:</span>
                     <span className="text-lg font-bold text-green-600">
                       $
@@ -110,9 +110,9 @@ function Order() {
                   </div>
 
                   {/* Shipping Info */}
-                  <div className="p-4 border-t text-xs text-gray-500 dark:text-gray-400 space-y-1">
+                  <div className="p-4 border-t bg-red-50 text-xs text-gray-500 dark:text-gray-400 space-y-1">
                     <p>
-                      <span className="font-semibold text-gray-700 dark:text-gray-300 line-clamp-1">
+                      <span className="font-semibold text-gray-700 dark:text-gray-500 line-clamp-1">
                         Shipping to:
                       </span>{" "}
                       {order.addressInfo?.name}, {order.addressInfo?.address}

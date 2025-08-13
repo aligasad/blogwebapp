@@ -189,9 +189,9 @@ function App() {
 
       <button
         onClick={() => setIsContactOpen(!isContactOpen)}
-        className="cursor-pointer fixed bottom-6 left-6 bg-green-600 text-white p-3 rounded-full shadow-lg hover:bg-green-700 transition z-50"
+        className="cursor-pointer fixed bottom-6 left-6 bg-green-600 text-white p-[10px] rounded-full shadow-lg hover:bg-green-700 transition z-50 hover:scale-105"
       >
-        {isContactOpen ? <Icon icon={'mdi:close'} className=" sm:text-2xl opacity-50" /> : <Icon icon={'mdi:email-arrow-right-outline'} className=" sm:text-2xl" />}
+        {isContactOpen ? <Icon icon={'mdi:close'} className="text-xl sm:text-2xl text-rose-600 font-bold" /> : <Icon icon={'mdi:email-arrow-right-outline'} className="text-2xl sm:text-3xl" />}
       </button>
 
       {/* Contact Form Panel */}

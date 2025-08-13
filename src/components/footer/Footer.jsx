@@ -23,8 +23,7 @@ const Footer = () => {
   const [email, setEmail] = useState("");
 
   async function handleSubscribe() {
-
-    if(!user) {
+    if (!user) {
       toast.warning("Please login to subscribe.");
       return;
     }
@@ -105,7 +104,7 @@ const Footer = () => {
             </li>
             <li className="hover:underline cursor-pointer">Reviews</li>
             <li className="hover:underline cursor-pointer">
-              <Link to={'/contact'}>Contact</Link>
+              <Link to={"/contact"}>Contact</Link>
             </li>
           </ul>
         </div>
@@ -115,13 +114,20 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-4">Customer Care</h3>
           <ul className="space-y-3 text-sm">
             <li className="flex items-center gap-2">
-              <MdEmail /> office@thezaphira.com
+              <MdEmail /> <a href="mailto:office@thezaphira.com">office@thezaphira.com</a>
+            </li>
+            <li className="flex items-center gap-2 hover:text-rose-600">
+              <MdPhone /> <a href="tel:+917518202507">+91-7518202507</a>
             </li>
             <li className="flex items-center gap-2">
-              <MdPhone /> +91 74173 31926
-            </li>
-            <li className="flex items-center gap-2">
-              <MdLocationOn /> Lucknow, India
+              <MdLocationOn />{" "}
+              <a
+                href="https://www.google.com/maps?q=Zaphira Organic Farm Lucknow"
+                target="_blank"
+                rel="NoorByShayan"
+              >
+                Lucknow, India
+              </a>
             </li>
           </ul>
         </div>
