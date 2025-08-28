@@ -51,7 +51,7 @@ const Benefits = () => {
             <span className="text-sm font-semibold uppercase tracking-wide">Skincare Benefits</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-green-800 mb-4">
-            Why Choose Our <span className="block text-green-600">Organic Serum?</span>
+            Why Choose Our <span className="block text-green-600">Organic Products?</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Discover the natural goodness your skin deserves — chemical-free, eco-friendly, and radiantly effective.

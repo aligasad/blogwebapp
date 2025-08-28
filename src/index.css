@@ -37,14 +37,14 @@
 }
 
 .floating-1 {
-  top: 10%;
+  top: 8%;
   left: 5%;
   animation: floatLeaf 8s infinite ease-in-out;
 }
 
 .floating-2 {
   top: 30%;
-  right: 10%;
+  right: 3%;
   animation: floatLeafReverse 10s infinite ease-in-out;
 }
 

@@ -261,7 +261,15 @@ function MyState({ children }) {
     setFilterType("");
   }
 
-  // =============FOR ANIMATION{framer motion}================
+  // ============={ CALCULATE DISCOUNT }================
+
+  function calculateDiscount(original, selling) {
+    if (!original || !selling || Number(original) === 0) return 0;
+    const discount =
+      ((Number(original) - Number(selling)) / Number(original)) * 100;
+
+    return discount.toFixed(2);
+  }
 
 
 
@@ -294,6 +302,7 @@ function MyState({ children }) {
         resetFilter,
         pageType,
         setPageType,
+        calculateDiscount,
       }}
     >
       {children}

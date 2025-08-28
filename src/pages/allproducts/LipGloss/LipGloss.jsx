@@ -74,7 +74,8 @@ function LipGloss() {
             </div>
 
             <div className="flex flex-wrap -m-4">
-              {product
+              {
+              product
                 .filter((obj) =>
                   obj.type
                     .toLowerCase()

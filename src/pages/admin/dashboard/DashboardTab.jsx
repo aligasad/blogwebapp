@@ -326,7 +326,7 @@ function DashboardTab() {
                                   color: mode === "dark" ? "white" : "",
                                 }}
                               >
-                                ₹{price}
+                                ${price}
                               </td>
                               <td
                                 className="px-6 py-4 text-black "
@@ -346,7 +346,7 @@ function DashboardTab() {
                                 {allOrder.addressInfo.name}
                               </td>
                               <td
-                                className="px-6 py-4 text-black "
+                                className="px-6 py-4 text-black"
                                 style={{
                                   color: mode === "dark" ? "white" : "",
                                 }}

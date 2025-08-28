@@ -77,9 +77,9 @@ const Footer = () => {
             {[FaInstagram, FaFacebookF, FaTwitter].map((Icon, index) => (
               <div
                 key={index}
-                className="w-9 h-9 flex items-center justify-center bg-[#19523f] rounded-full cursor-pointer transform transition-transform duration-200 hover:scale-110"
+                className="group w-9 h-9 flex items-center justify-center bg-[#19523f] rounded-full cursor-pointer transform transition-transform duration-200 hover:scale-110"
               >
-                <Icon className="text-white text-lg" />
+                <Icon className="text-white text-lg group-hover:text-amber-400" />
               </div>
             ))}
           </div>
@@ -90,20 +90,20 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2 text-sm">
             <li
-              className="hover:underline cursor-pointer"
+              className="hover:underline cursor-pointer hover:text-amber-400"
               onClick={() => navigate("about")}
             >
               About Us
             </li>
-            <li className="hover:underline cursor-pointer">Products</li>
+            <li className="hover:underline cursor-pointer hover:text-amber-400">Products</li>
             <li
-              className="hover:underline cursor-pointer"
+              className="hover:underline cursor-pointer hover:text-amber-400"
               onClick={() => navigate("return-policy")}
             >
               Return Policy
             </li>
-            <li className="hover:underline cursor-pointer">Reviews</li>
-            <li className="hover:underline cursor-pointer">
+            <li className="hover:underline cursor-pointer hover:text-amber-400">Reviews</li>
+            <li className="hover:underline cursor-pointer hover:text-amber-400">
               <Link to={"/contact"}>Contact</Link>
             </li>
           </ul>
@@ -147,7 +147,7 @@ const Footer = () => {
           />
           <button
             onClick={handleSubscribe}
-            className="w-full bg-[#3ca769] text-white font-medium py-2 rounded-md transition transform hover:scale-105 cursor-pointer"
+            className="w-full bg-[#3ca769] text-white hover:text-amber-300 font-medium py-2 rounded-md transition transform hover:scale-105 cursor-pointer"
           >
             Subscribe
           </button>
@@ -162,17 +162,17 @@ const Footer = () => {
         <div className="flex space-x-6">
           <a
             onClick={() => navigate("privacy-policy")}
-            className="hover:underline cursor-pointer"
+            className="hover:underline cursor-pointer hover:text-amber-400"
           >
             Privacy Policy
           </a>
           <a
             onClick={() => navigate("terms&condition")}
-            className="hover:underline cursor-pointer"
+            className="hover:underline cursor-pointer hover:text-amber-400"
           >
             Terms and Conditions
           </a>
-          <a href="#" className="hover:underline cursor-pointer">
+          <a href="#" className="hover:underline cursor-pointer hover:text-amber-400">
             Cookie Policy
           </a>
         </div>

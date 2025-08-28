@@ -4,6 +4,7 @@ import { Leaf, Droplets } from "lucide-react";
 import serumBottle from "../../assets/heroImg.png";
 import leaf1 from "../../assets/leaves.png";
 import leaf2 from "../../assets/leaves2.png";
+import HeroVideo from "../../assets/HeroVideo.mp4";
 import { Link, useNavigate } from "react-router-dom";
 
 const HeroSection2 = () => {
@@ -11,7 +12,7 @@ const HeroSection2 = () => {
   return (
     <section className="relative bg-[#e2fce7] overflow-hidden py-16 px-6 md:px-20">
       {/* Floating leaves */}
-      <img src={leaf1} className="leaf floating-1" alt="leaf" />
+      <img src={leaf1} className="leaf floating-1 " alt="leaf" />
       <img src={leaf2} className="leaf floating-2" alt="leaf" />
 
       <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-10">
@@ -29,15 +30,15 @@ const HeroSection2 = () => {
 
           <h1 className="text-4xl md:text-5xl font-bold text-[#449474] mb-4 leading-tight">
             Zaphira{" "}
-            <span className="bg-gradient-to-r from-pink-500 via-[#79e63a] to-[#449474] bg-clip-text text-transparent ">
+            <span className="bg-gradient-to-r from-green-500 via-orange-600 to-green-600 bg-clip-text text-transparent ">
               Organic
             </span>{" "}
-            <br /> Facial Serum
+            <br /> Facial Products
           </h1>
 
           <p className="text-md text-gray-600 mb-6 max-w-md">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
-            cum placeat incidunt quos officiis. Rerum, beatae.
+            “<span className="text-amber-500 font-semibold">Pure nature in every drop</span> – brighten, hydrate, and protect your
+            skin the natural way”
           </p>
 
           <div className="flex items-center gap-6 mb-6">
@@ -65,29 +66,23 @@ const HeroSection2 = () => {
           </div>
         </motion.div>
 
-        {/* Right Image - Fake 3D Effect */}
+        {/* Right Video - */}
         <motion.div
           initial={{ opacity: 0, rotateY: -30 }}
           animate={{ opacity: 1, rotateY: 0 }}
           transition={{ duration: 1 }}
           className="flex-1 z-10 flex justify-center"
         >
-          <div className="relative p-2 rounded-3xl bg-gradient-to-br from-[#c8f7dc] to-[#449474] shadow-xl hover:shadow-2xl transition duration-500 ease-in-out max-w-sm">
-            <div className="rounded-2xl bg-white p-3 relative overflow-hidden shadow-inner">
-              <img
-                src="https://i.ibb.co/6JskvgZx/banner2.jpg"
-                alt="Serum Bottle"
-                className="w-52 md:w-72 lg:w-80 rounded-xl transform hover:scale-105 transition duration-500 ease-in-out"
-                style={{ transformStyle: "preserve-3d" }}
-              />
-
-              {/* Subtle ring effect */}
-              <div className="absolute inset-0 rounded-2xl ring-1 ring-[#449474] opacity-20 pointer-events-none"></div>
-
-              {/* Shine overlay */}
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-white/10 via-transparent to-white/10 rounded-xl pointer-events-none"></div>
-            </div>
-          </div>
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            type="video/mp4"
+            src={HeroVideo}
+            className="w-64 md:w-96 lg:w-[32rem] rounded-xl transform hover:scale-105 transition duration-500 ease-in-out shadow-2xl"
+            style={{ transformStyle: "preserve-3d" }}
+          ></video>
         </motion.div>
       </div>
     </section>

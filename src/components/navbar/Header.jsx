@@ -12,6 +12,7 @@ import {
   Menu,
   X,
   ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import { RiSearchLine } from "react-icons/ri";
@@ -61,9 +62,36 @@ function Navbar() {
   // For Select Options in header-=============================================
   const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+  const productRef = useRef(null);
+  const userRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        productRef.current &&
+        !productRef.current.contains(event.target) &&
+        event.target.getAttribute("data-dropdown") !== "product"
+      ) {
+        setIsProductDropdownOpen(false);
+      }
+      if (
+        userRef.current &&
+        !userRef.current.contains(event.target) &&
+        event.target.getAttribute("data-dropdown") !== "user"
+      ) {
+        setIsUserDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleSelect = (path) => {
     setIsProductDropdownOpen(false);
+    setIsUserDropdownOpen(false);
     navigate(path);
   };
 
@@ -110,8 +138,6 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [searchBarOpen, setSearchBarOpen] = useState(false); // <-- Add this line
-
-  
 
   return (
     <div className="bg-[#dfe3d6] sticky top-0 z-50 shadow-md">
@@ -200,16 +226,24 @@ function Navbar() {
             </div>
             <ul className="space-y-4 text-gray-800 px-6 py-6 font-medium">
               <li>
-                <div className="relative inline-block text-left">
+                <div
+                  className="relative inline-block text-left"
+                  ref={productRef}
+                >
                   <button
+                    data-dropdown="product"
                     onClick={() => {
                       setIsProductDropdownOpen(!isProductDropdownOpen);
-                      setIsUserDropdownOpen(false);
+                      setIsDropdownOpen(false); // Close the other if open
                     }}
-                    className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b cursor-pointer] transition"
+                    className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b] cursor-pointer transition"
                   >
                     Products{" "}
-                    <ChevronDown size={16} className="cursor-pointer" />
+                    {isProductDropdownOpen ? (
+                      <ChevronUp size={16} className="cursor-pointer" />
+                    ) : (
+                      <ChevronDown size={16} className="cursor-pointer" />
+                    )}
                   </button>
 
                   {isProductDropdownOpen && (
@@ -371,15 +405,21 @@ function Navbar() {
               Home
             </Link>
 
-            <div className="relative inline-block text-left">
+            <div className="relative inline-block text-left" ref={productRef}>
               <button
+                data-dropdown="product"
                 onClick={() => {
                   setIsProductDropdownOpen(!isProductDropdownOpen);
                   setIsDropdownOpen(false); // Close the other if open
                 }}
-                className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b cursor-pointer] transition"
+                className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b] cursor-pointer transition"
               >
-                Products <ChevronDown size={16} className="cursor-pointer" />
+                Products{" "}
+                {isProductDropdownOpen ? (
+                  <ChevronUp size={16} className="cursor-pointer" />
+                ) : (
+                  <ChevronDown size={16} className="cursor-pointer" />
+                )}
               </button>
 
               {isProductDropdownOpen && (
@@ -458,7 +498,7 @@ function Navbar() {
               )}
             </div>
 
-            <Link to={'/orders'} className="hover:text-green-700 font-bold">
+            <Link to={"/orders"} className="hover:text-green-700 font-bold">
               Orders
             </Link>
             <Link to="/about" className="hover:text-green-700 font-bold">
@@ -512,36 +552,46 @@ function Navbar() {
               className="flex items-center gap-1 cursor-pointer hover:text-[#449474] "
             >
               <div className="relative inline-block text-left">
-                <button
-                  onClick={() => {
-                    setIsUserDropdownOpen(!isUserDropdownOpen);
-                    setIsProductDropdownOpen(false); // Close the other if open
-                  }}
-                  className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b cursor-pointer] transition"
-                >
-                  Products <ChevronDown size={16} className="cursor-pointer" />
-                </button>
+                <div ref={userRef} className="relative">
+                  <button
+                    data-dropdown="user"
+                    onClick={() => {
+                      setIsUserDropdownOpen(!isUserDropdownOpen); // 👈 toggle
+                      setMenuOpen(false); // agar koi aur menu open hai to close
+                    }}
+                    className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b] cursor-pointer transition"
+                  >
+                    Profile{" "}
+                    {isUserDropdownOpen ? (
+                      <ChevronUp size={16} className="cursor-pointer" />
+                    ) : (
+                      <ChevronDown size={16} className="cursor-pointer" />
+                    )}
+                  </button>
 
-                {isUserDropdownOpen && (
-                  <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
-                    <li
-                      onClick={() => {
-                        handleSelect("/profile"),
-                          setIsUserDropdownOpen(false),
-                          setMenuOpen(false);
-                      }}
-                      className="hover:underline hover:cursor-pointer"
-                    >
-                      Profile
-                    </li>
-                    <li
-                      onClick={handleLogout}
-                      className="hover:underline hover:cursor-pointer"
-                    >
-                      Logout
-                    </li>
-                  </ul>
-                )}
+                  {isUserDropdownOpen && (
+                    <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
+                      <li
+                        onClick={() => {
+                          handleSelect("/profile");
+                          setIsUserDropdownOpen(false); // select ke baad close
+                        }}
+                        className="hover:underline hover:cursor-pointer"
+                      >
+                        Profile
+                      </li>
+                      <li
+                        onClick={() => {
+                          handleLogout();
+                          setIsUserDropdownOpen(false); // logout ke baad bhi close
+                        }}
+                        className="hover:underline hover:cursor-pointer"
+                      >
+                        Logout
+                      </li>
+                    </ul>
+                  )}
+                </div>
               </div>
             </button>
           ) : (

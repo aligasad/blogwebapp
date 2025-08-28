@@ -19,6 +19,7 @@ function Candles() {
     filterPrice,
     setFilterPrice,
     calcOffer,
+    calculateDiscount,
   } = context;
 
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ function Candles() {
       dispatch(deleteFromCart(product));
       toast.info("Item removed from cart");
     } else {
-      dispatch(addToCart({...product, quan: 1 }));
+      dispatch(addToCart({ ...product, quan: 1 }));
       toast.success("Item added to cart");
     }
   };
@@ -76,10 +77,7 @@ function Candles() {
             <div className="flex flex-wrap -m-4">
               {product
                 .filter((obj) =>
-                  obj.type
-                    .toLowerCase()
-                    .replace(/\s+/g, "")
-                    .includes("candles")
+                  obj.type.toLowerCase().replace(/\s+/g, "").includes("candles")
                 )
                 .filter(
                   (obj) =>
@@ -127,23 +125,26 @@ function Candles() {
                             color: mode === "dark" ? "#FFFFFF" : "#000000",
                           }}
                         >
-                          <div className="flex justify-center items-center p-4 bg-white rounded-t-lg border-2 border-b-0 border-[#003d29] relative">
+                          <div className="flex justify-center items-center p-4 bg-white rounded-t-lg border-2 border-b-0 border-[#195f48] relative">
                             {stock > 0 ? (
-                              <p className=" absolute bottom-0 left-0 bg-green-700 px-2 rounded-tr-lg text-[10px] sm:text-[13px] text-white font-semibold z-10 ">
+                              <p className=" absolute bottom-0 left-0 bg-green-700 px-2 rounded-tr-lg text-[10px] sm:text-[12px] text-white font-semibold z-10 ">
                                 On Sale
                               </p>
                             ) : (
-                              <p className=" absolute bottom-0 left-0 bg-[#b35d52] px-2 rounded-tr-lg text-[10px] sm:text-[13px] text-white font-semibold z-10 ">
+                              <p className=" absolute bottom-0 left-0 bg-[#b35d52] px-2 rounded-tr-lg text-[10px] sm:text-[12px] text-white font-semibold z-10 ">
                                 Sold Out
                               </p>
                             )}
-                            {isNew ? (
-                              <p className="absolute bottom-0 right-0 px-3 text-[13px] text-white font-semibold z-10 bg-black rounded-tl-lg">
+                            {calculateDiscount(originalPrice, price) > 30 ? (
+                              <p className="absolute bottom-0 right-0 px-3 text-[12px] text-rose-600 font-semibold z-10 border-t border-l bg-rose-200 rounded-tl-lg">
+                                {" "}
+                                Hot Deal{" "}
+                              </p>
+                            ) : (
+                              <p className="absolute bottom-0 right-0 px-3 text-[12px] text-white font-semibold z-10 bg-black rounded-tl-lg">
                                 {" "}
                                 New{" "}
                               </p>
-                            ) : (
-                              ""
                             )}
                             <img
                               onClick={() =>

@@ -45,7 +45,7 @@ function UpdateProduct() {
             type="number"
             name="originalPrice"
             className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Original Price (₹)"
+            placeholder="Original Price ($)"
             value={products.originalPrice || ""}
             onChange={(e) =>
               setProducts({ ...products, originalPrice: e.target.value })
@@ -55,7 +55,7 @@ function UpdateProduct() {
             type="number"
             name="price"
             className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Selling Price (₹)"
+            placeholder="Selling Price ($)"
             value={products.price}
             onChange={(e) =>
               setProducts({ ...products, price: e.target.value })
@@ -73,11 +73,29 @@ function UpdateProduct() {
           />
           <input
             type="text"
+            name="brand"
+            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
+            placeholder="Brand"
+            value={products.brand || ""}
+            onChange={(e) =>
+              setProducts({ ...products, brand: e.target.value })
+            }
+          />
+          <input
+            type="text"
             name="tags"
             className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
             placeholder="Tags (comma separated)"
             value={products.tags || ""}
             onChange={(e) => setProducts({ ...products, tags: e.target.value })}
+          />
+          <input
+            type="text"
+            name="selfLife"
+            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
+            placeholder="Self Life (e.g., 6 months, 1 year)"
+            value={products.selfLife || ""}
+            onChange={(e) => setProducts({ ...products, selfLife: e.target.value })}
           />
           <input
             type="text"

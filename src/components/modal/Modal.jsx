@@ -17,6 +17,7 @@ export default function Modal({
   setPincode,
   setPhoneNumber,
   buyNow,
+  grandTotal,
 }) {
   let [isOpen, setIsOpen] = useState(false);
 
@@ -33,7 +34,9 @@ export default function Modal({
       <div className="  text-center rounded-lg text-white font-bold">
         <button
           type="button"
-          onClick={openModal}
+          onClick={() => {
+            grandTotal > 0 ? openModal() : toast.error("Please add items to cart before buying!");
+          }}
           className="w-full  bg-[#439373] hover:bg-[#376a55] py-2 text-center rounded-lg text-white font-bold cursor-pointer"
         >
           Buy Now

@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/FirebaseConfig";
+import { auth, googleProvider } from "../../firebase/FirebaseConfig";
 import { useData } from "../../context/data/MyState";
 import Loader from "../../components/loader/Loader";
+import { signInWithPopup } from "firebase/auth";
 
 function Login() {
   const navigate = useNavigate();
@@ -48,53 +49,28 @@ function Login() {
     }
   }
 
+  // Function to handle Google login----------------------------------------
+  const handleGoogleLogin = async () => {
+    try {
+      setLoading(true);
+      const result = await signInWithPopup(auth, googleProvider);
+      localStorage.setItem("user", JSON.stringify(result.user));
+      toast.success("Login with Google Successful! 🎉");
+      navigate("/");
+      setLoading(false);
+    } catch (error) {
+      toast.error("Google login failed!");
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  
-
   return (
     <>
       {loading && <Loader />}
-      {/* <div className=" flex justify-center items-center my-8">
-        <form
-          className="bg-gray-800 p-8 rounded-xl shadow-md w-96"
-          onSubmit={handleSubmit}
-        >
-          <h2 className="text-2xl font-bold mb-6 text-center text-white">
-            Login
-          </h2>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={form.email}
-            onChange={handleChange}
-            className="w-full p-2 mb-4 border bg-gray-400 outline-0 border-gray-300 rounded"
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={form.password}
-            onChange={handleChange}
-            className="w-full p-2 mb-4 border bg-gray-400 outline-0 border-gray-300 rounded"
-          />
-          <button
-            type="submit"
-            className="w-full bg-yellow-400 font-semibold text-black py-2 rounded hover:bg-yellow-500"
-          >
-            Login
-          </button>
-          <p className="mt-4 text-center text-white">
-            Don't have an account?{" "}
-            <Link to="/signup" className="text-yellow-400 outline-0-500">
-              Register
-            </Link>
-          </p>
-        </form>
-      </div> */}
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#e8f5e9] to-[#f1f8e9] p-4">
         <form
           className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-green-200 transition-all duration-300 hover:shadow-2xl"
@@ -128,6 +104,14 @@ function Login() {
           >
             Login
           </button>
+          
+          {/* <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="w-full bg-gradient-to-r from-green-600 to-lime-500 text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-lg hover:from-green-700 hover:to-lime-600 transition-all cursor-pointer"
+          >
+            Login with Google
+          </button> */}
 
           <p className="mt-6 text-center text-green-700 font-medium">
             Don’t have an account?{" "}

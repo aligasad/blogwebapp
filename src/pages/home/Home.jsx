@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import HeroSection from "../../components/heroSection/Caresol";
+import Carousel from "../../components/heroSection/Carousel";
 import ProductCard from "../../components/productCard/ProductCard";
 import Testimonial from "../../components/testimonial/Testimonial";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,9 +35,9 @@ function Home() {
         <HeroSection2 />
       </motion.div>
       <motion.div
-        initial={{ opacity: 0, x: -100 }} // start off-screen to the left
-        animate={{ opacity: 1, x: 0 }} // move to center
-        exit={{ opacity: 0 }} // exit off-screen to the right
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0 }} 
+        exit={{ opacity: 0 }} 
         transition={{ duration: 1 }}
       >
         <CategoriesSection />
@@ -58,7 +58,7 @@ function Home() {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 1 }}
-        onAnimationComplete={() => setIsFirstVisit(false)} // Remove animation after it's done
+        onAnimationComplete={() => setIsFirstVisit(false)} 
       >
         <ProductShow />
       </motion.div>
@@ -68,7 +68,7 @@ function Home() {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 1 }}
-        onAnimationComplete={() => setIsFirstVisit(false)} // Remove animation after it's done
+        onAnimationComplete={() => setIsFirstVisit(false)} 
       >
         <TransformSection />
       </motion.div>
@@ -78,7 +78,7 @@ function Home() {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 1 }}
-        onAnimationComplete={() => setIsFirstVisit(false)} // Remove animation after it's done
+        onAnimationComplete={() => setIsFirstVisit(false)} 
       >
         <ProductCard />
       </motion.div>

@@ -362,15 +362,6 @@ function Cart() {
                 {totalAmount.toFixed(2)}
               </span>
             </div>
-            {/* <div className="flex justify-between">
-              <span>
-                GST <span className="text-rose-600 font-semibold">(18%)</span>
-              </span>
-              <span className="flex items-center">
-                <FaIndianRupeeSign className="mr-1" />
-                {GST}
-              </span>
-            </div> */}
             <div className="flex justify-between">
               <span>
                 {" "}
@@ -389,9 +380,7 @@ function Cart() {
               <span>Grand Total</span>
               <span className="flex items-center text-gray-700">
                 <span className="text-gray-800 mr-1">$</span>
-                {totalAmount > 60
-                  ? totalAmount.toFixed(2)
-                  : (totalAmount + shipping).toFixed(2)}
+                {totalAmount > 60 ? totalAmount.toFixed(2) : (totalAmount === 0 ? totalAmount.toFixed(2): (totalAmount + shipping).toFixed(2))}
               </span>
             </div>
           </div>
@@ -407,6 +396,7 @@ function Cart() {
               setPincode={setPincode}
               setPhoneNumber={setPhoneNumber}
               buyNow={buyNow}
+              grandTotal={grandTotal}
             />
           </div>
         </div>
