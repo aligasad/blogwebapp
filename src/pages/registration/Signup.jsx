@@ -49,7 +49,7 @@ function Signup() {
       setForm({ name: "", email: "", password: "" });
       toast.success("Register Successfully!");
     } catch (error) {
-      toast.error("Registeration Failed...");
+      toast.warning("Already Registered..");
     }
   }
 
@@ -65,8 +65,8 @@ function Signup() {
         onSubmit={handleSubmit}
       >
         <h2 className="text-2xl font-bold mb-6 text-center text-green-900">
-          Ayura C Serum 🌿
-        </h2>
+          Noor by <span className="text-[27px] text-[#028732]">Shayan</span> 🌿
+        </h2> 
 
         <input
           type="name"

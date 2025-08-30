@@ -76,10 +76,11 @@ function Login() {
           className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-green-200 transition-all duration-300 hover:shadow-2xl"
           onSubmit={handleSubmit}
         >
-          <h2 className="text-3xl font-bold mb-6 text-center text-green-800 font-serif">
-            Ayura C Serum 🌿
+          <h2 className="text-2xl font-bold mb-6 text-center text-green-900">
+            Noor by <span className="text-[27px] text-[#028732]">Shayan</span>{" "}
+            🌿
           </h2>
-
+ 
           <input
             type="email"
             name="email"
@@ -104,7 +105,7 @@ function Login() {
           >
             Login
           </button>
-          
+
           {/* <button
             type="button"
             onClick={handleGoogleLogin}

@@ -12,16 +12,14 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 import ReviewSection from "../../components/reviews/reviews";
-import { collection, query, where, getDocs } from "firebase/firestore";
 
-function ProductInfo() {
+function ProductInfo1() {
   const context = useData();
   const [isWished, setIsWished] = useState(false);
   const { loading, setLoading, calcOffer, product } = context;
 
   const [products, setProducts] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
-  const [similarProducts, setSimilarProducts] = useState([]);
   const params = useParams();
   // console.log(products.title)
 
@@ -42,30 +40,6 @@ function ProductInfo() {
   useEffect(() => {
     getProductData();
   }, []);
-
-  useEffect(() => {
-    const fetchSimilarProducts = async () => {
-      if (!products.type) return;
-      try {
-        const q = query(
-          collection(firebaseDB, "products"),
-          where("type", "==", products.type)
-        );
-        const querySnapshot = await getDocs(q);
-        const items = [];
-        querySnapshot.forEach((doc) => {
-          // Exclude current product
-          if (doc.id !== params.id) {
-            items.push({ id: doc.id, ...doc.data() });
-          }
-        });
-        setSimilarProducts(items);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (products.type) fetchSimilarProducts();
-  }, [products.type, params.id]);
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
@@ -391,37 +365,6 @@ function ProductInfo() {
                 <ReviewSection productId={params} />
               </div>
             </div>
-
-            {/* Similar Products Carousel------------------------------------------------------------- */}
-            {similarProducts.length > 0 && (
-              <div className="mt-10">
-                <h2 className="text-xl font-bold mb-4 text-green-800">
-                  Similar Products
-                </h2>
-                <div className="flex overflow-x-auto gap-6 pb-4">
-                  {similarProducts.map((prod) => (
-                    <div
-                      key={prod.id}
-                      className="min-w-[200px] bg-white rounded-xl shadow p-3 flex-shrink-0"
-                    >
-                      <img
-                        src={prod.imageUrl}
-                        alt={prod.title}
-                        className="w-full h-32 object-contain rounded-lg mb-2"
-                      />
-                      <div className="font-semibold text-gray-800">{prod.title}</div>
-                      <div className="text-green-700 font-bold">${prod.price}</div>
-                      <button
-                        className="mt-2 px-3 py-1 bg-[#439373] text-white rounded hover:bg-green-800 text-xs"
-                        onClick={() => window.location.href = `/productinfo/${prod.id}`}
-                      >
-                        View
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
         )}
       </div>
@@ -429,4 +372,4 @@ function ProductInfo() {
   );
 }
 
-export default ProductInfo;
+export default ProductInfo1;
