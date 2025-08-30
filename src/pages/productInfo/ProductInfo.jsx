@@ -118,7 +118,7 @@ function ProductInfo() {
     <section className="text-gray-700 body-font overflow-hidden bg-gradient-to-br from-green-50 to-blue-100 min-h-screen">
       <div className="container px-2 md:px-5 py-5 mx-auto">
         {products && (
-          <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-lg p-4 md:p-8">
+          <div className="max-w-max mx-auto bg-white rounded-2xl shadow-lg p-4 md:p-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Images Section */}
               <div>
@@ -402,17 +402,20 @@ function ProductInfo() {
                   {similarProducts.map((prod) => (
                     <div
                       key={prod.id}
-                      className="min-w-[200px] bg-white rounded-xl shadow p-3 flex-shrink-0"
+                      className="w-[200px] bg-white rounded-sm shadow p-3 my-1 flex-shrink-0 hover:shadow-md hover:shadow-gray-400 transition-all duration-200 "
                     >
                       <img
                         src={prod.imageUrl}
                         alt={prod.title}
-                        className="w-full h-32 object-contain rounded-lg mb-2"
+                        className="w-32 h-32 object-contain rounded-lg mb-2 m-auto"
                       />
-                      <div className="font-semibold text-gray-800">{prod.title}</div>
-                      <div className="text-green-700 font-bold">${prod.price}</div>
+                      <div className="font-semibold text-gray-800 line-clamp-1">{prod.title}</div>
+                      <div>
+                        <span className="text-green-700 font-bold">${prod.price}</span>
+                        <span className="text-[14px] text-rose-600 font-semibold line-through decoration-1 ml-2">${prod.originalPrice}</span>
+                      </div>
                       <button
-                        className="mt-2 px-3 py-1 bg-[#439373] text-white rounded hover:bg-green-800 text-xs"
+                        className="mt-2 px-3 py-1 bg-[#439373] text-white rounded hover:bg-green-800 text-xs cursor-pointer transition-all duration-200"
                         onClick={() => window.location.href = `/productinfo/${prod.id}`}
                       >
                         View
