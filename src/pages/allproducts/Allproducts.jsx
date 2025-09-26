@@ -20,12 +20,8 @@ function Allproducts() {
     mode,
     product,
     searchkey,
-    setSearchkey,
     filterType,
-    setFilterType,
     filterPrice,
-    setFilterPrice,
-    calcOffer,
     calculateDiscount
   } = context;
 
@@ -223,10 +219,10 @@ function Allproducts() {
                             {stock > 0 ? (
                               <button
                                 onClick={() => toggleCart(item)}
-                                className={`px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg transition duration-800 hover:scale-105 cursor-pointer ${
+                                className={`px-3 h-8 sm:h-9 sm:w-27 sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-sm transition duration-200 hover:shadow-sm hover:shadow-gray-900 cursor-pointer ${
                                   cartItems.some((p) => p.id === item.id)
-                                    ? "bg-red-700 text-white hover:bg-black"
-                                    : "bg-[#439373] text-black hover:bg-black hover:text-white"
+                                    ? "bg-red-700 text-white"
+                                    : "bg-[#439373] hover:text-white"
                                 }`}
                               >
                                 {cartItems.some((p) => p.id === item.id)
@@ -236,7 +232,7 @@ function Allproducts() {
                             ) : (
                               <button
                                 disabled
-                                className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg text-white bg-[#b35d52] cursor-not-allowed"
+                                className="px-3 h-8 sm:h-9 sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-sm text-white bg-[#b35d52] cursor-not-allowed"
                               >
                                 Out of Stock
                               </button>

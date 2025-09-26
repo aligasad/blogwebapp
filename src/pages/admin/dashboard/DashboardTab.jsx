@@ -9,7 +9,29 @@ import { Link } from "react-router-dom";
 
 function DashboardTab() {
   const context = useData();
-  const { mode, product, editHandle, deleteProduct, order, users } = context;
+  const {
+    mode,
+    product,
+    editHandle,
+    deleteProduct,
+    order,
+    users,
+    searchkey,
+    filterType,
+    filterPrice,
+  } = context;
+
+  // ---Debouncing Functionality for SearchKey----------------------------
+  const [debouncedSearchKey, setDebouncedSearchKey] = useState(searchkey);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchKey(searchkey);
+    }, 600);
+    return () => {
+      clearTimeout(handler)
+    }
+  }, [searchkey])
+
   console.log(product);
   let [isOpen, setIsOpen] = useState(false);
 
@@ -24,7 +46,6 @@ function DashboardTab() {
   const add = () => {
     window.location.href = "/addproduct";
   };
-
 
   return (
     <>
@@ -74,8 +95,6 @@ function DashboardTab() {
                   Product Details
                 </h1>
                 <div className=" flex justify-end">
-                  
-
                   <button
                     onClick={add}
                     type="button"
@@ -126,97 +145,132 @@ function DashboardTab() {
                         </th>
                       </tr>
                     </thead>
-                    {product.map((item, index) => {
-                      const {
-                        title,
-                        price,
-                        imageUrl,
-                        category,
-                        type,
-                        description,
-                        date,
-                      } = item;
-                      return (
-                        <tbody key={index} className="">
-                          <tr
-                            className="bg-gray-50 border-b  dark:border-gray-700"
-                            style={{
-                              backgroundColor:
-                                mode === "dark" ? "rgb(46 49 55)" : "",
-                              color: mode === "dark" ? "white" : "",
-                            }}
-                          >
-                            <td
-                              className="px-6 py-4 text-black font-bold"
-                              style={{ color: mode === "dark" ? "white" : "" }}
+                    {product
+                      .filter((obj) => {
+                        const key = debouncedSearchKey
+                          .toLowerCase()
+                          .trim()
+                          .replace(/\s+/g, " ");
+                        return (
+                          obj.title.toLowerCase().includes(key) ||
+                          obj.type.toLowerCase().includes(key) ||
+                          obj.category.toLowerCase().includes(key)
+                        );
+                      })
+                      .filter((item) =>
+                        item.category
+                          .replace(/\s+/g, "")
+                          .toLowerCase()
+                          .includes(filterType)
+                      )
+                      .filter((obj) => obj.price.trim().includes(filterPrice))
+                      .map((item, index) => {
+                        const {
+                          title,
+                          price,
+                          imageUrl,
+                          category,
+                          type,
+                          description,
+                          date,
+                        } = item;
+                        return (
+                          <tbody key={index} className="">
+                            <tr
+                              className="bg-gray-50 border-b  dark:border-gray-700"
+                              style={{
+                                backgroundColor:
+                                  mode === "dark" ? "rgb(46 49 55)" : "",
+                                color: mode === "dark" ? "white" : "",
+                              }}
                             >
-                              {index + 1}
-                            </td>
-                            <th
-                              scope="row"
-                              className="px-6 py-4 font-medium text-black whitespace-nowrap"
-                            >
-                              <img className="w-16" src={imageUrl} alt="img" />
-                            </th>
-                            <td
-                              className="px-6 py-4 text-black "
-                              style={{ color: mode === "dark" ? "white" : "" }}
-                            >
-                              {title}
-                            </td>
-                            <td
-                              className="px-6 py-4 text-black "
-                              style={{ color: mode === "dark" ? "white" : "" }}
-                            >
-                              {"$" + price}
-                            </td>
-                            <td
-                              className="px-6 py-4 text-black "
-                              style={{ color: mode === "dark" ? "white" : "" }}
-                            >
-                              {category}
-                            </td>
-                            <td
-                              className="px-6 py-4 text-black "
-                              style={{ color: mode === "dark" ? "white" : "" }}
-                            >
-                              {type}
-                            </td>
-                            <td
-                              className="px-6 py-4 text-black "
-                              style={{ color: mode === "dark" ? "white" : "" }}
-                            >
-                              {date}
-                            </td>
-                            <td className="px-6 py-4">
-                              <div className=" flex gap-2">
-                                <div
-                                  className=" flex gap-2 cursor-pointer text-black "
-                                  style={{
-                                    color: mode === "dark" ? "white" : "",
-                                  }}
-                                >
-                                  <div className="flex gap-4">
-                                    <div className="text-xl hover:text-red-700">
-                                      <AiFillDelete
-                                        onClick={() => deleteProduct(item)}
-                                      />
-                                    </div>
-                                    <div className="text-xl hover:text-red-700">
-                                      <Link to={"/updateproduct"}>
-                                        <FaEdit
-                                          onClick={() => editHandle(item)}
+                              <td
+                                className="px-6 py-4 text-black font-bold"
+                                style={{
+                                  color: mode === "dark" ? "white" : "",
+                                }}
+                              >
+                                {index + 1}
+                              </td>
+                              <th
+                                scope="row"
+                                className="px-6 py-4 font-medium text-black whitespace-nowrap"
+                              >
+                                <img
+                                  className="w-16"
+                                  src={imageUrl}
+                                  alt="img"
+                                />
+                              </th>
+                              <td
+                                className="px-6 py-4 text-black "
+                                style={{
+                                  color: mode === "dark" ? "white" : "",
+                                }}
+                              >
+                                {title}
+                              </td>
+                              <td
+                                className="px-6 py-4 text-black "
+                                style={{
+                                  color: mode === "dark" ? "white" : "",
+                                }}
+                              >
+                                {"$" + price}
+                              </td>
+                              <td
+                                className="px-6 py-4 text-black "
+                                style={{
+                                  color: mode === "dark" ? "white" : "",
+                                }}
+                              >
+                                {category}
+                              </td>
+                              <td
+                                className="px-6 py-4 text-black "
+                                style={{
+                                  color: mode === "dark" ? "white" : "",
+                                }}
+                              >
+                                {type}
+                              </td>
+                              <td
+                                className="px-6 py-4 text-black "
+                                style={{
+                                  color: mode === "dark" ? "white" : "",
+                                }}
+                              >
+                                {date}
+                              </td>
+                              <td className="px-6 py-4">
+                                <div className=" flex gap-2">
+                                  <div
+                                    className=" flex gap-2 cursor-pointer text-black "
+                                    style={{
+                                      color: mode === "dark" ? "white" : "",
+                                    }}
+                                  >
+                                    <div className="flex gap-4">
+                                      <div className="text-xl hover:text-red-700">
+                                        <AiFillDelete
+                                          onClick={() => deleteProduct(item)}
                                         />
-                                      </Link>
+                                      </div>
+                                      <div className="text-xl hover:text-red-700">
+                                        <Link to={"/updateproduct"}>
+                                          <FaEdit
+                                            onClick={() => editHandle(item)}
+                                          />
+                                        </Link>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      );
-                    })}
+                              </td>
+                            </tr>
+                          </tbody>
+                        );
+                      })}
                   </table>
                 </div>
               </div>
@@ -466,7 +520,7 @@ function DashboardTab() {
                             className="px-6 py-4 text-black "
                             style={{ color: mode === "dark" ? "white" : "" }}
                           >
-                            {uid?.slice(0, 15) }.....
+                            {uid?.slice(0, 15)}.....
                           </td>
                           <td
                             className="px-6 py-4 text-black "

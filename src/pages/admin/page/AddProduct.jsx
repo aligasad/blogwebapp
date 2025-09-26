@@ -194,7 +194,7 @@ function AddProduct() {
                 onChange={(e) =>
                   setProducts({ ...products, isNew: e.target.checked })
                 }
-                className="accent-green-500 w-4 h-4"
+                className="accent-rose-500 w-4 h-4"
               />
               <span className="text-green-700 text-sm">Mark as New</span>
             </label>
@@ -213,7 +213,7 @@ function AddProduct() {
         </div>
         <button
           onClick={addProduct}
-          className="mt-6 w-full bg-gradient-to-r from-green-400 to-lime-400 text-white font-bold py-2 rounded-lg shadow hover:from-green-500 hover:to-lime-500 transition"
+          className="mt-6 w-full bg-gradient-to-r from-green-400 to-lime-400 text-white font-bold py-2 rounded-lg shadow hover:from-green-500 hover:to-lime-500 transition cursor-pointer"
         >
           Add Product
         </button>
