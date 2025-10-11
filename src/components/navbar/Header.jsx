@@ -342,7 +342,7 @@ function Navbar() {
                   About
                 </Link>
               </li>
-              {user?.user?.email === "asadalam4291@gmail.com" ||
+              {user?.user?.email === "tanveer123alam@gmail.com" ||
                 (user?.user?.email === "asadalamalig@gmail.com" && (
                   <li>
                     <Link
