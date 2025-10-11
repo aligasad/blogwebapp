@@ -179,8 +179,8 @@ function App() {
   ]);
   // For whatsapp button----------------------
   const handleWhatsAppClick = () => {
-    const phoneNumber = "917807040707";
-    const message = "Hi, I am interested in your product!";
+    const phoneNumber = "919634612657";
+    const message = "Hi, Tanveer Alam!";
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message
     )}`;

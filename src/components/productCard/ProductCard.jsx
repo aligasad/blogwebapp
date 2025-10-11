@@ -7,10 +7,8 @@ import { motion } from "framer-motion";
 
 function ProductCard() {
   const context = useData();
-  const [isWished, setIsWished] = useState(false);
 
   const {
-    mode,
     product,
     searchkey,
     filterType,
@@ -20,20 +18,6 @@ function ProductCard() {
   const cartItems = useSelector((state) => state.cart);
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const toggleCart = (product) => {
-    if (!user) {
-      toast.warning("Please login first!");
-      return;
-    }
-    const isInCart = cartItems.some((item) => item.id === product.id);
-    if (isInCart) {
-      dispatch(deleteFromCart(product));
-      toast.info("Removed from cart");
-    } else {
-      dispatch(addToCart(product));
-      toast.success("Added to cart");
-    }
-  };
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
