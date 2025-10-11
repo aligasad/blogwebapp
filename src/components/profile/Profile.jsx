@@ -91,16 +91,16 @@ function Profile() {
         {/* Logout Button */}
         <div className="mt-8 flex justify-center gap-3">
           <button
-            onClick={handleSignOut}
+            onClick={() => navigate('/adduserblogs')}
             className="text-white hover:text-red-600 cursor-pointer border bg-rose-700 hover:bg-[#ffffff] border-red-500 px-4 py-2 rounded-lg transition-colors duration-300"
           >
-            Log Out
+            Add Blog
           </button>
           <button
-            onClick={() => navigate('/orders')}
+            onClick={() => navigate('/userdashboard')}
             className="text-red-600 hover:text-white cursor-pointer border border-red-500 px-4 py-2 rounded-lg hover:bg-rose-700 transition-colors duration-300"
           >
-            Your Orders
+            Dashboard
           </button>
         </div>
 

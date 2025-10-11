@@ -5,14 +5,11 @@ function AddProduct() {
   const context = useData();
   const { products, setProducts, addProduct } = context;
 
-  // Add new fields to your initial state if not already present
-  // Example: { ...products, brand: '', stock: '', discount: '', tags: '' }
-
   return (
     <div className="py-6 min-h-screen bg-gradient-to-br from-green-50 to-lime-100 flex items-center justify-center">
       <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl p-8 border border-green-100">
         <h1 className="text-center text-2xl font-extrabold text-green-800 mb-6 tracking-wide">
-          Add New Product
+          Add New Blogs
         </h1>
         <div className="grid grid-cols-1 gap-4">
           <input
@@ -27,69 +24,21 @@ function AddProduct() {
           />
           <input
             type="text"
-            name="quantity"
+            name="subtitle"
             className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Quantity (e.g., 500g, 1L)"
-            value={products.quantity || ""}
+            placeholder="Sub Title"
+            value={products.subtitle || ""}
             onChange={(e) =>
-              setProducts({ ...products, quantity: e.target.value })
-            }
-          />
-          <input
-            type="number"
-            name="originalPrice"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Original Price ($)"
-            value={products.originalPrice || ""}
-            onChange={(e) =>
-              setProducts({ ...products, originalPrice: e.target.value })
-            }
-          />
-          <input
-            type="number"
-            name="price"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Selling Price ($)"
-            value={products.price}
-            onChange={(e) =>
-              setProducts({ ...products, price: e.target.value })
-            }
-          />
-          <input
-            type="number"
-            name="stock"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Stock"
-            value={products.stock || ""}
-            onChange={(e) =>
-              setProducts({ ...products, stock: e.target.value })
+              setProducts({ ...products, subtitle: e.target.value })
             }
           />
           <input
             type="text"
-            name="brand"
+            name="author"
             className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Brand"
-            value={products.brand || ""}
-            onChange={(e) =>
-              setProducts({ ...products, brand: e.target.value })
-            }
-          />
-          <input
-            type="text"
-            name="tags"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Tags (comma separated)"
-            value={products.tags || ""}
-            onChange={(e) => setProducts({ ...products, tags: e.target.value })}
-          />
-          <input
-            type="text"
-            name="selfLife"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Self Life"
-            value={products.selfLife || ""}
-            onChange={(e) => setProducts({ ...products, selfLife: e.target.value })}
+            placeholder="Author Name"
+            value={products.author || ""}
+            onChange={(e) => setProducts({ ...products, author: e.target.value })}
           />
           <input
             type="text"
@@ -131,50 +80,32 @@ function AddProduct() {
               setProducts({ ...products, imageUrl4: e.target.value })
             }
           />
+
+          <textarea
+            cols="30"
+            rows="4"
+            name="content"
+            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
+            placeholder="content"
+            value={products.content}
+            onChange={(e) =>
+              setProducts({ ...products, content: e.target.value })
+            }
+          ></textarea>
           
           <input
             type="text"
             name="category"
             className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Category"
+            placeholder="Category (Like Buildings, Monoments etc"
             value={products.category}
             onChange={(e) =>
               setProducts({ ...products, category: e.target.value })
             }
           />
-          <input
-            type="text"
-            name="type"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Type"
-            value={products.type}
-            onChange={(e) => setProducts({ ...products, type: e.target.value })}
-          />
-          <textarea
-            cols="30"
-            rows="4"
-            name="description"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Description"
-            value={products.description}
-            onChange={(e) =>
-              setProducts({ ...products, description: e.target.value })
-            }
-          ></textarea>
-          {/* New Ingredients Field */}
-          <textarea
-            cols="30"
-            rows="3"
-            name="ingredients"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Ingredients (comma separated or paragraph)"
-            value={products.ingredients || ""}
-            onChange={(e) =>
-              setProducts({ ...products, ingredients: e.target.value })
-            }
-          ></textarea>
+          
           {/* New Benefits Field */}
-          <textarea
+          {/* <textarea
             cols="30"
             rows="3"
             name="benefits"
@@ -184,7 +115,7 @@ function AddProduct() {
             onChange={(e) =>
               setProducts({ ...products, benefits: e.target.value })
             }
-          ></textarea>
+          ></textarea> */}
           {/* Checkboxes */}
           <div className="flex items-center gap-6 mt-2">
             <label className="flex items-center gap-2 cursor-pointer">
@@ -197,17 +128,6 @@ function AddProduct() {
                 className="accent-rose-500 w-4 h-4"
               />
               <span className="text-green-700 text-sm">Mark as New</span>
-            </label>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={products.onSale || false}
-                onChange={(e) =>
-                  setProducts({ ...products, onSale: e.target.checked })
-                }
-                className="accent-green-500 w-4 h-4"
-              />
-              <span className="text-green-700 text-sm">On Sale</span>
             </label>
           </div>
         </div>

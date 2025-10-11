@@ -25,25 +25,25 @@ function Home() {
   return (
     <>
 
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, x: -100 }} // start off-screen to the left
         animate={{ opacity: 1, x: 0 }} // move to center
         exit={{ opacity: 0 }} // exit off-screen to the right
         transition={{ duration: 1 }}
       >
-        {/* <HeroSection /> */}
         <HeroSection2 />
-      </motion.div>
-      <motion.div
+      </motion.div> */}
+
+      {/* <motion.div
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }} 
         exit={{ opacity: 0 }} 
         transition={{ duration: 1 }}
       >
         <CategoriesSection />
-      </motion.div>
+      </motion.div> */}
 
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
@@ -51,9 +51,9 @@ function Home() {
         onAnimationComplete={() => setIsFirstVisit(false)} // Remove animation after it's done
       >
         <Benefits />
-      </motion.div>
+      </motion.div> */}
 
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
@@ -61,9 +61,9 @@ function Home() {
         onAnimationComplete={() => setIsFirstVisit(false)} 
       >
         <ProductShow />
-      </motion.div>
+      </motion.div> */}
 
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
@@ -71,7 +71,7 @@ function Home() {
         onAnimationComplete={() => setIsFirstVisit(false)} 
       >
         <TransformSection />
-      </motion.div>
+      </motion.div> */}
 
       <motion.div
         initial={{ opacity: 0, y: 50 }}

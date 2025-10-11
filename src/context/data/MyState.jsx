@@ -29,10 +29,10 @@ function MyState({ children }) {
     }
   };
 
-  // For Loading...
+  // For Loading.................
   const [loading, setLoading] = useState(false);
 
-  // --------------------- AddProduct Function and get Product Function ---------------------
+  // ---------------- AddProduct Function and get Product Function ---------------------
   const [products, setProducts] = useState({
     title: null,
     price: null,
@@ -50,17 +50,17 @@ function MyState({ children }) {
   const addProduct = async () => {
     if (
       products.title === null ||
-      products.price === null ||
+      products.author === null ||
       products.imageUrl === null ||
       products.category === null ||
-      products.description === null
+      products.subtitle === null
     ) {
       return toast.warning("Please fill all fields");
     }
 
     setLoading(true);
     try {
-      const productRef = collection(firebaseDB, "products");
+      const productRef = collection(firebaseDB, "blogs");
       await addDoc(productRef, products);
       toast.success("Product Added Successfully!");
       setTimeout(() => {
@@ -81,7 +81,7 @@ function MyState({ children }) {
     setLoading(true);
     try {
       const q = query(
-        collection(firebaseDB, "products"),
+        collection(firebaseDB, "blogs"),
         //It returns data after sorting according to its time
         orderBy("time")
       );
@@ -143,23 +143,44 @@ function MyState({ children }) {
 
   // orderedData function------------------
   const [order, setOrder] = useState([]);
+  // const getOrderData = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const result = await getDocs(collection(firebaseDB, "orders"));
+  //     const ordersArray = [];
+  //     result.forEach((doc) => {
+  //       ordersArray.push(doc.data());
+  //       setLoading(false);
+  //     });
+  //     setOrder(ordersArray);
+  //     console.log(ordersArray);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.log(error);
+  //     setLoading(false);
+  //   }
+  // };
   const getOrderData = async () => {
-    setLoading(true);
-    try {
-      const result = await getDocs(collection(firebaseDB, "orders"));
-      const ordersArray = [];
-      result.forEach((doc) => {
-        ordersArray.push(doc.data());
-        setLoading(false);
+  setLoading(true);
+  try {
+    const result = await getDocs(collection(firebaseDB, "orders"));
+    const ordersArray = [];
+    result.forEach((docSnap) => {
+      ordersArray.push({
+        id: docSnap.id,   // ✅ Firebase document id include
+        ...docSnap.data() // ✅ baaki data spread
       });
-      setOrder(ordersArray);
-      console.log(ordersArray);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  };
+    });
+
+    setOrder(ordersArray);
+    console.log("Orders:", ordersArray);
+    setLoading(false);
+  } catch (error) {
+    console.log("Error fetching orders:", error);
+    setLoading(false);
+  }
+};
+
   useEffect(() => {
     getOrderData();
   }, []);

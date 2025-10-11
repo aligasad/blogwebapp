@@ -14,7 +14,7 @@ import MyState from "./context/data/MyState.jsx";
 import Login from "./pages/registration/Login.jsx";
 import Signup from "./pages/registration/Signup.jsx";
 import ProductInfo from "./pages/productInfo/ProductInfo.jsx";
-import AddProduct from "./pages/admin/page/AddProduct.jsx";
+import AddBlogs from "./pages/admin/page/AddBlogs.jsx";
 import UpdateProduct from "./pages/admin/page/UpdateProduct.jsx";
 import { ToastContainer, Bounce } from "react-toastify";
 import AuthProvider from "./components/protector/AuthContext.jsx";
@@ -37,6 +37,8 @@ import PrivacyPolicy from "./components/aboutUs/PrivacyPolicy.jsx";
 import Contact from "./components/Contact/Contact.jsx";
 import { useState } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import AddUserBlog from "./pages/user/UserBlogs.jsx";
+import UserDashboard from "./pages/user/UserDashBoard.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -125,12 +127,16 @@ function App() {
           element: <Profile />,
         },
         {
-          path: "/addproduct",
+          path: "/addblogs",
           element: (
             <ProtectedRouteForAdmin>
-              <AddProduct />
+              <AddBlogs />
             </ProtectedRouteForAdmin>
           ),
+        },
+        {
+          path: "/adduserblogs",
+          element: <AddUserBlog />
         },
         {
           path: "/updateproduct",
@@ -139,6 +145,14 @@ function App() {
               <UpdateProduct />
             </ProtectedRouteForAdmin>
           ),
+        },
+        {
+          path: '/userdashboard',
+          element: (
+            <ProtectedRoute>
+              <UserDashboard />
+            </ProtectedRoute>
+          )
         },
         {
           path: "/return-policy",

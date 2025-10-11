@@ -18,8 +18,8 @@ function Dashboard() {
       <div className="container px-5 mx-auto mb-15">
         <div className="flex flex-wrap justify-around -m-4 text-center">
           {[
-            { label: "Total Products", value: productLength },
-            { label: "Total Orders", value: orderLength },
+            { label: "Total Blogs", value: productLength },
+            { label: "Total Visitors", value: orderLength },
             { label: "Total Users", value: usersLength },
           ].map((item, idx) => (
             <div key={idx} className="p-4 md:w-1/4 sm:w-1/2 w-full">

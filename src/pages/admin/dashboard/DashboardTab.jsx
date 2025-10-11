@@ -44,7 +44,7 @@ function DashboardTab() {
   }
 
   const add = () => {
-    window.location.href = "/addproduct";
+    window.location.href = "/addblogs";
   };
 
   return (
@@ -85,6 +85,7 @@ function DashboardTab() {
                 </button>
               </Tab>
             </TabList>
+
             {/* product  */}
             <TabPanel>
               <div className="  px-4 md:px-0 mb-16">
@@ -129,13 +130,13 @@ function DashboardTab() {
                           Title
                         </th>
                         <th scope="col" className="px-6 py-3">
-                          Price
+                          SubTitle
                         </th>
                         <th scope="col" className="px-6 py-3">
                           Category
                         </th>
                         <th scope="col" className="px-6 py-3">
-                          Type
+                          Author
                         </th>
                         <th scope="col" className="px-6 py-3">
                           Date
@@ -153,7 +154,7 @@ function DashboardTab() {
                           .replace(/\s+/g, " ");
                         return (
                           obj.title.toLowerCase().includes(key) ||
-                          obj.type.toLowerCase().includes(key) ||
+                          obj.subtitle.toLowerCase().includes(key) ||
                           obj.category.toLowerCase().includes(key)
                         );
                       })
@@ -163,15 +164,13 @@ function DashboardTab() {
                           .toLowerCase()
                           .includes(filterType)
                       )
-                      .filter((obj) => obj.price.trim().includes(filterPrice))
                       .map((item, index) => {
                         const {
                           title,
-                          price,
                           imageUrl,
                           category,
-                          type,
-                          description,
+                          author,
+                          subtitle,
                           date,
                         } = item;
                         return (
@@ -216,7 +215,7 @@ function DashboardTab() {
                                   color: mode === "dark" ? "white" : "",
                                 }}
                               >
-                                {"$" + price}
+                                {subtitle}
                               </td>
                               <td
                                 className="px-6 py-4 text-black "
@@ -232,7 +231,7 @@ function DashboardTab() {
                                   color: mode === "dark" ? "white" : "",
                                 }}
                               >
-                                {type}
+                                {author}
                               </td>
                               <td
                                 className="px-6 py-4 text-black "

@@ -396,21 +396,21 @@ function Navbar() {
             to="/"
             className="text-2xl font-bold text-green-700"
           >
-            <div className="border-2 border-green-700 p-1 rounded-full">
-              <img src={logo} alt="Logo" className="w-10 h-auto rounded" />
+            <div className="p-1">
+              <h1>BlogApp</h1>
             </div>
           </Link>
           <nav className="hidden md:flex gap-6 text-sm text-[#003d29]">
             <Link to="/" className="hover:text-green-700 font-bold">
-              Home
+              Blogs
             </Link>
 
-            <div className="relative inline-block text-left" ref={productRef}>
+            {/* <div className="relative inline-block text-left" ref={productRef}>
               <button
                 data-dropdown="product"
                 onClick={() => {
                   setIsProductDropdownOpen(!isProductDropdownOpen);
-                  setIsDropdownOpen(false); // Close the other if open
+                  setIsDropdownOpen(false); 
                 }}
                 className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b] cursor-pointer transition"
               >
@@ -496,11 +496,12 @@ function Navbar() {
                   </li>
                 </ul>
               )}
-            </div>
+            </div> */}
 
-            <Link to={"/orders"} className="hover:text-green-700 font-bold">
+            {/* <Link to={"/orders"} className="hover:text-green-700 font-bold">
               Orders
-            </Link>
+            </Link> */}
+
             <Link to="/about" className="hover:text-green-700 font-bold">
               About
             </Link>
@@ -515,10 +516,6 @@ function Navbar() {
 
         {/* Right Icons */}
         <div className="flex items-center gap-8">
-          {/* Theme Toggle */}
-          {/* <button onClick={toggleMode} className="text-xl">
-            {mode === "dark" ? <BsFillCloudSunFill /> : <FiSun />}
-          </button> */}
 
           {/* Search Icon/Input on Large Screens */}
           <div className="relative hidden sm:flex items-center">

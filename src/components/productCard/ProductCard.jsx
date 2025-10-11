@@ -3,7 +3,6 @@ import { useData } from "../../context/data/MyState";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, deleteFromCart } from "../../redux/CartSlice";
 import { toast } from "react-toastify";
-import { Timestamp } from "firebase/firestore";
 import { motion } from "framer-motion";
 
 function ProductCard() {
@@ -14,38 +13,25 @@ function ProductCard() {
     mode,
     product,
     searchkey,
-    setSearchkey,
     filterType,
-    setFilterType,
-    filterPrice,
-    setFilterPrice,
-    calcOffer,
   } = context;
-  // console.log("ITEMS: ",product);
-  // ====================={R E D U X - P A R T}===============================
-  const dispatch = useDispatch(); //Returns the dispatch function from the Redux store
-  const cartItems = useSelector((state) => state.cart);
-  // =============================================================
-  console.log("cartItems", cartItems);
-  // console.log("SELECTED", isWished);
 
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart);
   const user = JSON.parse(localStorage.getItem("user"));
-  // add to cart and remove from cart function-------------------------------------------
 
   const toggleCart = (product) => {
     if (!user) {
       toast.warning("Please login first!");
       return;
     }
-
     const isInCart = cartItems.some((item) => item.id === product.id);
-
     if (isInCart) {
       dispatch(deleteFromCart(product));
-      toast.info("Item removed from cart");
+      toast.info("Removed from cart");
     } else {
       dispatch(addToCart(product));
-      toast.success("Item added to cart");
+      toast.success("Added to cart");
     }
   };
 
@@ -54,152 +40,102 @@ function ProductCard() {
   }, [cartItems]);
 
   return (
-    <section className="text-gray-600 bg-[#dcf8ef] body-font">
-      <div className="container px-5 py-8 md:py-16 mx-auto">
-        <div className="lg:w-1/2 w-full mb-6 lg:mb-10">
-          <h1
-            className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900"
-            style={{ color: mode === "dark" ? "white" : "" }}
-          >
-            Our Latest Products
+    <section
+      className="text-gray-600 body-font py-10"
+      style={{
+        background: "linear-gradient(135deg, #DDF4E7, #67C090, #26667F)",
+      }}
+    >
+      <div className="container px-5 mx-auto">
+        <div className="text-center mb-10">
+          <h1 className="text-3xl font-bold text-white mb-2">
+            Our Latest Blogs
           </h1>
-          <div className="h-1 w-25 bg-green-700 rounded"></div>
+          <div className="h-1 w-24 mx-auto bg-white rounded"></div>
         </div>
 
-        <div className="flex flex-wrap -m-4">
+        <div className="flex flex-wrap justify-center gap-6">
           {product
             .filter(
               (item) =>
                 item.title
                   .toLowerCase()
-                  .includes(
-                    searchkey.toLowerCase().trim().replace(/\s+/g, " ")
-                  ) ||
-                item.type
+                  .includes(searchkey.toLowerCase().trim()) ||
+                item.subtitle
                   .toLowerCase()
-                  .includes(searchkey.toLowerCase().trim().replace(/\s+/g, " "))
+                  .includes(searchkey.toLowerCase().trim())
             )
             .filter((item) =>
-              item.category
-                .replace(/\s+/g, "")
-                .toLowerCase()
-                .includes(filterType)
+              item.category.toLowerCase().includes(filterType.toLowerCase())
             )
-            .slice(0, 5)
-            .filter((obj) => obj.price.trim().includes(filterPrice))
+            .slice(0, 6)
             .map((item, index) => {
               const {
                 title,
-                price,
                 imageUrl,
-                id,
                 category,
-                type,
-                isNew,
-                stock,
-                quantity,
-                originalPrice,
-                description,
+                content,
+                author,
+                id,
                 date,
               } = item;
-              return (
-                <div
-                  key={index}
-                  className="w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2"
-                >
-                  <motion.div
-                    key={index}
-                    className=""
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    whileHover={{ y: -5 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <div
-                      className="h-full rounded-lg shadow-md bg-[#A7EAD5] hover:shadow-lg transition-shadow hover:shadow-gray-500 duration-300"
-                      style={{
-                        backgroundColor:
-                          mode === "dark" ? "#232F3E" : "#A7EAD5",
-                        color: mode === "dark" ? "#FFFFFF" : "#000000",
-                      }}
-                    >
-                      <div className="flex justify-center items-center p-4 bg-white rounded-t-lg border-2 border-b-0 border-[#003d29] relative">
-                        {stock > 0 ? (
-                          <p className=" absolute bottom-0 left-0 bg-green-700 px-2 rounded-tr-lg text-[10px] sm:text-[13px] text-white font-semibold z-10 ">
-                            On Sale
-                          </p>
-                        ) : (
-                          <p className=" absolute bottom-0 left-0 bg-[#b35d52] px-2 rounded-tr-lg text-[10px] sm:text-[13px] text-white font-semibold z-10 ">
-                            Sold Out
-                          </p>
-                        )}
-                        {isNew ? (
-                          <p className="absolute bottom-0 right-0 px-3 text-[13px] text-white font-semibold z-10 bg-black rounded-tl-lg">
-                            {" "}
-                            New{" "}
-                          </p>
-                        ) : (
-                          ""
-                        )}
-                        <img
-                          onClick={() =>
-                            (window.location.href = `/productinfo/${id}`)
-                          }
-                          className="h-36 sm:h-44 object-contain transition-transform rounded-md duration-300 hover:scale-110 cursor-pointer"
-                          src={imageUrl}
-                          alt={title}
-                        />
-                      </div>
-                      <div className="px-2 md:px-4 pb-4 border-t bg-[#003d29]  rounded-b-lg  border-gray-300">
-                        <p className="text-xs text-white mt-2">
-                          <span className=" font-semibold">{type}</span> /{" "}
-                          {category}
-                        </p>
-                        <h2 className="text-sm font-semibold truncate text-gray-300">
-                          {title}
-                        </h2>
-                        <h2 className="text-[12px] font-semibold truncate text-gray-300">
-                          <span>Quantity: </span>
-                          {quantity}
-                        </h2>
-                        <hr className="text-white mt-[3px]" />
-                        <div className="flex items-baseline gap-1">
-                          <p className="text-[14px] md:text-base font-bold text-red-600 mt-1">
-                            ₹{price}
-                          </p>
-                          <p className="text-[12px] md:text-sm font-semibold text-gray-100 line-through">
-                            ₹{originalPrice}
-                          </p>
-                        </div>
 
-                        <div className="flex items-center justify-between mt-2 w-[70%] sm:w-[55%]">
-                          {stock > 0 ? (
-                            <button
-                              onClick={() => toggleCart(item)}
-                              className={`px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg transition duration-800 hover:scale-105 cursor-pointer ${
-                                cartItems.some((p) => p.id === item.id)
-                                  ? "bg-red-700 text-white hover:bg-black"
-                                  : "bg-[#439373] text-black hover:bg-black hover:text-white"
-                              }`}
-                            >
-                              {cartItems.some((p) => p.id === item.id)
-                                ? "Remove"
-                                : "Add to Cart"}
-                            </button>
-                          ) : (
-                            <button
-                              disabled
-                              className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg text-white bg-[#b35d52] cursor-not-allowed"
-                            >
-                              Out of Stock
-                            </button>
-                          )}
+              // Random placeholder description for now
+              const description =
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Doloremque, nihil! At ea atque quidem.";
+
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="w-full sm:w-[320px]"
+                >
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <div className="relative">
+                      <img
+                        src={imageUrl}
+                        alt={title}
+                        className="w-full h-48 object-cover cursor-pointer"
+                        onClick={() =>
+                          (window.location.href = `/productinfo/${id}`)
+                        }
+                      />
+                      <span className="absolute top-3 left-3 bg-blue-500 text-white text-xs px-3 py-1 rounded-full shadow-md">
+                        {category}
+                      </span>
+                    </div>
+
+                    <div className="p-5">
+                      <h2 className="text-lg font-semibold text-gray-800 mb-2">
+                        {title}
+                      </h2>
+                      <p className="text-sm text-gray-500 mb-4">
+                        {content || description}
+                      </p>
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <img
+                            src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${author || "John"}`}
+                            alt="Author"
+                            className="w-8 h-8 rounded-full"
+                          />
+                          <div>
+                            <p className="text-sm font-semibold text-gray-700">
+                              {author || "John Doe"}
+                            </p>
+                            <p className="text-xs text-gray-400">
+                              {date || "2 days ago"}
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </motion.div>
-                </div>
+                  </div>
+                </motion.div>
               );
             })}
         </div>
