@@ -79,13 +79,51 @@ function ProductInfo() {
       {/* Blog Content Section */}
       <div className="max-w-5xl mx-auto px-4 md:px-8">
         {/* Main Image */}
-        <div className="rounded-2xl overflow-hidden shadow-md mb-8">
+        {/* <div className="rounded-2xl overflow-hidden shadow-md mb-8">
           <img
             src={selectedImage || blog.imageUrl}
             alt={blog.title}
             className="w-full max-h-[70vh] object-cover transition-all duration-300"
           />
-        </div>
+        </div> */}
+
+        <div>
+                {/* Big Image */}
+                <div className="w-full bg-gray-100 rounded-2xl flex items-center justify-center mb-6 border overflow-hidden shadow-inner">
+                  <img
+                    alt="ecommerce"
+                    className="w-full max-h-[55vh] object-contain rounded-xl transition-all duration-300"
+                    src={selectedImage || blog.imageUrl}
+                  />
+                </div>
+                {/* Thumbnails */}
+                <div className="flex gap-3 justify-center">
+                  {[
+                    blog.imageUrl,
+                    blog.imageUrl2,
+                    blog.imageUrl3,
+                    blog.imageUrl4,
+                  ]
+                    .filter(Boolean)
+                    .map((url, idx) => (
+                      <img
+                        key={idx}
+                        src={url}
+                        alt={`thumb-${idx}`}
+                        className={`w-16 h-16 object-cover rounded-xl cursor-pointer border-2 transition-all duration-200 transform hover:scale-105 ${
+                          (selectedImage || blog.imageUrl) === url
+                            ? "border-[#449474] shadow-md"
+                            : "border-gray-200 opacity-70 hover:opacity-100"
+                        }`}
+                        onClick={() => setSelectedImage(url)}
+                      />
+                    ))}
+                </div>
+
+                <div className="hidden sm:block mt-8">
+                  <ReviewSection productId={params} />
+                </div>
+              </div>
 
         {/* Article Content */}
         <article className="prose prose-lg md:prose-xl max-w-none leading-relaxed text-gray-700 mb-10">

@@ -8,16 +8,11 @@ import { motion } from "framer-motion";
 function ProductCard() {
   const context = useData();
 
-  const {
-    product,
-    searchkey,
-    filterType,
-  } = context;
+  const { product, searchkey, filterType } = context;
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
   const user = JSON.parse(localStorage.getItem("user"));
-
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
@@ -25,7 +20,7 @@ function ProductCard() {
 
   return (
     <section
-      className="text-gray-600 body-font py-10"
+      className="text-gray-600 body-font py-10 mb-10"
       style={{
         background: "linear-gradient(135deg, #DDF4E7, #67C090, #26667F)",
       }}
@@ -54,15 +49,8 @@ function ProductCard() {
             )
             .slice(0, 6)
             .map((item, index) => {
-              const {
-                title,
-                imageUrl,
-                category,
-                content,
-                author,
-                id,
-                date,
-              } = item;
+              const { title, imageUrl, category, content, author, id, date } =
+                item;
 
               // Random placeholder description for now
               const description =
@@ -96,14 +84,26 @@ function ProductCard() {
                       <h2 className="text-lg font-semibold text-gray-800 mb-2">
                         {title}
                       </h2>
-                      <p className="text-sm text-gray-500 mb-4">
-                        {content || description}
+                      <p className="text-sm text-gray-500 mb-4 ">
+                        <span className="line-clamp-4">
+                          {content || description}
+                        </span>{" "}
+                        <span
+                          className="text-blue-500 cursor-pointer hover:text-blue-700 font-semibold transition-all duration-100"
+                          onClick={() =>
+                            (window.location.href = `/productinfo/${id}`)
+                          }
+                        >
+                          Read More
+                        </span>
                       </p>
 
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
                           <img
-                            src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${author || "John"}`}
+                            src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${
+                              author || "John"
+                            }`}
                             alt="Author"
                             className="w-8 h-8 rounded-full"
                           />

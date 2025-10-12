@@ -114,7 +114,7 @@ function MyState({ children }) {
   const updateProduct = async (item) => {
     setLoading(true);
     try {
-      await setDoc(doc(firebaseDB, "products", products.id), products);
+      await setDoc(doc(firebaseDB, "blogs", products.id), products);
       toast.success("Product Updated Successfully!");
       getProductData();
       setTimeout(() => {
@@ -131,7 +131,7 @@ function MyState({ children }) {
   const deleteProduct = async (item) => {
     setLoading(true);
     try {
-      await deleteDoc(doc(firebaseDB, "products", item.id));
+      await deleteDoc(doc(firebaseDB, "blogs", item.id));
       toast.warning("Product Deleted Successfully!");
       setLoading(false);
       getProductData();
