@@ -78,14 +78,13 @@ function Home() {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 1 }}
-        onAnimationComplete={() => setIsFirstVisit(false)} 
       >
         <ProductCard />
       </motion.div>
 
       {/* <ProductApi /> */}
       <div className="flex justify-center md:-mt-10 mb-4 ">
-        <Link to={"/allproducts"}>
+        <Link to={"/allblogs"}>
           <button
             onClick={resetFilter}
             className=" bg-gray-300 px-5 py-2 rounded-xl cursor-pointer"

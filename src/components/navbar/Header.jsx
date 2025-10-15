@@ -1,7 +1,7 @@
 import { useData } from "../../context/data/MyState";
 import { BsFillCloudSunFill } from "react-icons/bs";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { IoLogOut } from "react-icons/io5";
+import { IoClose, IoLogOut } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { FaAngleDown, FaUserAlt } from "react-icons/fa";
 import {
@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import { RiSearchLine } from "react-icons/ri";
-import logo from "../../assets/logo.jpg";
+import logo from "../../assets/logo.png";
 import {
   Dialog,
   DialogPanel,
@@ -142,14 +142,24 @@ function Navbar() {
   return (
     <div className="bg-[#dfe3d6] sticky top-0 z-50 shadow-md">
       {/* Mobile View */}
-      <div className="md:hidden flex justify-between items-center px-4 py-3">
-        <Link to="/" className="text-2xl font-bold text-green-700">
-          <div className="border-2 border-green-700 p-1 rounded-full">
+      <div
+        className="md:hidden flex justify-between items-center px-4 py-1"
+        style={{ backgroundColor: "#F4E9D7" }} // Background color
+      >
+        <Link
+          to="/"
+          className="text-2xl font-bold"
+          style={{ color: "#D97D55" }}
+        >
+          <div
+            className=" p-1 rounded-full"
+            style={{ borderColor: "#D97D55" }}
+          >
             <img
               onClick={onTop}
               src={logo}
               alt="Logo"
-              className="w-10 h-auto rounded"
+              className="h-10 shadow shadow-[#d97d55] rounded-sm"
             />
           </div>
         </Link>
@@ -160,7 +170,8 @@ function Navbar() {
           {!searchBarOpen ? (
             <button
               onClick={() => setSearchBarOpen(true)}
-              className="text-xl text-gray-700"
+              className="text-xl"
+              style={{ color: "#6FA4AF" }}
             >
               <RiSearchLine />
             </button>
@@ -172,27 +183,41 @@ function Navbar() {
               value={searchkey}
               onChange={(e) => setSearchkey(e.target.value)}
               onBlur={() => setSearchBarOpen(false)}
-              className="w-44 p-2 text-sm border border-gray-300 rounded-md outline-none"
-              style={{ maxWidth: "220px" }}
+              className="w-44 p-2 text-sm border rounded-md outline-none"
+              style={{
+                borderColor: "#B8C4A9",
+                color: "#6FA4AF",
+                maxWidth: "220px",
+              }}
             />
           )}
 
           {/* Cart button */}
-          <Link to="/cart">
+          {/* <Link to="/cart">
             <div className="relative">
-              <ShoppingCart className="h-5 w-5 font-bold text-gray-700 " />
-              <span className="bg-green-400 text-black text-[12px] rounded-full px-[5px] absolute -top-2 -right-3">
+              <ShoppingCart
+                className="h-5 w-5 font-bold"
+                style={{ color: "#6FA4AF" }}
+              />
+              <span
+                className="text-[12px] rounded-full px-[5px] absolute -top-2 -right-3"
+                style={{
+                  backgroundColor: "#B8C4A9",
+                  color: "#000",
+                }}
+              >
                 {(cartItems || []).length}
               </span>
             </div>
-          </Link>
+          </Link> */}
 
           {/* Menu button */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="text-2xl text-green-700"
+            className="text-2xl"
+            style={{ color: "#D97D55" }}
           >
-            <Menu />
+            {menuOpen ? <IoClose /> : <Menu />}
           </button>
         </div>
       </div>
@@ -206,25 +231,44 @@ function Navbar() {
             aria-hidden="true"
           >
             <div
-              className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent w-1/2 h-full pointer-events-auto"
+              className="absolute inset-0 bg-gradient-to-r from-[#D97D55]/30 to-transparent w-1/2 h-full pointer-events-auto"
               onClick={() => setMenuOpen(false)}
             />
           </div>
+
           {/* Slide-in menu from left, half screen */}
           <div
-            className="fixed top-0 left-0 h-full w-1/2 sm:w-3/5 bg-[#f5f5eb] shadow-2xl z-50 rounded-r-2xl border-r border-green-200 transform transition-transform duration-300 ease-in-out"
+            className="fixed top-0 left-0 h-full w-1/2 sm:w-3/5 shadow-2xl z-50 rounded-r-2xl border-r transform transition-transform duration-300 ease-in-out"
             style={{
+              backgroundColor: "#F4E9D7", // Theme background
+              borderColor: "#B8C4A9", // Accent Light Green border
               transform: menuOpen ? "translateX(0)" : "translateX(-100%)",
             }}
           >
-            <div className="flex justify-between items-center px-6 py-4 border-b">
-              <h2 className="text-lg font-semibold text-green-700">Menu</h2>
+            {/* Header */}
+            <div
+              className="flex justify-between items-center px-6 py-4 border-b"
+              style={{ borderColor: "#B8C4A9" }}
+            >
+              <h2
+                className="text-lg font-semibold"
+                style={{ color: "#D97D55" }}
+              >
+                Menu
+              </h2>
               <X
                 onClick={() => setMenuOpen(false)}
-                className="cursor-pointer text-2xl text-green-700"
+                className="cursor-pointer text-2xl"
+                style={{ color: "#D97D55" }}
               />
             </div>
-            <ul className="space-y-4 text-gray-800 px-6 py-6 font-medium">
+
+            {/* Menu Items */}
+            <ul
+              className="space-y-4 px-6 py-6 font-medium"
+              style={{ color: "#6FA4AF" }}
+            >
+              {/* Product Dropdown */}
               <li>
                 <div
                   className="relative inline-block text-left"
@@ -234,11 +278,20 @@ function Navbar() {
                     data-dropdown="product"
                     onClick={() => {
                       setIsProductDropdownOpen(!isProductDropdownOpen);
-                      setIsDropdownOpen(false); // Close the other if open
+                      setIsDropdownOpen(false);
                     }}
-                    className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b] cursor-pointer transition"
+                    className="flex items-center gap-1 font-bold cursor-pointer transition"
+                    style={{
+                      color: "#6FA4AF",
+                    }}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.color = "#D97D55")
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.color = "#6FA4AF")
+                    }
                   >
-                    Products{" "}
+                    Categories{" "}
                     {isProductDropdownOpen ? (
                       <ChevronUp size={16} className="cursor-pointer" />
                     ) : (
@@ -247,89 +300,69 @@ function Navbar() {
                   </button>
 
                   {isProductDropdownOpen && (
-                    <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
-                      <li
-                        onClick={() => {
-                          handleSelect("/allproducts"),
-                            setIsProductDropdownOpen(false),
+                    <ul
+                      className="absolute mt-3 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2"
+                      style={{
+                        backgroundColor: "#F4E9D7",
+                        color: "#6FA4AF",
+                        border: "1px solid #B8C4A9",
+                      }}
+                    >
+                      {[
+                        { path: "/allblogs", label: "All Blogs" },
+                        { path: "/technology", label: "Technology" },
+                        { path: "/lifestyle", label: "Lifestyle" },
+                        { path: "/design", label: "Design" },
+                        { path: "/travel", label: "Travel" },
+                        { path: "/productivity", label: "Productivity" },
+                      ].map((item) => (
+                        <li
+                          key={item.path}
+                          onClick={() => {
+                            handleSelect(item.path);
+                            setIsProductDropdownOpen(false);
                             setMenuOpen(false);
-                        }}
-                        className="hover:underline hover:cursor-pointer"
-                      >
-                        All Products
-                      </li>
-                      <li
-                        onClick={() => {
-                          handleSelect("/serum"),
-                            setIsOpen(false),
-                            setMenuOpen(false);
-                        }}
-                        className="hover:underline hover:cursor-pointer"
-                      >
-                        Serum
-                      </li>
-                      <li
-                        onClick={() => {
-                          handleSelect("/shampoo"),
-                            setIsOpen(false),
-                            setMenuOpen(false);
-                        }}
-                        className="hover:underline hover:cursor-pointer"
-                      >
-                        Shampoo
-                      </li>
-                      <li
-                        onClick={() => {
-                          handleSelect("/soap"),
-                            setIsOpen(false),
-                            setMenuOpen(false);
-                        }}
-                        className="hover:underline hover:cursor-pointer"
-                      >
-                        Soap
-                      </li>
-                      <li
-                        onClick={() => {
-                          handleSelect("/lipgloss"),
-                            setIsOpen(false),
-                            setMenuOpen(false);
-                        }}
-                        className="hover:underline hover:cursor-pointer"
-                      >
-                        Lip Gloss
-                      </li>
-                      <li
-                        onClick={() => {
-                          handleSelect("/organicchocolates"),
-                            setIsOpen(false),
-                            setMenuOpen(false);
-                        }}
-                        className="hover:underline hover:cursor-pointer"
-                      >
-                        Choclates
-                      </li>
-                      <li
-                        onClick={() => {
-                          handleSelect("/candles"),
-                            setIsOpen(false),
-                            setMenuOpen(false);
-                        }}
-                        className="hover:underline hover:cursor-pointer"
-                      >
-                        Candles
-                      </li>
+                          }}
+                          className="hover:underline hover:cursor-pointer"
+                          style={{ color: "#6FA4AF" }}
+                          onMouseOver={(e) =>
+                            (e.currentTarget.style.color = "#D97D55")
+                          }
+                          onMouseOut={(e) =>
+                            (e.currentTarget.style.color = "#6FA4AF")
+                          }
+                        >
+                          {item.label}
+                        </li>
+                      ))}
                     </ul>
                   )}
                 </div>
               </li>
 
+              {/* Other Links */}
               <li>
                 <Link
-                  to="/orders"
+                  to="/userdashboard"
                   onClick={() => setMenuOpen(false)}
-                  className="hover:text-green-700 transition"
+                  className="transition"
+                  style={{ color: "#6FA4AF" }}
+                  onMouseOver={(e) => (e.currentTarget.style.color = "#D97D55")}
+                  onMouseOut={(e) => (e.currentTarget.style.color = "#6FA4AF")}
                 >
-                  Orders
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/adduserblogs"
+                  onClick={() => setMenuOpen(false)}
+                  className="transition"
+                  style={{ color: "#6FA4AF" }}
+                  onMouseOver={(e) => (e.currentTarget.style.color = "#D97D55")}
+                  onMouseOut={(e) => (e.currentTarget.style.color = "#6FA4AF")}
+                >
+                  Add Blog
                 </Link>
               </li>
 
@@ -337,38 +370,60 @@ function Navbar() {
                 <Link
                   to="/about"
                   onClick={() => setMenuOpen(false)}
-                  className="hover:text-green-700 transition"
+                  className="transition"
+                  style={{ color: "#6FA4AF" }}
+                  onMouseOver={(e) => (e.currentTarget.style.color = "#D97D55")}
+                  onMouseOut={(e) => (e.currentTarget.style.color = "#6FA4AF")}
                 >
                   About
                 </Link>
               </li>
+
               {user?.user?.email === "tanveer123alam@gmail.com" ||
-                (user?.user?.email === "asadalamalig@gmail.com" && (
-                  <li>
-                    <Link
-                      to="/dashboard"
-                      className="font-bold text-red-600"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      ADMIN
-                    </Link>
-                  </li>
-                ))
-                }
-              <li>
-                <Link
-                  to="/profile"
-                  onClick={() => setMenuOpen(false)}
-                  className="hover:text-green-700 transition"
-                >
-                  Profile
-                </Link>
-              </li>
+              user?.user?.email === "asadalamalig@gmail.com" ? (
+                <li>
+                  <Link
+                    to="/dashboard"
+                    className="font-bold"
+                    onClick={() => setMenuOpen(false)}
+                    style={{ color: "#D97D55" }}
+                  >
+                    ADMIN
+                  </Link>
+                </li>
+              ) : null}
+
+              {user && (
+                <li>
+                  <Link
+                    to="/profile"
+                    onClick={() => setMenuOpen(false)}
+                    className="transition"
+                    style={{ color: "#6FA4AF" }}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.color = "#D97D55")
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.color = "#6FA4AF")
+                    }
+                  >
+                    Profile
+                  </Link>
+                </li>
+              )}
+
               {user ? (
                 <li>
                   <button
                     onClick={handleLogout}
-                    className="flex items-center gap-1 hover:text-green-700 transition"
+                    className="flex items-center gap-1 transition"
+                    style={{ color: "#6FA4AF" }}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.color = "#D97D55")
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.color = "#6FA4AF")
+                    }
                   >
                     Logout <MdLogout />
                   </button>
@@ -378,7 +433,14 @@ function Navbar() {
                   <Link
                     to="/login"
                     onClick={() => setMenuOpen(false)}
-                    className="hover:text-green-700 transition"
+                    className="transition"
+                    style={{ color: "#6FA4AF" }}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.color = "#D97D55")
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.color = "#6FA4AF")
+                    }
                   >
                     Login
                   </Link>
@@ -390,32 +452,32 @@ function Navbar() {
       )}
 
       {/* Desktop Header-------------------------------------------- */}
-      <div className="hidden md:flex items-center justify-between px-8 py-1 bg-[#dfe3d6] border-b-2 border-[#4b9878]">
+      <div className="hidden md:flex items-center justify-between px-8 bg-[#F4E9D7] border-b-2 border-[#6FA4AF]">
         <div className="flex items-center gap-6">
           <Link
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             to="/"
-            className="text-2xl font-bold text-green-700"
+            className="text-2xl font-bold text-[#D97D55]"
           >
             <div className="p-1">
-              <h1>BlogApp</h1>
+              <img src={logo} className="h-12 shadow shadow-[#d97d55] rounded-sm" />
             </div>
           </Link>
-          <nav className="hidden md:flex gap-6 text-sm text-[#003d29]">
-            <Link to="/" className="hover:text-green-700 font-bold">
+          <nav className="hidden md:flex gap-6 text-sm text-[#6FA4AF]">
+            <Link to="/" className="hover:text-[#D97D55] font-bold">
               Blogs
             </Link>
 
-            {/* <div className="relative inline-block text-left" ref={productRef}>
+            <div className="relative inline-block text-left" ref={productRef}>
               <button
                 data-dropdown="product"
                 onClick={() => {
                   setIsProductDropdownOpen(!isProductDropdownOpen);
-                  setIsDropdownOpen(false); 
+                  setIsDropdownOpen(false);
                 }}
-                className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b] cursor-pointer transition"
+                className="flex items-center gap-1 text-[#6FA4AF] font-bold hover:text-[#D97D55] cursor-pointer transition"
               >
-                Products{" "}
+                Blog Categories{" "}
                 {isProductDropdownOpen ? (
                   <ChevronUp size={16} className="cursor-pointer" />
                 ) : (
@@ -424,91 +486,77 @@ function Navbar() {
               </button>
 
               {isProductDropdownOpen && (
-                <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
+                <ul className="absolute mt-3 bg-[#F4E9D7] text-[#6FA4AF] shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
                   <li
                     onClick={() => {
-                      handleSelect("/allproducts"),
+                      handleSelect("/allblogs"),
                         setIsProductDropdownOpen(false),
                         setMenuOpen(false);
                     }}
-                    className="hover:underline hover:cursor-pointer"
+                    className="hover:underline hover:text-[#D97D55] hover:cursor-pointer"
                   >
-                    All Products
+                    All Blogs
                   </li>
                   <li
                     onClick={() => {
-                      handleSelect("/serum"),
+                      handleSelect("/technology"),
                         setIsOpen(false),
                         setMenuOpen(false);
                     }}
-                    className="hover:underline hover:cursor-pointer"
+                    className="hover:underline hover:text-[#D97D55] hover:cursor-pointer"
                   >
-                    Serum
+                    Technology
                   </li>
                   <li
                     onClick={() => {
-                      handleSelect("/shampoo"),
+                      handleSelect("/lifestyle"),
                         setIsOpen(false),
                         setMenuOpen(false);
                     }}
-                    className="hover:underline hover:cursor-pointer"
+                    className="hover:underline hover:text-[#D97D55] hover:cursor-pointer"
                   >
-                    Shampoo
+                    Lifestyle
                   </li>
                   <li
                     onClick={() => {
-                      handleSelect("/soap"),
+                      handleSelect("/design"),
                         setIsOpen(false),
                         setMenuOpen(false);
                     }}
-                    className="hover:underline hover:cursor-pointer"
+                    className="hover:underline hover:text-[#D97D55] hover:cursor-pointer"
                   >
-                    Soap
+                    Design
                   </li>
                   <li
                     onClick={() => {
-                      handleSelect("/lipgloss"),
+                      handleSelect("/travel"),
                         setIsOpen(false),
                         setMenuOpen(false);
                     }}
-                    className="hover:underline hover:cursor-pointer"
+                    className="hover:underline hover:text-[#D97D55] hover:cursor-pointer"
                   >
-                    Lip Gloss
+                    Travel
                   </li>
                   <li
                     onClick={() => {
-                      handleSelect("/organicchocolates"),
+                      handleSelect("/productivity"),
                         setIsOpen(false),
                         setMenuOpen(false);
                     }}
-                    className="hover:underline hover:cursor-pointer"
+                    className="hover:underline hover:text-[#D97D55] hover:cursor-pointer"
                   >
-                    Choclates
-                  </li>
-                  <li
-                    onClick={() => {
-                      handleSelect("/candles"),
-                        setIsOpen(false),
-                        setMenuOpen(false);
-                    }}
-                    className="hover:underline hover:cursor-pointer"
-                  >
-                    Candles
+                    Productivity
                   </li>
                 </ul>
               )}
-            </div> */}
+            </div>
 
-            {/* <Link to={"/orders"} className="hover:text-green-700 font-bold">
-              Orders
-            </Link> */}
-
-            <Link to="/about" className="hover:text-green-700 font-bold">
+            <Link to="/about" className="hover:text-[#D97D55] font-bold">
               About
             </Link>
             {user?.user?.email === "tanveer123alam@gmail.com" ||
               (user?.user?.email === "asadalamalig@gmail.com" && (
-                <Link to="/dashboard" className="text-red-600 font-bold">
+                <Link to="/dashboard" className="text-[#B8C4A9] font-bold">
                   Admin
                 </Link>
               ))}
@@ -517,7 +565,6 @@ function Navbar() {
 
         {/* Right Icons */}
         <div className="flex items-center gap-8">
-
           {/* Search Icon/Input on Large Screens */}
           <div className="relative hidden sm:flex items-center">
             {!searchBarOpen ? (
@@ -526,7 +573,7 @@ function Navbar() {
                 className="text-xl cursor-pointer"
               >
                 <RiSearchLine
-                  className="text-black hover:text-[#449474]"
+                  className="text-[#6FA4AF] hover:text-[#D97D55]"
                   size={21}
                 />
               </button>
@@ -534,11 +581,11 @@ function Navbar() {
               <input
                 type="text"
                 autoFocus
-                placeholder="Search products..."
+                placeholder="Search blogs..."
                 value={searchkey}
                 onChange={(e) => setSearchkey(e.target.value)}
                 onBlur={() => setSearchBarOpen(false)}
-                className="px-4 py-1 border border-gray-300 bg-amber-50 rounded-md outline-none w-60 transition"
+                className="px-4 py-1 border border-[#B8C4A9] bg-[#F4E9D7] rounded-md outline-none w-60 transition"
                 style={{ maxWidth: "260px" }}
               />
             )}
@@ -547,17 +594,17 @@ function Navbar() {
           {user ? (
             <button
               title="Logout"
-              className="flex items-center gap-1 cursor-pointer hover:text-[#449474] "
+              className="flex items-center gap-1 cursor-pointer hover:text-[#D97D55]"
             >
               <div className="relative inline-block text-left">
                 <div ref={userRef} className="relative">
                   <button
                     data-dropdown="user"
                     onClick={() => {
-                      setIsUserDropdownOpen(!isUserDropdownOpen); // 👈 toggle
-                      setMenuOpen(false); // agar koi aur menu open hai to close
+                      setIsUserDropdownOpen(!isUserDropdownOpen);
+                      setMenuOpen(false);
                     }}
-                    className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b] cursor-pointer transition"
+                    className="flex items-center gap-1 text-[#6FA4AF] font-bold hover:text-[#D97D55] cursor-pointer transition"
                   >
                     Profile{" "}
                     {isUserDropdownOpen ? (
@@ -568,22 +615,22 @@ function Navbar() {
                   </button>
 
                   {isUserDropdownOpen && (
-                    <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
+                    <ul className="absolute mt-3 bg-[#F4E9D7] text-[#6FA4AF] shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
                       <li
                         onClick={() => {
                           handleSelect("/profile");
-                          setIsUserDropdownOpen(false); // select ke baad close
+                          setIsUserDropdownOpen(false);
                         }}
-                        className="hover:underline hover:cursor-pointer"
+                        className="hover:underline hover:text-[#D97D55] hover:cursor-pointer"
                       >
                         Profile
                       </li>
                       <li
                         onClick={() => {
                           handleLogout();
-                          setIsUserDropdownOpen(false); // logout ke baad bhi close
+                          setIsUserDropdownOpen(false);
                         }}
-                        className="hover:underline hover:cursor-pointer"
+                        className="hover:underline hover:text-[#D97D55] hover:cursor-pointer"
                       >
                         Logout
                       </li>
@@ -596,7 +643,7 @@ function Navbar() {
             <Link
               to="/login"
               title="Login"
-              className="flex flex-col hover:text-[#449474]"
+              className="flex flex-col hover:text-[#D97D55]"
             >
               <p className="flex items-center gap-1 ">
                 <FaUserAlt />
@@ -604,16 +651,16 @@ function Navbar() {
               </p>
             </Link>
           )}
-          <Link
+          {/* <Link
             to="/cart"
-            className="relative flex items-center text-sm hover:text-[#3a9a72] font-bold "
+            className="relative flex items-center text-sm hover:text-[#D97D55] font-bold "
           >
             <ShoppingCart className="h-5 w-5" />
             <span className="ml-1">Cart</span>
-            <span className="absolute -top-2 -right-3 bg-[#449474] text-white text-xs rounded-full px-1">
+            <span className="absolute -top-2 -right-3 bg-[#D97D55] text-white text-xs rounded-full px-1">
               {(cartItems || []).length}
             </span>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useData } from "../../context/data/MyState";
 import { firebaseDB } from "../../firebase/FirebaseConfig";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 function AddUserBlog() {
   const context = useData();
@@ -26,7 +27,7 @@ function AddUserBlog() {
 
       await addDoc(collection(firebaseDB, "blogs"), blogData);
 
-      alert("✅ Blog added successfully!");
+      toast.success("✅ Blog added successfully!");
       setProducts({
         title: "",
         subtitle: "",
@@ -41,7 +42,7 @@ function AddUserBlog() {
       });
     } catch (error) {
       console.error("Error adding blog:", error);
-      alert("❌ Failed to add blog. Please try again.");
+      toast.error("❌ Failed to add blog. Please try again.");
     }
   };
 
@@ -144,10 +145,20 @@ function AddUserBlog() {
             type="text"
             name="category"
             className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Category (like Travel, Nature, etc)"
+            placeholder="Category (like Buildings, Advanture, etc)"
             value={products.category}
             onChange={(e) =>
               setProducts({ ...products, category: e.target.value })
+            }
+          />
+          <input
+            type="text"
+            name="type"
+            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
+            placeholder="Type (like Travel, Nature, etc)"
+            value={products.type}
+            onChange={(e) =>
+              setProducts({ ...products, type: e.target.value })
             }
           />
 

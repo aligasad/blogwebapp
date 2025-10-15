@@ -55,53 +55,109 @@ function Signup() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [])
+  }, []);
 
   return (
-
-    <div className="flex justify-center items-center bg-[#f1fdee] min-h-screen">
+    <div
+      className="flex justify-center items-center min-h-screen p-4"
+      style={{
+        background: "linear-gradient(135deg, #F4E9D7, #B8C4A9)",
+      }}
+    >
       <form
-        className="bg-white p-8 rounded-xl shadow-lg w-96 border border-green-200"
+        className="bg-[#FFF8F3] p-8 rounded-3xl shadow-2xl w-full max-w-md border transition-all duration-300 hover:shadow-3xl"
+        style={{ borderColor: "#B8C4A9" }}
         onSubmit={handleSubmit}
       >
-        <h2 className="text-2xl font-bold mb-6 text-center text-green-900">
-          Noor by <span className="text-[27px] text-[#028732]">Shayan</span> 🌿
-        </h2> 
+        {/* Title */}
+        <h2
+          className="text-3xl font-extrabold mb-6 text-center"
+          style={{ color: "#D97D55" }}
+        >
+          TNV's{" "}
+          <span style={{ color: "#6FA4AF" }} className="text-[27px]">
+            Blogs
+          </span>
+        </h2>
 
+        {/* Name Input */}
         <input
-          type="name"
+          type="text"
           name="name"
           placeholder="Enter your name"
           value={form.name}
           onChange={handleChange}
-          className="w-full p-3 mb-6 border border-green-300 bg-[#f9fff9] text-green-900 placeholder-green-500 rounded-lg outline-none focus:ring-2 focus:ring-green-400 transition-all"
+          className="w-full p-3 mb-4 rounded-xl outline-none transition-all focus:scale-[1.02]"
+          style={{
+            border: "1.5px solid #B8C4A9",
+            backgroundColor: "#F4E9D7",
+            color: "#6FA4AF",
+          }}
         />
+
+        {/* Email Input */}
         <input
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-            value={form.email}
-            onChange={handleChange}
-            className="w-full p-3 mb-4 border border-green-300 bg-[#f9fff9] text-green-900 placeholder-green-500 rounded-lg outline-none focus:ring-2 focus:ring-green-400 transition-all"
-          />
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          value={form.email}
+          onChange={handleChange}
+          className="w-full p-3 mb-4 rounded-xl outline-none transition-all focus:scale-[1.02]"
+          style={{
+            border: "1.5px solid #B8C4A9",
+            backgroundColor: "#F4E9D7",
+            color: "#6FA4AF",
+          }}
+        />
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter your password"
-            value={form.password}
-            onChange={handleChange}
-            className="w-full p-3 mb-6 border border-green-300 bg-[#f9fff9] text-green-900 placeholder-green-500 rounded-lg outline-none focus:ring-2 focus:ring-green-400 transition-all"
-          />
+        {/* Password Input */}
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter your password"
+          value={form.password}
+          onChange={handleChange}
+          className="w-full p-3 mb-6 rounded-xl outline-none transition-all focus:scale-[1.02]"
+          style={{
+            border: "1.5px solid #B8C4A9",
+            backgroundColor: "#F4E9D7",
+            color: "#6FA4AF",
+          }}
+        />
 
-          <button
-            type="submit"
-            className="w-full bg-gradient-to-r from-green-600 to-lime-500 text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-lg hover:from-green-700 hover:to-lime-600 transition-all cursor-pointer"
-          >SignUp</button>
+        {/* Signup Button */}
+        <button
+          type="submit"
+          className="w-full font-semibold py-3 rounded-xl shadow-md transition-all cursor-pointer"
+          style={{
+            background: "linear-gradient(to right, #D97D55, #6FA4AF)",
+            color: "white",
+          }}
+          onMouseOver={(e) =>
+            (e.currentTarget.style.background =
+              "linear-gradient(to right, #6FA4AF, #D97D55)")
+          }
+          onMouseOut={(e) =>
+            (e.currentTarget.style.background =
+              "linear-gradient(to right, #D97D55, #6FA4AF)")
+          }
+        >
+          Sign Up
+        </button>
 
-        <p className="mt-4 text-center text-green-700">
+        {/* Login Redirect */}
+        <p
+          className="mt-6 text-center font-medium"
+          style={{ color: "#6FA4AF" }}
+        >
           Already have an account?{" "}
-          <Link to="/login" className="text-green-600 underline hover:text-green-800">
+          <Link
+            to="/login"
+            className="font-semibold underline transition-all"
+            style={{ color: "#D97D55" }}
+            onMouseOver={(e) => (e.currentTarget.style.color = "#B8C4A9")}
+            onMouseOut={(e) => (e.currentTarget.style.color = "#D97D55")}
+          >
             Login
           </Link>
         </p>

@@ -104,41 +104,46 @@ function ReviewSection({ productId }) {
   };
 
   return (
-    <div className="mt-6 border-t pt-4">
-      <h3 className="text-xl font-bold mb-2">Reviews</h3>
+    <div className="mt-6 border-t border-[#B8C4A9] pt-4">
+      <h3 className="text-xl font-bold text-[#D97D55] mb-2">Reviews</h3>
 
       {reviews.length > 0 && (
-        <div className="mb-3 flex items-center gap-2 border-b-2">
+        <div className="mb-3 flex items-center gap-2 border-b-2 border-[#B8C4A9]">
           {renderStars(avgRating)}
-          <span className="text-gray-700 font-medium text-lg mb-2">
+          <span className="text-[#6FA4AF] font-medium text-lg mb-2">
             {avgRating} Rating{" "}
-            <span className="text-[14px]">({reviews.length} reviews)</span>
+            <span className="text-[14px] text-[#B8C4A9]">
+              ({reviews.length} reviews)
+            </span>
           </span>
         </div>
       )}
 
-      {reviews.length === 0 && <p>No reviews yet. Be the first!</p>}
+      {reviews.length === 0 && (
+        <p className="text-[#6FA4AF]">No reviews yet. Be the first!</p>
+      )}
 
-      {/* Scrollable reviews container --------------   ---------------      -------------   -------------- */}
+      {/* Scrollable reviews container */}
       <div className="relative w-full px-2 overflow-hidden">
         <Slider {...settings}>
           {reviews.map((r, idx) => (
             <div
               key={idx}
-              className="bg-yellow-50 border border-yellow-200 rounded-xl py-2 pl-8 pr-4 shadow-sm"
+              className="bg-[#F4E9D7] border border-[#B8C4A9] rounded-xl py-2 pl-8 pr-4 shadow-sm"
             >
               <p>
-                <span className="font-semibold text-yellow-800">Review:</span>{" "}
-                <span className="text-gray-800 text-[14px]">{r.comment}</span>
+                <span className="font-semibold text-[#D97D55]">Review:</span>{" "}
+                <span className="text-[#6FA4AF] text-[14px]">{r.comment}</span>
               </p>
-              <p className="text-[12px]">{r.userName}</p>
+              <p className="text-[12px] text-[#B8C4A9]">{r.userName}</p>
             </div>
           ))}
         </Slider>
       </div>
 
-      <hr className="my-4" />
-      <h4 className="font-semibold">Leave a Review</h4>
+      <hr className="my-4 border-[#B8C4A9]" />
+      <h4 className="font-semibold text-[#D97D55]">Leave a Review</h4>
+
       <form onSubmit={handleSubmit} className="space-y-2">
         <input
           type="number"
@@ -146,7 +151,7 @@ function ReviewSection({ productId }) {
           placeholder="Rating (1-5)"
           value={rating}
           onChange={(e) => setRating(e.target.value)}
-          className="border border-gray-300 focus:border-[#3ca769] focus:ring-1 focus:ring-[#3ca769] rounded-md p-2 w-full transition duration-200 outline-none"
+          className="border border-[#B8C4A9] focus:border-[#6FA4AF] focus:ring-1 focus:ring-[#6FA4AF] rounded-md p-2 w-full transition duration-200 outline-none bg-[#F4E9D7] text-[#6FA4AF]"
           min="1"
           max="5"
         />
@@ -155,12 +160,12 @@ function ReviewSection({ productId }) {
           required
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          className="border resize-none border-gray-300 focus:border-[#3ca769] focus:ring-1 focus:ring-[#3ca769] rounded-md p-2 w-full transition duration-200 outline-none"
+          className="border resize-none border-[#B8C4A9] focus:border-[#6FA4AF] focus:ring-1 focus:ring-[#6FA4AF] rounded-md p-2 w-full transition duration-200 outline-none bg-[#F4E9D7] text-[#6FA4AF]"
           rows="1"
         />
         <button
           type="submit"
-          className="bg-[#376a55] cursor-pointer hover:bg-[#003d29] transition duration-200 text-white px-4 py-2 rounded-md w-full font-semibold shadow-sm"
+          className="cursor-pointer bg-[#D97D55] hover:bg-[#6FA4AF] transition duration-200 text-[#F4E9D7] px-4 py-2 rounded-md w-full font-semibold shadow-sm"
         >
           Submit Review
         </button>

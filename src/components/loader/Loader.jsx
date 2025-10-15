@@ -4,38 +4,55 @@ function Loader() {
   return (
     <div
       role="status"
-      className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-50 to-green-200 dark:from-[#003d29] dark:to-[#048b5e]"
+      className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-[#F4E9D7] to-[#B8C4A9]"
     >
       <div className="relative flex flex-col items-center">
-        {/* Animated Leaf Icon */}
+        {/* Animated Feather Icon */}
         <svg
-          className="w-16 h-16 text-green-500 animate-bounce drop-shadow-lg"
+          className="w-16 h-16 text-[#D97D55] animate-bounce drop-shadow-md"
           fill="none"
           viewBox="0 0 48 48"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path
-            d="M44 4C44 4 36 44 8 44C8 44 4 24 44 4Z"
-            fill="#4ade80"
-            stroke="#22c55e"
-            strokeWidth="2"
+          {/* Outer circle */}
+          <circle
+            cx="24"
+            cy="24"
+            r="20"
+            stroke="#6FA4AF"
+            strokeWidth="2.5"
+            fill="#F4E9D7"
           />
+
+          {/* Feather pen */}
           <path
-            d="M20 38C20 38 24 28 36 12"
-            stroke="#166534"
+            d="M16 30C22 20 30 12 36 10C34 16 28 24 22 32L16 30Z"
+            fill="#D97D55"
+            stroke="#B8C4A9"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          {/* Pen line */}
+          <path
+            d="M20 34C22 31 25 27 28 24"
+            stroke="#6FA4AF"
             strokeWidth="2"
             strokeLinecap="round"
           />
         </svg>
-        {/* Subtle ring animation */}
-        <div className="absolute -inset-2 rounded-full border-2 border-green-200 animate-ping opacity-40"></div>
+
+        {/* Soft ring animation */}
+        <div className="absolute -inset-2 rounded-full border-2 border-[#6FA4AF] animate-ping opacity-40"></div>
       </div>
+
       <div className="mt-8 text-center">
-        <p className="text-xl font-bold text-white animate-pulse">
-          Bringing Nature to You...
+        <p className="text-xl font-semibold text-[#D97D55] animate-pulse">
+          Crafting your story...
         </p>
-        <p className="text-sm text-white mt-2">
-          Please wait while we prepare your organic experience!
+        <p className="text-sm text-[#6FA4AF] mt-2">
+          Please wait while we load your blogging experience.
         </p>
       </div>
     </div>

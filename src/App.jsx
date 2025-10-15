@@ -13,21 +13,21 @@ import NoPage from "./pages/nopage/NoPage.jsx";
 import MyState from "./context/data/MyState.jsx";
 import Login from "./pages/registration/Login.jsx";
 import Signup from "./pages/registration/Signup.jsx";
-import ProductInfo from "./pages/productInfo/ProductInfo.jsx";
+import ProductInfo from "./pages/BlogsInfo/BlogsInfo.jsx";
 import AddBlogs from "./pages/admin/page/AddBlogs.jsx";
 import UpdateProduct from "./pages/admin/page/UpdateProduct.jsx";
 import { ToastContainer, Bounce } from "react-toastify";
 import AuthProvider from "./components/protector/AuthContext.jsx";
 import ProtectedRoute from "./components/protector/ProtectedRoute.jsx";
 import Allproducts from "./pages/allproducts/Allproducts.jsx";
-import Serum1 from "./pages/allproducts/Serum/Serum.jsx";
+import Serum1 from "./pages/allproducts/Technology/Technology.jsx";
 import AboutUs from "./components/aboutUs/AboutUs.jsx";
 import Profile from "./components/profile/Profile.jsx";
 import CompleteProfile from "./components/profile/CompleteProfile.jsx";
-import Soap from "./pages/allproducts/Soap/Soap.jsx";
-import LipGloss from "./pages/allproducts/LipGloss/LipGloss.jsx";
-import Shampoo from "./pages/allproducts/Shampoo/Shampoo.jsx";
-import Choclates from "./pages/allproducts/Choclates/Choclates.jsx";
+import Soap from "./pages/allproducts/Design/Design.jsx";
+import LipGloss from "./pages/allproducts/Travel/Travel.jsx";
+import Shampoo from "./pages/allproducts/LifeStyle/LifeStyle.jsx";
+import Choclates from "./pages/allproducts/Productivity/Productivity.jsx";
 import { FaArrowUp } from "react-icons/fa";
 import Candles from "./pages/allproducts/Candles/Candles.jsx";
 import { BsWhatsapp } from "react-icons/bs";
@@ -83,31 +83,31 @@ function App() {
           element: <Signup />,
         },
         {
-          path: "/productinfo/:id",
+          path: "/bloginfo/:id",
           element: <ProductInfo />,
         },
         {
-          path: "/allproducts",
+          path: "/allblogs",
           element: <Allproducts />,
         },
         {
-          path: "/serum",
+          path: "/technology",
           element: <Serum1 />,
         },
         {
-          path: "/shampoo",
+          path: "/lifestyle",
           element: <Shampoo />,
         },
         {
-          path: "/soap",
+          path: "/design",
           element: <Soap />,
         },
         {
-          path: "/lipgloss",
+          path: "/travel",
           element: <LipGloss />,
         },
         {
-          path: "organicchocolates",
+          path: "/productivity",
           element: <Choclates />,
         },
         {
@@ -198,14 +198,14 @@ function App() {
         <FaArrowUp size={25} />
       </button>
       {/* WhatsApp Button */}
-      <button
+      {/* <button
         onClick={handleWhatsAppClick}
         className="z-20 fixed bottom-22 sm:bottom-16 right-6 bg-[#449474] hover:bg-[#019664] hover:shadow-lg hover:scale-105 text-white p-[10px] cursor-pointer rounded-full shadow-lg transition"
       >
         <BsWhatsapp size={25} />
-      </button>
+      </button> */}
       {/* Contact Button */}
-      <button
+      {/* <button
         onClick={() => setIsContactOpen(!isContactOpen)}
         className="cursor-pointer fixed bottom-6 left-6 bg-[#449474] text-white p-[10px] rounded-full shadow-lg hover:bg-[#019664] transition z-50 hover:scale-105"
       >
@@ -220,7 +220,7 @@ function App() {
             className="text-2xl sm:text-3xl"
           />
         )}
-      </button>
+      </button> */}
 
       {/* Contact Form Panel */}
       {isContactOpen && <Contact onClose={() => setIsContactOpen(false)} />}
