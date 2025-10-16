@@ -19,7 +19,7 @@ import UpdateProduct from "./pages/admin/page/UpdateProduct.jsx";
 import { ToastContainer, Bounce } from "react-toastify";
 import AuthProvider from "./components/protector/AuthContext.jsx";
 import ProtectedRoute from "./components/protector/ProtectedRoute.jsx";
-import Allproducts from "./pages/allproducts/Allproducts.jsx";
+import Allproducts from "./pages/allproducts/AllBlogs.jsx";
 import Serum1 from "./pages/allproducts/Technology/Technology.jsx";
 import AboutUs from "./components/aboutUs/AboutUs.jsx";
 import Profile from "./components/profile/Profile.jsx";
@@ -29,7 +29,6 @@ import LipGloss from "./pages/allproducts/Travel/Travel.jsx";
 import Shampoo from "./pages/allproducts/LifeStyle/LifeStyle.jsx";
 import Choclates from "./pages/allproducts/Productivity/Productivity.jsx";
 import { FaArrowUp } from "react-icons/fa";
-import Candles from "./pages/allproducts/Candles/Candles.jsx";
 import { BsWhatsapp } from "react-icons/bs";
 import ReturnPolicy from "./components/aboutUs/ReturnPolicy.jsx";
 import TermsAndConditions from "./components/aboutUs/TermsAndCondition.jsx";
@@ -39,6 +38,7 @@ import { useState } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import AddUserBlog from "./pages/user/UserBlogs.jsx";
 import UserDashboard from "./pages/user/UserDashBoard.jsx";
+import './index.css'
 
 function App() {
   const router = createBrowserRouter([
@@ -109,10 +109,6 @@ function App() {
         {
           path: "/productivity",
           element: <Choclates />,
-        },
-        {
-          path: "candles",
-          element: <Candles />,
         },
         {
           path: "/complete-profile",

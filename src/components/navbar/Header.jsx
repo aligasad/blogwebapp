@@ -151,10 +151,7 @@ function Navbar() {
           className="text-2xl font-bold"
           style={{ color: "#D97D55" }}
         >
-          <div
-            className=" p-1 rounded-full"
-            style={{ borderColor: "#D97D55" }}
-          >
+          <div className=" p-1 rounded-full" style={{ borderColor: "#D97D55" }}>
             <img
               onClick={onTop}
               src={logo}
@@ -379,20 +376,6 @@ function Navbar() {
                 </Link>
               </li>
 
-              {user?.user?.email === "tanveer123alam@gmail.com" ||
-              user?.user?.email === "asadalamalig@gmail.com" ? (
-                <li>
-                  <Link
-                    to="/dashboard"
-                    className="font-bold"
-                    onClick={() => setMenuOpen(false)}
-                    style={{ color: "#D97D55" }}
-                  >
-                    ADMIN
-                  </Link>
-                </li>
-              ) : null}
-
               {user && (
                 <li>
                   <Link
@@ -446,6 +429,19 @@ function Navbar() {
                   </Link>
                 </li>
               )}
+              {user?.user?.email === "tanveer123alam@gmail.com" ||
+              user?.user?.email === "asadalamalig@gmail.com" ? (
+                <li>
+                  <Link
+                    to="/dashboard"
+                    className="font-bold"
+                    onClick={() => setMenuOpen(false)}
+                    style={{ color: "#D97D55" }}
+                  >
+                    ADMIN
+                  </Link>
+                </li>
+              ) : null}
             </ul>
           </div>
         </>
@@ -460,7 +456,10 @@ function Navbar() {
             className="text-2xl font-bold text-[#D97D55]"
           >
             <div className="p-1">
-              <img src={logo} className="h-12 shadow shadow-[#d97d55] rounded-sm" />
+              <img
+                src={logo}
+                className="h-12 shadow shadow-[#d97d55] rounded-sm"
+              />
             </div>
           </Link>
           <nav className="hidden md:flex gap-6 text-sm text-[#6FA4AF]">
